@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ทำนายฝันเป็นเลข ดูความหมายฝัน เลขเด็ดจากความฝัน ทำนายฝันออนไลน์ฟรี">
+
+<meta property="og:title" content="ทำนายฝัน — เลขเด็ดจากฝัน ฟรี">
+<meta property="og:description" content="ทำนายความฝันเป็นเลขเด็ด เลขนำโชค วิเคราะห์สัญลักษณ์ความฝัน ฟรี ไม่ต้องสมัคร">
+<meta property="og:type" content="website">
+
+<title>ทำนายฝัน — เลขเด็ดจากฝัน ฟรี</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#080510}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+.wrap{position:relative;z-index:1}
+.hero{padding:24px 16px 16px;text-align:center}
+.hero-ico{font-size:52px;display:block;margin-bottom:10px;animation:float 4s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(160,120,255,.6))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-title{font-size:24px;font-weight:800;color:#e8d5ff;margin-bottom:6px}
+.hero-sub{font-size:13px;color:#7a6a9a;line-height:1.6}
+.inp-wrap{margin:0 16px;position:relative}
+.inp-border{position:absolute;inset:-2px;border-radius:16px;background:linear-gradient(135deg,#6c3fc7,#2d1a5e,#6c3fc7);background-size:200% 200%;animation:bs 4s linear infinite;z-index:0}
+@keyframes bs{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.dream-ta{position:relative;z-index:1;width:100%;min-height:120px;background:#0f0a1e;border:none;border-radius:14px;color:#e8d5ff;font-family:var(--font);font-size:15px;line-height:1.6;padding:14px 16px;resize:none;outline:none}
+.dream-ta::placeholder{color:#3a2a5a;font-size:13px}
+.char-cnt{text-align:right;padding:4px 16px 0;font-size:11px;color:#4a3a6a}
+.ex-lbl{font-size:11px;color:#4a3a6a;padding:10px 16px 4px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.ex-wrap{display:flex;flex-wrap:wrap;gap:7px;padding:0 16px 10px}
+.ex-chip{padding:6px 13px;border-radius:20px;font-size:12px;font-family:var(--font);background:#130d28;border:1px solid #2e1e5e;color:#8a6ac4;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ex-chip:active{background:#1e1245;color:#e8d5ff}
+.go-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:calc(100% - 32px);margin:10px 16px 4px;padding:14px;background:linear-gradient(135deg,#6c3fc7,#4a1f9e);border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:800;font-family:var(--font);cursor:pointer;box-shadow:0 4px 20px rgba(108,63,199,.4)}
+.go-btn:active{opacity:.85;transform:scale(.98)}
+.hist-sec{padding:0 16px 8px}
+.hist-lbl{font-size:11px;font-weight:700;color:#3a2860;letter-spacing:1px;text-transform:uppercase;padding:10px 0 6px}
+.hist-item{background:#0f0a1e;border:1px solid #2d1a5e;border-radius:10px;padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.hist-item:active{border-color:#6c3fc7}
+.hi-dream{flex:1;font-size:12px;color:#6a5a8a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hi-nums{font-size:14px;font-weight:800;color:#c9a8ff;letter-spacing:1px}
+.hi-time{font-size:10px;color:#3a2860}
+.disc{margin:8px 16px 14px;padding:10px 14px;background:#0a0818;border:1px solid #1e1540;border-radius:10px;font-size:11px;color:#2e2050;line-height:1.6}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="wrap">
+<header class="hdr" style="background:linear-gradient(135deg,#080510,#110828);border-bottom-color:#2d1a5e">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#6c3fc7,#4a1f9e)">💭</div>
+    <div><div class="logo-txt" style="color:#e8d5ff">ทำนายฝัน</div><div class="logo-sub">เลขเด็ดจากความฝัน · ฟรี 100%</div></div>
+  </div>
+</header>
+<div class="ad ad-b" style="background:#0f0a1e;border-color:#2d1a5e"><span>โฆษณา 320×50</span></div>
+<div class="hero">
+  <span class="hero-ico">🌙</span>
+  <div class="hero-title">ฝันว่าอะไรคืนนี้?</div>
+  <div class="hero-sub">เล่าความฝันให้ละเอียด รับคำทำนายยาวๆ<br>พร้อมเลขเด็ดที่วิเคราะห์เฉพาะคุณ</div>
+</div>
+<div class="inp-wrap">
+  <div class="inp-border"></div>
+  <textarea class="dream-ta" id="di" maxlength="500" placeholder="เช่น ฝันเห็นงูใหญ่สีทองขดอยู่หน้าบ้าน แล้วมันพยักหน้าให้..."></textarea>
+</div>
+<div class="char-cnt"><span id="cc">0</span>/500</div>
+<div class="ex-lbl">คลิกเร็ว</div>
+<div class="ex-wrap" id="ex-wrap"></div>
+<button class="go-btn" onclick="go()"><span style="font-size:20px">🔮</span> ทำนายฝัน</button>
+<div class="ad ad-i" style="background:#0f0a1e;border-color:#2d1a5e;margin-top:8px"><span>โฆษณา</span></div>
+<div class="hist-sec" id="hist-sec" style="display:none">
+  <div class="hist-lbl">ความฝันล่าสุด</div>
+  <div id="hist-list"></div>
+</div>
+<div class="disc">⚠️ เนื้อหาเพื่อความบันเทิงและความเชื่อเท่านั้น ไม่ใช่คำแนะนำทางการเงิน</div>
+<div class="bsp"></div>
+</div>
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem active" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+<script>
+const EXAMPLES=[
+  {l:'🐍 งูใหญ่',t:'ฝันเห็นงูใหญ่สีทองขดอยู่หน้าบ้าน มันพยักหน้าให้เราแล้วหายไป รู้สึกไม่กลัวเลย'},
+  {l:'🐟 ปลา',t:'ฝันเห็นปลาหลายร้อยตัวว่ายอยู่ในแม่น้ำใสแจ๋ว มีปลาทองตัวใหญ่โผล่ขึ้นมาให้จับ'},
+  {l:'🔥 ไฟ',t:'ฝันเห็นไฟลุกโชนสีทองสวยมาก ไม่รู้สึกร้อนเลย มีแสงสว่างมาก'},
+  {l:'💰 เงินทอง',t:'ฝันเก็บเงินได้เต็มมือ มีทั้งธนบัตรและเหรียญทองเต็มพื้น เก็บไม่หมดเลย'},
+  {l:'🐘 ช้าง',t:'ฝันเห็นช้างขาวตัวใหญ่มากเดินมาหา โค้งงวงให้เหมือนทักทาย'},
+  {l:'🌊 น้ำ',t:'ฝันว่าน้ำใสไหลผ่านบ้าน น้ำสีฟ้าใส เย็นสบาย ไม่กลัวเลย'},
+  {l:'🦁 สิงโต',t:'ฝันเห็นสิงโตนอนอยู่ข้างๆ แผงคอทองสวยงาม มันไม่ดุเลย'},
+  {l:'⭐ ดาว',t:'ฝันเห็นดาวตกสวยมาก เต็มท้องฟ้า แล้วดาวดวงใหญ่ตกมาใกล้ๆ'},
+  {l:'🐉 นาค',t:'ฝันเห็นพญานาคตัวใหญ่มีเกล็ดทอง ว่ายอยู่ในอากาศ แล้วก็โค้งกายให้เรา'},
+  {l:'🛕 วัด',t:'ฝันเดินเข้าวัดสวยมาก มีพระพุทธรูปทองใหญ่ แล้วได้รับของศักดิ์สิทธิ์จากพระ'},
+];
+document.getElementById('ex-wrap').innerHTML=EXAMPLES.map(e=>`<button class="ex-chip" onclick="fill('${e.t.replace(/'/g,"\\'")}')">${e.l}</button>`).join('');
+document.getElementById('di').addEventListener('input',function(){document.getElementById('cc').textContent=this.value.length;});
+function fill(t){const ta=document.getElementById('di');ta.value=t;document.getElementById('cc').textContent=t.length;}
+function go(){
+  const dream=document.getElementById('di').value.trim();
+  if(!dream||dream.length<5){document.getElementById('di').style.borderColor='#c0392b';setTimeout(()=>document.getElementById('di').style.borderColor='',1500);return;}
+  const seed=strSeed(dream+new Date().toDateString());
+  window.location.href=`dream-result.html?q=${encodeURIComponent(dream)}&s=${seed}`;
+}
+function strSeed(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,0x01000193);}return h>>>0;}
+// history
+let hist=[];try{hist=JSON.parse(localStorage.getItem('dream_hist')||'[]');}catch(e){}
+if(hist.length){
+  document.getElementById('hist-sec').style.display='block';
+  document.getElementById('hist-list').innerHTML=hist.map(h=>`<div class="hist-item" onclick="fill('${h.dream.replace(/'/g,"\\'")}')" ><div class="hi-dream">💭 ${h.dream}</div><div class="hi-nums">${h.nums}</div><div class="hi-time">${h.time}</div></div>`).join('');
+}
+// starfield
+(function(){const c=document.getElementById('stars'),ctx=c.getContext('2d');let stars=[];function r(){c.width=window.innerWidth;c.height=window.innerHeight;stars=Array.from({length:120},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+.3,o:Math.random()*.8+.2,s:Math.random()*.3+.1}));}r();window.addEventListener('resize',r);let t=0;(function d(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,160,255,${s.o*(0.5+0.5*Math.sin(t*s.s))})`;ctx.fill();});t+=0.02;requestAnimationFrame(d);})();})();
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Numerology เลขศาสตร์ชื่อ-นามสกุล วิเคราะห์เลขชีวิต เลขวิญญาณ เลขบุคลิกภาพ ดูดวงชื่อฟรี">
+
+<meta property="og:title" content="Numerology เลขศาสตร์ชื่อ-นามสกุล ฟรี">
+<meta property="og:description" content="วิเคราะห์เลขศาสตร์จากชื่อ-นามสกุล 6 มิติ เลขวิถีชีวิต เลขแสดงออก เลขดวงใจ เลขมงคล">
+<meta property="og:type" content="website">
+
+<title>Numerology เลขศาสตร์ชื่อ-นามสกุล ฟรี</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#06050f}
+/* HERO */
+.hero{padding:22px 16px 14px;text-align:center}
+.hero-ico{font-size:48px;display:block;margin-bottom:8px;animation:float 3.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-title{font-size:22px;font-weight:800;color:#ede0ff;margin-bottom:5px}
+.hero-sub{font-size:13px;color:#5a4878;line-height:1.6}
+/* INPUT */
+.inp-card{margin:0 16px 10px;background:#0d0a1a;border:1px solid #1e1540;border-radius:var(--r);padding:16px}
+.inp-label{font-size:11px;font-weight:700;color:#9b6dff;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px}
+.finput{width:100%;background:#060410;border:1px solid #1e1540;border-radius:var(--rs);color:#ede0ff;font-family:var(--font);font-size:16px;padding:11px 14px;outline:none;transition:border-color .2s;margin-bottom:10px}
+.finput:focus{border-color:#9b6dff}
+.finput::placeholder{color:#2a1e50}
+.finput-row{display:flex;gap:8px;margin-bottom:10px}
+.finput-row .finput{margin-bottom:0;flex:1}
+select.finput{appearance:none;-webkit-appearance:none;cursor:pointer}
+.go-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:linear-gradient(135deg,#7c3aed,#4c1d95);border:none;border-radius:var(--rs);color:#fff;font-size:16px;font-weight:800;font-family:var(--font);cursor:pointer;transition:opacity .2s,transform .1s;box-shadow:0 3px 16px rgba(124,58,237,.4)}
+.go-btn:active{opacity:.85;transform:scale(.98)}
+/* DIVIDER LABEL */
+.or-div{text-align:center;color:#2a1e50;font-size:12px;padding:4px 0}
+/* RESULT */
+.result-wrap{padding:0 0 8px}
+/* LIFE PATH BIG */
+.lifepath-hero{margin:0 16px 12px;background:linear-gradient(135deg,#0d0a1a,#180f38);border:1px solid #2e1e60;border-radius:var(--r);overflow:hidden}
+.lp-header{padding:16px;display:flex;align-items:center;gap:14px;border-bottom:1px solid #1e1540}
+.lp-num-big{width:64px;height:64px;background:linear-gradient(135deg,#7c3aed,#4c1d95);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#fff;box-shadow:0 4px 18px rgba(124,58,237,.5);flex-shrink:0}
+.lp-name{font-size:17px;font-weight:800;color:#ede0ff}
+.lp-sub{font-size:12px;color:#5a4878;margin-top:3px}
+.lp-trait{font-size:13px;color:#c8a8ff;line-height:1.7;padding:14px 16px;border-bottom:1px solid #1e1540}
+.lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 16px;border-bottom:1px solid #1e1540}
+.lp-card{background:#060410;border:1px solid #1e1540;border-radius:var(--rs);padding:10px;text-align:center}
+.lp-card-l{font-size:9px;color:#5a4878;font-weight:700;letter-spacing:.5px;margin-bottom:3px}
+.lp-card-v{font-size:15px;font-weight:800;color:#c8a8ff}
+/* CHART ROW */
+.chart-section{padding:14px 16px;border-bottom:1px solid #1e1540}
+.cs-label{font-size:10px;font-weight:700;color:#9b6dff;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.chart-item{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.chart-item:last-child{margin-bottom:0}
+.ci-name{font-size:12px;color:#8a70b0;min-width:80px}
+.ci-bar-bg{flex:1;height:10px;background:#1e1540;border-radius:5px;overflow:hidden}
+.ci-bar{height:100%;border-radius:5px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.ci-val{font-size:13px;font-weight:800;color:#c8a8ff;min-width:28px;text-align:right}
+/* NUMBER CARDS */
+.num-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 16px 12px}
+.nc{background:#0d0a1a;border:1px solid #1e1540;border-radius:var(--r);overflow:hidden}
+.nc-header{padding:10px 12px;background:rgba(124,58,237,.08);border-bottom:1px solid #1e1540;display:flex;align-items:center;gap:8px}
+.nc-ico{font-size:18px}
+.nc-hname{font-size:12px;font-weight:700;color:#c8a8ff}
+.nc-body{padding:12px}
+.nc-num{font-size:32px;font-weight:800;color:#ede0ff;letter-spacing:1px;margin-bottom:4px}
+.nc-meaning{font-size:11px;color:#5a4878;line-height:1.5}
+/* LETTER TABLE */
+.letter-section{margin:0 16px 12px;background:#0d0a1a;border:1px solid #1e1540;border-radius:var(--r);overflow:hidden}
+.lt-header{padding:11px 14px;border-bottom:1px solid #1e1540;font-size:11px;font-weight:700;color:#9b6dff;letter-spacing:1.5px;text-transform:uppercase}
+.lt-wrap{padding:12px 14px;display:flex;flex-wrap:wrap;gap:6px}
+.lt-box{background:#060410;border:1px solid #1e1540;border-radius:7px;padding:6px 8px;text-align:center;min-width:38px}
+.lt-char{font-size:13px;font-weight:700;color:#ede0ff}
+.lt-num{font-size:14px;font-weight:800;color:#9b6dff;margin-top:1px}
+.lt-sum{padding:8px 14px 12px;border-top:1px solid #1e1540;font-size:13px;color:#8a70b0}
+.lt-sum strong{color:#c8a8ff}
+/* LUCKY SECTION */
+.lucky-section{margin:0 16px 12px;background:#0d0a1a;border:1px solid #1e1540;border-radius:var(--r);overflow:hidden}
+.lucky-header{padding:11px 14px;border-bottom:1px solid #1e1540;font-size:11px;font-weight:700;color:#9b6dff;letter-spacing:1.5px;text-transform:uppercase}
+.lucky-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 14px}
+.lgc{background:#060410;border:1px solid #1e1540;border-radius:var(--rs);padding:9px 8px;text-align:center}
+.lgc-l{font-size:9px;color:#5a4878;font-weight:700;margin-bottom:3px}
+.lgc-v{font-size:15px;font-weight:800;color:#c8a8ff}
+/* COMPATIBILITY */
+.compat-section{margin:0 16px 12px;background:#0d0a1a;border:1px solid #1e1540;border-radius:var(--r);overflow:hidden}
+.compat-header{padding:11px 14px;border-bottom:1px solid #1e1540;font-size:11px;font-weight:700;color:#9b6dff;letter-spacing:1.5px;text-transform:uppercase}
+.compat-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid #1e1540}
+.compat-row:last-child{border-bottom:none}
+.compat-num{font-size:22px;font-weight:800;color:#ede0ff;min-width:36px}
+.compat-bar-bg{flex:1;height:8px;background:#1e1540;border-radius:4px;overflow:hidden}
+.compat-bar{height:100%;border-radius:4px}
+.compat-label{font-size:11px;color:#8a70b0;min-width:50px;text-align:right}
+/* CAREER SECTION */
+.career-section{margin:0 16px 12px;background:#0d0a1a;border:1px solid #1e1540;border-radius:var(--r);overflow:hidden}
+/* LOTTO HINT */
+.lotto-section{margin:0 16px 12px;background:linear-gradient(135deg,#0d0a1a,#180f38);border:1px solid #2e1e60;border-radius:var(--r);overflow:hidden}
+.lotto-header{padding:11px 14px;border-bottom:1px solid #2e1e60;font-size:11px;font-weight:700;color:#9b6dff;letter-spacing:1.5px;text-transform:uppercase}
+.lotto-nums{display:flex;gap:8px;flex-wrap:wrap;padding:14px 14px 10px;justify-content:center}
+.lotto-pill{padding:8px 18px;border-radius:10px;font-size:22px;font-weight:800;letter-spacing:3px}
+.lp-main{background:linear-gradient(135deg,#7c3aed,#4c1d95);color:#fff;box-shadow:0 3px 14px rgba(124,58,237,.4)}
+.lp-sec{background:#0d0a1a;border:1px solid #2e1e60;color:#c8a8ff}
+.lotto-note{font-size:11px;color:#5a4878;padding:0 14px 12px;text-align:center}
+/* SHARE */
+.share-row{display:flex;gap:8px;padding:0 16px 12px}
+.shbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--rs);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;border:none}
+.sh-fb{background:#1877f2;color:#fff}
+.sh-cp{background:#0d0a1a;border:1px solid #1e1540;color:#8a70b0}
+.disclaimer{margin:0 16px 14px;padding:10px 14px;background:#060410;border:1px solid #1e1540;border-radius:10px;font-size:11px;color:#2a1e50;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header class="hdr" style="background:linear-gradient(135deg,#06050f,#0d0a1a);border-bottom-color:#1e1540">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">🔢</div>
+    <div>
+      <div class="logo-txt" style="color:#ede0ff">Numerology</div>
+      <div class="logo-sub">เลขศาสตร์ชื่อ-นามสกุล ละเอียด</div>
+    </div>
+  </div>
+</header>
+
+<div class="ad ad-b" style="background:#0a0810;border-color:#1e1540"><span>โฆษณา 320×50</span></div>
+
+<main style="max-width:480px;margin:0 auto;padding-bottom:80px">
+
+<div class="hero">
+  <span class="hero-ico">✨</span>
+  <div class="hero-title">เลขศาสตร์ชื่อ-นามสกุล</div>
+  <div class="hero-sub">วิเคราะห์ 6 มิติจากชื่อและวันเกิด<br>เลขชีวิต · เลขวิญญาณ · เลขบุคลิกภาพ · เลขแสดงออก · เลขชะตา · เลขความสำเร็จ</div>
+</div>
+
+<div class="inp-card">
+  <div class="inp-label">ชื่อ (ภาษาไทย หรืออังกฤษ)</div>
+  <input class="finput" id="n-first" type="text" placeholder="ชื่อจริง เช่น สมชาย / Somchai">
+  <div class="inp-label">นามสกุล</div>
+  <input class="finput" id="n-last" type="text" placeholder="นามสกุล เช่น ใจดี / Jaidee">
+  <div class="or-div">— วันเกิด (ไม่บังคับ แต่จะทำให้ละเอียดขึ้น) —</div>
+  <div class="finput-row" style="margin-top:8px">
+    <select class="finput" id="n-day"><option value="">วันที่</option></select>
+    <select class="finput" id="n-month"><option value="">เดือน</option></select>
+    <select class="finput" id="n-year"><option value="">ปี ค.ศ.</option></select>
+  </div>
+  <button class="go-btn" onclick="calcNumerology()">✨ วิเคราะห์เลขศาสตร์</button>
+</div>
+
+<div id="result-area"></div>
+
+<div class="ad ad-r" style="background:#0a0810;border-color:#1e1540;margin:0 16px 12px"><span>โฆษณา 300×250</span></div>
+<div class="disclaimer">เนื้อหาเพื่อความบันเทิงและการพัฒนาตนเอง ไม่ใช่คำทำนายที่แน่นอน</div>
+
+</main>
+<div class="bsp"></div>
+
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem active" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+
+<script>
+// ══════════════════════════════════════
+// LETTER VALUE TABLES
+// ══════════════════════════════════════
+const EN_VAL={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
+const EN_VOWELS=new Set(['A','E','I','O','U']);
+const TH_VAL={ก:1,ข:2,ค:3,ฆ:4,ง:5,จ:6,ฉ:7,ช:8,ซ:9,ฌ:1,ญ:2,ฎ:3,ฏ:4,ฐ:5,ฑ:6,ฒ:7,ณ:8,ด:9,ต:1,ถ:2,ท:3,ธ:4,น:5,บ:6,ป:7,ผ:8,ฝ:9,พ:1,ฟ:2,ภ:3,ม:4,ย:5,ร:6,ล:7,ว:8,ศ:9,ษ:1,ส:2,ห:3,ฬ:4,อ:5,ฮ:6};
+const TH_VOWELS=new Set(['อา','อิ','อี','อุ','อู','เ','แ','โ','ไ','ใ','อ็','อั','อว','อย','อ่','อ้','อ๊','อ๋']);
+
+function getLetterVal(c){
+  const u=c.toUpperCase();
+  if(EN_VAL[u])return{val:EN_VAL[u],isVowel:EN_VOWELS.has(u)};
+  if(TH_VAL[c])return{val:TH_VAL[c],isVowel:false};
+  return null;
+}
+
+function reduce(n){
+  while(n>9&&n!==11&&n!==22&&n!==33){
+    n=String(n).split('').reduce((a,c)=>a+parseInt(c),0);
+  }
+  return n;
+}
+
+// ══════════════════════════════════════
+// NUMBER MEANINGS (detailed)
+// ══════════════════════════════════════
+const NUM_DATA={
+  1:{name:'ผู้นำ · ริเริ่ม',planet:'พระอาทิตย์',element:'ไฟ',color:'แดง ทอง',gem:'ทับทิม',
+   trait:'มีความเป็นผู้นำ กล้าหาญ ริเริ่มสิ่งใหม่ มีความมั่นใจสูง ชอบอิสระ ไม่ชอบถูกสั่ง',
+   strength:'ความกล้า ความคิดสร้างสรรค์ ความมุ่งมั่น',
+   weakness:'อาจดื้อรั้น เห็นแก่ตัว ขาดการรับฟัง',
+   career:'ผู้ประกอบการ ผู้บริหาร นักการเมือง ผู้กำกับ',
+   love:'ต้องการคู่ที่ยอมรับความเป็นตัวเอง มักนำในความสัมพันธ์',
+   lotto:'เลข 1 ลงท้าย, ผลรวมได้ 1, 10, 19, 28',
+   compat:[{n:3,pct:90,l:'ดีมาก'},{n:5,pct:85,l:'ดีมาก'},{n:2,pct:65,l:'พอใช้'},{n:8,pct:70,l:'ดี'},{n:4,pct:50,l:'กลางๆ'}]},
+  2:{name:'นักทูต · ร่วมมือ',planet:'พระจันทร์',element:'น้ำ',color:'ขาว ครีม เงิน',gem:'มุก',
+   trait:'อ่อนโยน มีความรู้สึกไว ชอบร่วมมือ มีความเห็นอกเห็นใจ ชอบความสมดุลและสันติ',
+   strength:'การประสานงาน ความเห็นอกเห็นใจ ความใจเย็น',
+   weakness:'ลังเล ขาดความมั่นใจ อ่อนไหวง่าย',
+   career:'นักการทูต ที่ปรึกษา นักจิตวิทยา HR พยาบาล',
+   love:'ต้องการความมั่นคงและความรักที่แท้จริง อ่อนโยนในความรัก',
+   lotto:'เลข 2 ลงท้าย, เลขคู่, ผลรวมได้ 2, 11, 20',
+   compat:[{n:4,pct:88,l:'ดีมาก'},{n:6,pct:85,l:'ดีมาก'},{n:8,pct:80,l:'ดี'},{n:1,pct:65,l:'พอใช้'},{n:9,pct:70,l:'ดี'}]},
+  3:{name:'นักสร้างสรรค์ · ร่าเริง',planet:'พระพฤหัส',element:'ไม้',color:'เหลือง ทอง',gem:'บุษราคัม',
+   trait:'มีพรสวรรค์ด้านการสื่อสาร ศิลปะ ร่าเริง สร้างสรรค์ มีเสน่ห์ดึงดูดคน',
+   strength:'ความคิดสร้างสรรค์ การสื่อสาร ความร่าเริง',
+   weakness:'ขาดโฟกัส ไม่สม่ำเสมอ ฟุ้งซ่าน',
+   career:'ศิลปิน นักเขียน นักแสดง ครีเอทีฟ ครู',
+   love:'ต้องการความสนุกและความตื่นเต้น ชอบแสดงความรัก',
+   lotto:'เลข 3 ลงท้าย, ผลรวมได้ 3, 12, 21, 30',
+   compat:[{n:1,pct:88,l:'ดีมาก'},{n:5,pct:90,l:'ดีมาก'},{n:9,pct:85,l:'ดีมาก'},{n:6,pct:75,l:'ดี'},{n:2,pct:60,l:'พอใช้'}]},
+  4:{name:'นักสร้าง · มั่นคง',planet:'พระราหู',element:'ดิน',color:'น้ำตาล เขียว',gem:'มรกต',
+   trait:'มีระเบียบ ขยัน น่าเชื่อถือ ซื่อสัตย์ มีความรับผิดชอบสูง ชอบความแน่นอน',
+   strength:'ความขยัน ความน่าเชื่อถือ ความรับผิดชอบ',
+   weakness:'เครียดง่าย ดื้อ ขาดความยืดหยุ่น',
+   career:'วิศวกร นักบัญชี สถาปนิก ผู้จัดการโครงการ ทหาร',
+   love:'ต้องการความมั่นคงและความซื่อสัตย์ ช้าในการเปิดใจ',
+   lotto:'เลข 4 ลงท้าย, ผลรวมได้ 4, 13, 22, 31',
+   compat:[{n:2,pct:85,l:'ดีมาก'},{n:6,pct:88,l:'ดีมาก'},{n:8,pct:82,l:'ดีมาก'},{n:7,pct:75,l:'ดี'},{n:1,pct:55,l:'กลางๆ'}]},
+  5:{name:'นักผจญภัย · อิสระ',planet:'พระพุธ',element:'ลม',color:'ฟ้า เทอร์ควอยซ์',gem:'อความารีน',
+   trait:'ชอบอิสระ ปรับตัวเก่ง กระตือรือร้น ชอบการเปลี่ยนแปลง มีพลังงานสูง',
+   strength:'ความยืดหยุ่น พลังงาน การปรับตัว',
+   weakness:'ขาดความต่อเนื่อง หุนหันพลันแล่น',
+   career:'นักท่องเที่ยว นักขาย นักข่าว นักผจญภัย',
+   love:'ต้องการอิสระ ชอบความตื่นเต้นในความรัก',
+   lotto:'เลข 5 ลงท้าย, ผลรวมได้ 5, 14, 23',
+   compat:[{n:3,pct:90,l:'ดีมาก'},{n:1,pct:85,l:'ดีมาก'},{n:7,pct:80,l:'ดี'},{n:9,pct:78,l:'ดี'},{n:4,pct:55,l:'กลางๆ'}]},
+  6:{name:'นักดูแล · ครอบครัว',planet:'พระศุกร์',element:'โลหะ',color:'ชมพู ฟ้า',gem:'เพชร',
+   trait:'มีความรักและเมตตา รับผิดชอบ ชอบดูแลผู้อื่น รักครอบครัว มีรสนิยม',
+   strength:'ความเมตตา ความรับผิดชอบ ความอบอุ่น',
+   weakness:'ยุ่งเรื่องคนอื่น ชอบควบคุม กังวลมากเกินไป',
+   career:'แพทย์ พยาบาล ครู นักสังคมสงเคราะห์ นักออกแบบ',
+   love:'ความรักลึกซึ้ง รักครอบครัว ต้องการความมั่นคง',
+   lotto:'เลข 6 ลงท้าย, ผลรวมได้ 6, 15, 24, 33',
+   compat:[{n:2,pct:90,l:'ดีมาก'},{n:4,pct:88,l:'ดีมาก'},{n:9,pct:85,l:'ดีมาก'},{n:3,pct:78,l:'ดี'},{n:5,pct:60,l:'พอใช้'}]},
+  7:{name:'นักปราชญ์ · จิตวิญญาณ',planet:'พระเกตุ',element:'น้ำ',color:'ม่วง น้ำเงินเข้ม',gem:'ไพลิน',
+   trait:'ฉลาด ชอบวิเคราะห์ ชอบความเป็นส่วนตัว ใฝ่หาความจริง มีสัญชาตญาณดี',
+   strength:'ความฉลาด การวิเคราะห์ สัญชาตญาณ',
+   weakness:'แยกตัว ลึกลับ ยากต่อการเข้าใจ',
+   career:'นักวิทยาศาสตร์ นักวิจัย นักปรัชญา โปรแกรมเมอร์',
+   love:'ต้องการคู่ที่เข้าใจความต้องการส่วนตัว ไม่ชอบโชว์',
+   lotto:'เลข 7 ลงท้าย, ผลรวมได้ 7, 16, 25',
+   compat:[{n:5,pct:82,l:'ดีมาก'},{n:9,pct:85,l:'ดีมาก'},{n:4,pct:78,l:'ดี'},{n:1,pct:65,l:'พอใช้'},{n:2,pct:60,l:'พอใช้'}]},
+  8:{name:'นักธุรกิจ · อำนาจ',planet:'พระเสาร์',element:'ดิน',color:'ดำ ทอง แดง',gem:'นิล',
+   trait:'ทะเยอทะยาน มีพลังอำนาจ สัญชาตญาณธุรกิจดี มุ่งมั่น ต้องการความสำเร็จ',
+   strength:'ความมุ่งมั่น สัญชาตญาณธุรกิจ ความเป็นผู้นำ',
+   weakness:'วัตถุนิยม ชอบควบคุม อาจโหดเกินไป',
+   career:'นักธุรกิจ ผู้บริหาร นักการเงิน นักกฎหมาย',
+   love:'ต้องการคู่ที่เข้มแข็งและเท่าเทียม รักยาก แต่มั่นคง',
+   lotto:'เลข 8 ลงท้าย, ผลรวมได้ 8, 17, 26',
+   compat:[{n:2,pct:85,l:'ดีมาก'},{n:4,pct:88,l:'ดีมาก'},{n:6,pct:80,l:'ดี'},{n:1,pct:72,l:'ดี'},{n:3,pct:60,l:'พอใช้'}]},
+  9:{name:'นักมนุษยธรรม · วิสัยทัศน์',planet:'พระอังคาร',element:'ไฟ',color:'แดง ทอง',gem:'ทับทิม',
+   trait:'มีวิสัยทัศน์กว้าง ใจกว้าง เห็นอกเห็นใจ มีความเมตตา รักมนุษยชาติ',
+   strength:'ความเมตตา วิสัยทัศน์ การสร้างแรงบันดาลใจ',
+   weakness:'ไม่รู้จักหยุด เอาแต่ให้คนอื่น ขาดการดูแลตัวเอง',
+   career:'นักสังคมสงเคราะห์ หมอ ครู ศิลปิน นักการเมือง',
+   love:'ความรักลึกซึ้งและไม่มีเงื่อนไข แต่ต้องการคนที่ใจกว้างเช่นกัน',
+   lotto:'เลข 9 ลงท้าย, ผลรวมได้ 9, 18, 27, 36',
+   compat:[{n:3,pct:88,l:'ดีมาก'},{n:6,pct:90,l:'ดีมาก'},{n:1,pct:80,l:'ดี'},{n:5,pct:78,l:'ดี'},{n:7,pct:75,l:'ดี'}]},
+  11:{name:'ผู้ส่องสว่าง · เลขอาจารย์',planet:'พระจันทร์/พระอาทิตย์',element:'ลม',color:'เงิน ขาว',gem:'มุก เพชร',
+   trait:'มีสัญชาตญาณสูงมาก เป็นผู้นำทางจิตวิญญาณ ได้รับแรงบันดาลใจจากสิ่งเหนือธรรมชาติ',
+   strength:'สัญชาตญาณ ความคิดสร้างสรรค์ พลังจิต',
+   weakness:'วิตกกังวลสูง ความกดดันจากพลังงานสูง',
+   career:'ที่ปรึกษา ครูจิตวิญญาณ นักบำบัด นักประดิษฐ์',
+   love:'ต้องการคู่ที่เข้าใจจิตวิญญาณ ความสัมพันธ์ลึกมาก',
+   lotto:'เลข 11, 2, 29, 38 มงคลพิเศษ',
+   compat:[{n:2,pct:88,l:'ดีมาก'},{n:6,pct:85,l:'ดีมาก'},{n:8,pct:80,l:'ดี'},{n:9,pct:78,l:'ดี'},{n:4,pct:70,l:'ดี'}]},
+  22:{name:'ผู้สร้างโลก · เลขอาจารย์',planet:'พระเสาร์/พระราหู',element:'ดิน',color:'ทอง น้ำเงิน',gem:'นิล บุษราคัม',
+   trait:'มีพลังสร้างสรรค์สูงสุด สามารถสร้างสิ่งยิ่งใหญ่จากวิสัยทัศน์ที่ชัดเจน',
+   strength:'วิสัยทัศน์ ความสามารถในการสร้างสรรค์จริง',
+   weakness:'แรงกดดันจากความคาดหวังตัวเอง',
+   career:'ผู้นำระดับโลก วิศวกรยิ่งใหญ่ สถาปนิก',
+   love:'ต้องการคู่ที่แข็งแกร่งและเข้าใจความฝันยิ่งใหญ่',
+   lotto:'เลข 22, 4, 13, 31 มงคลพิเศษ',
+   compat:[{n:4,pct:88,l:'ดีมาก'},{n:8,pct:85,l:'ดีมาก'},{n:6,pct:80,l:'ดี'},{n:2,pct:75,l:'ดี'},{n:1,pct:70,l:'ดี'}]},
+  33:{name:'ครูผู้ยิ่งใหญ่ · เลขอาจารย์',planet:'พระศุกร์/พระพฤหัส',element:'โลหะ/ไม้',color:'ทอง ชมพู',gem:'เพชร บุษราคัม',
+   trait:'มีความรักและเมตตาสูงสุด เป็นแรงบันดาลใจแก่ผู้อื่น มีพลังการสอนและรักษา',
+   strength:'ความรัก เมตตา แรงบันดาลใจ การรักษา',
+   weakness:'แบกภาระคนอื่นมากเกินไป',
+   career:'ครูผู้ยิ่งใหญ่ พระ ผู้นำจิตวิญญาณ แพทย์',
+   love:'ความรักไม่มีเงื่อนไข ให้ทุกอย่างกับคู่รัก',
+   lotto:'เลข 33, 6, 15, 24 มงคลพิเศษ',
+   compat:[{n:6,pct:92,l:'ดีมาก'},{n:9,pct:88,l:'ดีมาก'},{n:3,pct:85,l:'ดีมาก'},{n:2,pct:80,l:'ดี'},{n:7,pct:75,l:'ดี'}]},
+};
+function getData(n){return NUM_DATA[n]||NUM_DATA[reduce(n>33?n%9||9:n)]||NUM_DATA[1];}
+
+// ══════════════════════════════════════
+// CALC ENGINE
+// ══════════════════════════════════════
+function calcNumerology(){
+  const first=document.getElementById('n-first').value.trim();
+  const last=document.getElementById('n-last').value.trim();
+  const day=parseInt(document.getElementById('n-day').value)||0;
+  const month=parseInt(document.getElementById('n-month').value)||0;
+  const year=parseInt(document.getElementById('n-year').value)||0;
+  if(!first&&!last){alert('กรุณากรอกชื่อหรือนามสกุลอย่างน้อย 1 ช่อง');return;}
+
+  const fullName=(first+' '+last).trim();
+  const cleanName=fullName.replace(/\s/g,'');
+
+  // Extract letter data
+  const letters=[];
+  cleanName.split('').forEach(c=>{
+    const lv=getLetterVal(c);
+    if(lv)letters.push({char:c,...lv});
+  });
+
+  // Expression number (all letters)
+  const exprSum=letters.reduce((a,l)=>a+l.val,0);
+  const exprNum=reduce(exprSum);
+
+  // Soul urge (vowels only — EN; for TH approximate with สระ pattern)
+  const vowelSum=letters.filter(l=>l.isVowel).reduce((a,l)=>a+l.val,0);
+  const soulNum=reduce(vowelSum||exprSum%9||9);
+
+  // Personality (consonants only)
+  const consSum=letters.filter(l=>!l.isVowel).reduce((a,l)=>a+l.val,0);
+  const persNum=reduce(consSum||exprSum%9||9);
+
+  // Life path (birthdate)
+  let lifeNum=0;
+  if(day&&month&&year){
+    const s=n=>String(n).split('').reduce((a,c)=>a+parseInt(c),0);
+    let lp=s(day)+s(month)+s(year);
+    lifeNum=reduce(lp);
+  }
+
+  // Destiny number (name + birthdate)
+  const destNum=lifeNum?reduce(exprNum+lifeNum):exprNum;
+
+  // Achievement = life + expression
+  const achNum=lifeNum?reduce(lifeNum+exprNum):reduce(exprNum*2);
+
+  const mainNum=lifeNum||exprNum;
+  const d=getData(mainNum);
+
+  // Generate lotto hints
+  const lottoNums=genLotto(mainNum,exprNum,soulNum,persNum,lifeNum);
+
+  renderResult({
+    fullName,letters,exprNum,soulNum,persNum,lifeNum,destNum,achNum,
+    mainNum,d,lottoNums,hasDate:!!(day&&month&&year)
+  });
+}
+
+function genLotto(main,expr,soul,pers,life){
+  const nums=new Set();
+  [main,expr,soul,pers,life].forEach(n=>{
+    if(!n)return;
+    nums.add(String(n).padStart(2,'0'));
+    nums.add(String(n*2%100).padStart(2,'0'));
+    nums.add(String((n*11)%100).padStart(2,'0'));
+    nums.add(String((n*10+main)%1000).padStart(3,'0'));
+  });
+  return [...nums].filter(n=>n!=='00').slice(0,6);
+}
+
+// ══════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════
+function renderResult(r){
+  const el=document.getElementById('result-area');
+  const masterTag=r.mainNum===11||r.mainNum===22||r.mainNum===33?`<span style="font-size:10px;background:rgba(124,58,237,.3);border:1px solid rgba(124,58,237,.5);color:#c8a8ff;padding:2px 7px;border-radius:8px;margin-left:6px">Master Number</span>`:'';
+
+  // Letter table
+  const ltBoxes=r.letters.map(l=>`
+    <div class="lt-box">
+      <div class="lt-char">${l.char}</div>
+      <div class="lt-num">${l.val}</div>
+    </div>`).join('');
+  const ltSum=r.letters.reduce((a,l)=>a+l.val,0);
+
+  // 6-number overview cards
+  const numCards=[
+    {ico:'🌟',name:'เลขแสดงออก',num:r.exprNum,meaning:'พรสวรรค์ที่โลกเห็น'},
+    {ico:'💜',name:'เลขวิญญาณ',num:r.soulNum,meaning:'ความปรารถนาลึกๆ'},
+    {ico:'🎭',name:'เลขบุคลิก',num:r.persNum,meaning:'ภาพที่คนอื่นมองเห็น'},
+    r.lifeNum?{ico:'🛤️',name:'เลขชีวิต',num:r.lifeNum,meaning:'เส้นทางชีวิต'}:null,
+    {ico:'⭐',name:'เลขชะตา',num:r.destNum,meaning:'จุดหมายปลายทาง'},
+    {ico:'🏆',name:'เลขความสำเร็จ',num:r.achNum,meaning:'ศักยภาพสูงสุด'},
+  ].filter(Boolean);
+
+  // Compatibility bars
+  const compatBars=(r.d.compat||[]).map(c=>`
+    <div class="compat-row">
+      <div class="compat-num">${c.n}</div>
+      <div class="compat-bar-bg"><div class="compat-bar" style="width:${c.pct}%;background:${c.pct>=85?'#9b6dff':c.pct>=75?'#f0c84a':'#5a4878'}"></div></div>
+      <div class="compat-label" style="color:${c.pct>=85?'#c8a8ff':c.pct>=75?'#f0c84a':'#5a4878'}">${c.l}</div>
+    </div>`).join('');
+
+  // Chart bars (strength scores)
+  const chartItems=[
+    {name:'ความรัก',val:r.d.compat?r.d.compat[0]?.pct||70:70,color:'#ff6b9d'},
+    {name:'การงาน',val:r.mainNum%2===0?82:78,color:'#9b6dff'},
+    {name:'การเงิน',val:[1,4,8,22].includes(r.mainNum)?85:70,color:'#f0c84a'},
+    {name:'สุขภาพ',val:[3,5,9].includes(r.mainNum)?80:72,color:'#00c896'},
+    {name:'โชคชะตา',val:60+r.mainNum*3%30,color:'#ff9b3d'},
+  ];
+
+  el.innerHTML=`
+    <!-- MAIN HERO CARD -->
+    <div class="lifepath-hero">
+      <div class="lp-header">
+        <div class="lp-num-big">${r.mainNum}</div>
+        <div>
+          <div class="lp-name">${r.d.name}${masterTag}</div>
+          <div class="lp-sub">${r.fullName} · พระ${r.d.planet} · ธาตุ${r.d.element}</div>
+        </div>
+      </div>
+      <div class="lp-trait">${r.d.trait}</div>
+      <div class="lp-grid">
+        <div class="lp-card"><div class="lp-card-l">สีมงคล</div><div class="lp-card-v">${r.d.color.split(' ')[0]}</div></div>
+        <div class="lp-card"><div class="lp-card-l">อัญมณี</div><div class="lp-card-v">${r.d.gem.split(' ')[0]}</div></div>
+        <div class="lp-card"><div class="lp-card-l">จุดแข็ง</div><div class="lp-card-v" style="font-size:12px">${r.d.strength.split(',')[0]}</div></div>
+        <div class="lp-card"><div class="lp-card-l">ระวัง</div><div class="lp-card-v" style="font-size:12px">${r.d.weakness.split(',')[0]}</div></div>
+      </div>
+      <!-- CHART -->
+      <div class="chart-section">
+        <div class="cs-label">พลังงานในแต่ละด้าน</div>
+        ${chartItems.map(c=>`<div class="chart-item">
+          <div class="ci-name">${c.name}</div>
+          <div class="ci-bar-bg"><div class="ci-bar" style="width:${c.val}%;background:${c.color}"></div></div>
+          <div class="ci-val" style="color:${c.color}">${c.val}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- 6 NUMBERS -->
+    <div class="num-cards">
+      ${numCards.map(nc=>`<div class="nc">
+        <div class="nc-header"><span class="nc-ico">${nc.ico}</span><div class="nc-hname">${nc.name}</div></div>
+        <div class="nc-body"><div class="nc-num">${nc.num}</div><div class="nc-meaning">${nc.meaning}<br><span style="color:#9b6dff;font-weight:700">${getData(nc.num).name.split('·')[0].trim()}</span></div></div>
+      </div>`).join('')}
+    </div>
+
+    <!-- LETTER TABLE -->
+    <div class="letter-section">
+      <div class="lt-header">ค่าตัวอักษรของชื่อ</div>
+      <div class="lt-wrap">${ltBoxes}</div>
+      <div class="lt-sum">ผลรวม <strong>${ltSum}</strong> → ลดเหลือ <strong>${r.exprNum}</strong>${r.mainNum===11||r.mainNum===22||r.mainNum===33?' (Master Number)':''}</div>
+    </div>
+
+    <!-- CAREER & LOVE -->
+    <div class="career-section" style="margin:0 16px 12px;background:#0d0a1a;border:1px solid #1e1540;border-radius:var(--r);overflow:hidden">
+      <div style="padding:11px 14px;border-bottom:1px solid #1e1540;font-size:11px;font-weight:700;color:#9b6dff;letter-spacing:1.5px;text-transform:uppercase">เส้นทางชีวิตและความรัก</div>
+      <div style="padding:12px 14px;border-bottom:1px solid #1e1540">
+        <div style="font-size:10px;color:#9b6dff;font-weight:700;letter-spacing:1px;margin-bottom:5px">💼 อาชีพที่เหมาะสม</div>
+        <div style="font-size:13px;color:#c8a8ff;line-height:1.7">${r.d.career}</div>
+      </div>
+      <div style="padding:12px 14px;border-bottom:1px solid #1e1540">
+        <div style="font-size:10px;color:#9b6dff;font-weight:700;letter-spacing:1px;margin-bottom:5px">💕 ความรักและความสัมพันธ์</div>
+        <div style="font-size:13px;color:#c8a8ff;line-height:1.7">${r.d.love}</div>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="font-size:10px;color:#9b6dff;font-weight:700;letter-spacing:1px;margin-bottom:5px">⚠️ ความท้าทาย</div>
+        <div style="font-size:13px;color:#8a70b0;line-height:1.7">${r.d.weakness}</div>
+      </div>
+    </div>
+
+    <!-- COMPAT -->
+    <div class="compat-section">
+      <div class="compat-header">เลขที่เข้ากันได้ดี</div>
+      ${compatBars}
+    </div>
+
+    <!-- LUCKY -->
+    <div class="lucky-section">
+      <div class="lucky-header">สีมงคล · วันมงคล · อัญมณี</div>
+      <div class="lucky-grid">
+        ${r.d.color.split(' ').slice(0,2).map(c=>`<div class="lgc"><div class="lgc-l">สีมงคล</div><div class="lgc-v">${c}</div></div>`).join('')}
+        <div class="lgc"><div class="lgc-l">อัญมณี</div><div class="lgc-v">${r.d.gem.split(' ')[0]}</div></div>
+        <div class="lgc"><div class="lgc-l">พระเคราะห์</div><div class="lgc-v" style="font-size:12px">${r.d.planet.split('/')[0]}</div></div>
+        <div class="lgc"><div class="lgc-l">ธาตุ</div><div class="lgc-v">${r.d.element}</div></div>
+        <div class="lgc"><div class="lgc-l">เลขมงคล</div><div class="lgc-v">${r.mainNum}</div></div>
+      </div>
+    </div>
+
+    <!-- LOTTO -->
+    <div class="lotto-section">
+      <div class="lotto-header">🎯 เลขเด็ดจากเลขศาสตร์ชื่อ</div>
+      <div class="lotto-nums">
+        ${r.lottoNums.map((n,i)=>`<div class="lotto-pill ${i===0?'lp-main':'lp-sec'}" style="animation-delay:${i*.15}s">${n}</div>`).join('')}
+      </div>
+      <div class="lotto-note">${r.d.lotto}</div>
+    </div>
+
+    <!-- SHARE -->
+    <div class="share-row">
+      <button class="shbtn sh-fb" onclick="doShare('${r.fullName.replace(/'/g,'')}','${r.mainNum}','${r.d.name.replace(/'/g,'')}','${r.lottoNums.slice(0,3).join(' ')}')">📘 แชร์ Facebook</button>
+      <button class="shbtn sh-cp" id="cp-btn" onclick="doCopy('${r.fullName.replace(/'/g,'')}','${r.mainNum}','${r.d.name.replace(/'/g,'')}','${r.lottoNums.join(' ')}')">📋 คัดลอก</button>
+    </div>`;
+
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function doShare(name,num,meaning,nums){
+  const t=`🔢 Numerology: ${name}\nเลขชีวิต: ${num} — ${meaning}\nเลขมงคล: ${nums}\nวิเคราะห์ชื่อฟรี: ${location.href}`;
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(t)}`,'_blank','width=600,height=400');
+}
+function doCopy(name,num,meaning,nums){
+  const t=`🔢 Numerology: ${name}\nเลขชีวิต: ${num} — ${meaning}\nเลขมงคล: ${nums}\nวิเคราะห์ชื่อฟรี: ${location.href}`;
+  navigator.clipboard.writeText(t).then(()=>{
+    const btn=document.getElementById('cp-btn');
+    const orig=btn.innerHTML;btn.textContent='✅ คัดลอก!';
+    setTimeout(()=>{btn.innerHTML=orig;},2000);
+  });
+}
+
+// ══════════════════════════════════════
+// INIT SELECTS
+// ══════════════════════════════════════
+const TH_MONTHS=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+function fill(id,opts){const s=document.getElementById(id);opts.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;s.appendChild(o);});}
+fill('n-day',Array.from({length:31},(_,i)=>[i+1,i+1]));
+fill('n-month',TH_MONTHS.map((m,i)=>[i+1,m]));
+fill('n-year',Array.from({length:80},(_,i)=>[2025-i,2025-i]));
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

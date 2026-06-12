@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="หวยหุ้นไทย ช่อง 3 5 9 ดาวโจนส์ ฮั่งเส็ง นิเคอิ หวยยี่กี ผลล่าสุด ตรวจหวยหุ้น">
+
+<meta property="og:title" content="หวยหุ้น & ยี่กี — ผลล่าสุดทุกรอบ">
+<meta property="og:description" content="ตรวจหวยหุ้น 11 ตลาด หวยยี่กี 88 รอบ/วัน ผลหวยหุ้นไทยล่าสุด อัปเดตทุกรอบ">
+<meta property="og:type" content="website">
+
+<title>หวยหุ้น & ยี่กี — ผลล่าสุดทุกรอบ</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#03080d}
+/* PAGE TABS */
+.ptabs{display:flex;background:#060d14;border-bottom:2px solid #0a1e30}
+.ptab{flex:1;padding:12px 8px 10px;text-align:center;font-size:13px;font-weight:700;font-family:var(--font);color:#2a5070;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .2s}
+.ptab .ptico{font-size:18px;display:block;margin-bottom:2px}
+.ptab.active{color:#4dd8ff;border-bottom-color:#0a9abf}
+/* HEADER */
+.mkt-header{background:linear-gradient(135deg,#03080d,#060d14);padding:14px 16px;border-bottom:1px solid #0a1e30}
+.mkt-title{font-size:16px;font-weight:800;color:#c8f0ff;margin-bottom:2px}
+.mkt-sub{font-size:12px;color:#2a5070}
+/* MARKET TABS */
+.mkt-tabs{display:flex;overflow-x:auto;scrollbar-width:none;background:#060d14;border-bottom:1px solid #0a1e30;gap:0}
+.mkt-tabs::-webkit-scrollbar{display:none}
+.mtab{flex-shrink:0;padding:10px 14px;font-size:12px;font-weight:700;font-family:var(--font);color:#2a5070;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.mtab.active{color:#4dd8ff;border-bottom-color:#0a9abf}
+/* STATUS BAR */
+.status-bar{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:12px;color:#2a6080}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-live{background:#00e676;animation:pulse 1.5s infinite}
+.dot-closed{background:#e53935}
+.dot-soon{background:#ffa726;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+/* COUNTDOWN */
+.countdown-wrap{margin:0 16px 10px;background:#060d14;border:1px solid #0a1e30;border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+.cd-label{font-size:11px;color:#2a5070;font-weight:600}
+.cd-time{font-size:22px;font-weight:800;color:#4dd8ff;letter-spacing:2px;font-variant-numeric:tabular-nums}
+.cd-desc{font-size:10px;color:#2a5070;margin-top:2px}
+/* RESULT CARD */
+.res-card{margin:0 16px 10px;background:linear-gradient(135deg,#060d14,#0a1520);border:1px solid #0a1e30;border-radius:var(--r);overflow:hidden}
+.rc-head{padding:12px 14px;border-bottom:1px solid #0a1e30;display:flex;align-items:center;gap:10px}
+.rc-flag{font-size:22px}
+.rc-mkt{font-size:15px;font-weight:800;color:#c8f0ff}
+.rc-time{font-size:11px;color:#2a6080;margin-top:2px}
+.rc-badge{padding:3px 8px;border-radius:10px;font-size:10px;font-weight:700;margin-left:auto;flex-shrink:0}
+.badge-live{background:rgba(0,230,118,.15);border:1px solid rgba(0,230,118,.3);color:#00e676}
+.badge-closed{background:rgba(229,57,53,.1);border:1px solid rgba(229,57,53,.2);color:#e53935}
+.badge-wait{background:rgba(255,167,38,.1);border:1px solid rgba(255,167,38,.2);color:#ffa726}
+/* NUMBERS */
+.nums-row{display:flex;gap:10px;padding:14px 14px 10px;justify-content:center;flex-wrap:wrap}
+.num-box{text-align:center}
+.num-label{font-size:10px;color:#2a6080;font-weight:600;margin-bottom:5px}
+.num-val{font-size:28px;font-weight:800;color:#4dd8ff;letter-spacing:3px;line-height:1}
+.num-val.big{font-size:36px}
+.num-val.wait{color:#1a4060;font-size:28px}
+/* CHECK INLINE */
+.check-inline{margin:0 16px 10px;background:#060d14;border:1px solid #0a1e30;border-radius:var(--rs);padding:12px}
+.ci-label{font-size:11px;color:#2a6080;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.ci-row{display:flex;gap:8px}
+.ci-input{flex:1;background:#03080d;border:1px solid #0a1e30;border-radius:var(--rs);color:#c8f0ff;font-family:var(--font);font-size:18px;font-weight:700;padding:9px 12px;outline:none;letter-spacing:3px;text-align:center;transition:border-color .2s;-moz-appearance:textfield}
+.ci-input::-webkit-inner-spin-button,.ci-input::-webkit-outer-spin-button{-webkit-appearance:none}
+.ci-input:focus{border-color:#0a9abf}
+.ci-btn{background:linear-gradient(135deg,#0a9abf,#065a75);border:none;border-radius:var(--rs);color:#fff;font-size:14px;font-weight:800;font-family:var(--font);padding:9px 16px;cursor:pointer}
+.ci-btn:active{opacity:.85}
+.ci-res{margin-top:8px;padding:9px;border-radius:var(--rs);font-size:13px;font-weight:600;text-align:center;display:none}
+.ci-res.win{background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.3);color:#00e676;display:block}
+.ci-res.lose{background:rgba(229,57,53,.1);border:1px solid rgba(229,57,53,.2);color:#e53935;display:block}
+.ci-res.near{background:rgba(77,216,255,.1);border:1px solid rgba(77,216,255,.2);color:#4dd8ff;display:block}
+/* SCHEDULE */
+.sched-wrap{margin:0 16px 10px}
+.sched-title{font-size:11px;font-weight:700;color:#2a5070;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.sched-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sched-item{background:#060d14;border:1px solid #0a1e30;border-radius:var(--rs);padding:9px 11px;display:flex;align-items:center;gap:8px}
+.sched-item.done{border-color:rgba(0,230,118,.25);background:rgba(0,230,118,.04)}
+.sched-item.next{border-color:rgba(255,167,38,.3);background:rgba(255,167,38,.04)}
+.sched-ico{font-size:16px;flex-shrink:0}
+.sched-info{flex:1;min-width:0}
+.sched-mkt{font-size:12px;font-weight:700;color:#c8f0ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sched-t{font-size:10px;color:#2a6080;margin-top:1px}
+.sched-num{font-size:13px;font-weight:800;color:#4dd8ff;letter-spacing:1px}
+/* ─── YEEGEE ─── */
+.yg-header{background:linear-gradient(135deg,#03080d,#060814);padding:14px 16px;border-bottom:1px solid #0a1030}
+.yg-title{font-size:16px;font-weight:800;color:#d0c8ff;margin-bottom:2px}
+.yg-sub{font-size:12px;color:#2a2860}
+/* ROUND SELECTOR */
+.round-wrap{padding:10px 16px 6px;display:flex;align-items:center;gap:10px;overflow-x:auto;scrollbar-width:none}
+.round-wrap::-webkit-scrollbar{display:none}
+.round-pill{flex-shrink:0;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:700;font-family:var(--font);cursor:pointer;border:1px solid #1a1a40;background:#060810;color:#3a3870;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.round-pill.active{background:#3d2ebf;border-color:#5a4aff;color:#d0c8ff}
+.round-pill.done{border-color:rgba(0,230,118,.3);color:#00e676}
+.round-pill.live{background:rgba(255,167,38,.1);border-color:rgba(255,167,38,.4);color:#ffa726;animation:pulse 1.5s infinite}
+/* YG RESULT */
+.yg-res{margin:8px 16px 10px;background:#060810;border:1px solid #1a1a40;border-radius:var(--r);overflow:hidden}
+.yg-res-head{padding:11px 14px;border-bottom:1px solid #1a1a40;display:flex;align-items:center;gap:8px}
+.yg-round-badge{background:linear-gradient(135deg,#3d2ebf,#1e1080);color:#d0c8ff;font-size:12px;font-weight:800;padding:3px 10px;border-radius:10px}
+.yg-status{font-size:11px;font-weight:600}
+.yg-time{font-size:11px;color:#2a2860;margin-left:auto}
+.yg-nums{display:flex;gap:12px;padding:14px;justify-content:center}
+.yg-num{text-align:center}
+.yg-nlabel{font-size:10px;color:#3a3870;font-weight:600;margin-bottom:4px}
+.yg-nval{font-size:30px;font-weight:800;letter-spacing:3px;line-height:1}
+.yg-nval.top{color:#b09fff}
+.yg-nval.bot{color:#7a6adf}
+.yg-nval.wait{color:#1a1a40;font-size:24px}
+/* YG CHECK */
+.yg-check{margin:0 16px 10px;background:#060810;border:1px solid #1a1a40;border-radius:var(--rs);padding:12px}
+/* COUNTDOWN YG */
+.yg-cd{margin:6px 16px 10px;display:flex;align-items:center;gap:10px;padding:10px 14px;background:#060810;border:1px solid #1a1a40;border-radius:var(--rs)}
+.yg-cd-label{font-size:11px;color:#2a2860;flex:1}
+.yg-cd-time{font-size:20px;font-weight:800;color:#9b6dff;letter-spacing:2px;font-variant-numeric:tabular-nums}
+/* INFO BOX */
+.info-box{margin:0 16px 10px;background:#060810;border:1px solid #1a1a40;border-radius:var(--rs);padding:11px 14px;font-size:12px;color:#2a2860;line-height:1.6}
+.info-box strong{color:#3a3870}
+/* SHARE */
+.share-strip{display:flex;gap:8px;padding:0 16px 10px}
+.sbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px;border-radius:var(--rs);font-size:12px;font-weight:600;font-family:var(--font);cursor:pointer;border:none}
+.s-fb{background:#1877f2;color:#fff}
+.s-cp{background:#060d14;border:1px solid #0a1e30;color:#2a6080}
+.s-cp.yg{background:#060810;border-color:#1a1a40;color:#3a3870}
+</style>
+</head>
+<body>
+
+<header class="hdr" style="background:linear-gradient(135deg,#03080d,#060d14);border-bottom-color:#0a1e30">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#0a9abf,#065a75)">📈</div>
+    <div>
+      <div class="logo-txt" style="color:#c8f0ff">หวยหุ้น & ยี่กี</div>
+      <div class="logo-sub" id="clock-sub">ออกทุกวัน · อัปเดต Real-time</div>
+    </div>
+  </div>
+  <div id="live-clock" style="font-size:14px;font-weight:800;color:#4dd8ff;font-variant-numeric:tabular-nums"></div>
+</header>
+
+<div class="ad ad-b" style="background:#060d14;border-color:#0a1e30"><span>โฆษณา 320×50</span></div>
+
+<div class="ptabs">
+  <button class="ptab active" onclick="switchPage('stock',this)">
+    <span class="ptico">📈</span>หวยหุ้น
+  </button>
+  <button class="ptab" onclick="switchPage('yeegee',this)">
+    <span class="ptico">🎰</span>ยี่กี
+  </button>
+</div>
+
+<main style="max-width:480px;margin:0 auto;padding-bottom:80px">
+
+<!-- ══════════ STOCK LOTTERY ══════════ -->
+<div id="page-stock">
+  <div class="mkt-header">
+    <div class="mkt-title">📈 หวยหุ้น — ผลล่าสุดทุกตลาด</div>
+    <div class="mkt-sub" id="stock-date-label">วันนี้ —</div>
+  </div>
+
+  <!-- Market selector -->
+  <div class="mkt-tabs" id="mkt-tabs"></div>
+
+  <!-- Status + countdown -->
+  <div class="status-bar">
+    <div class="status-dot" id="mkt-dot"></div>
+    <span id="mkt-status-txt">กำลังตรวจสอบ...</span>
+  </div>
+  <div class="countdown-wrap" id="mkt-cd-wrap" style="display:none">
+    <div>
+      <div class="cd-label" id="cd-label">ออกผลใน</div>
+      <div class="cd-desc" id="cd-desc">—</div>
+    </div>
+    <div class="cd-time" id="cd-time">--:--:--</div>
+  </div>
+
+  <!-- Result display -->
+  <div id="stock-result"></div>
+
+  <!-- Today's full schedule -->
+  <div class="sched-wrap">
+    <div class="sched-title">ตารางออกผลวันนี้</div>
+    <div class="sched-grid" id="sched-grid"></div>
+  </div>
+
+  <div class="ad ad-i" style="background:#060d14;border-color:#0a1e30"><span>โฆษณา</span></div>
+  <div class="ad ad-r" style="background:#060d14;border-color:#0a1e30;margin:8px 16px"><span>โฆษณา 300×250</span></div>
+</div>
+
+<!-- ══════════ YEEGEE ══════════ -->
+<div id="page-yeegee" style="display:none">
+  <div class="yg-header">
+    <div class="yg-title">🎰 หวยยี่กี — 88 รอบต่อวัน</div>
+    <div class="yg-sub">ออกทุก 15 นาที · 06:00–22:00 น.</div>
+  </div>
+
+  <div style="padding:10px 16px 4px;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:11px;font-weight:700;color:#2a2860;letter-spacing:1.5px;text-transform:uppercase">รอบปัจจุบัน / ถัดไป</div>
+    <div style="font-size:11px;color:#3a3870" id="yg-round-info"></div>
+  </div>
+
+  <!-- Live countdown -->
+  <div class="yg-cd">
+    <div>
+      <div class="yg-cd-label" id="yg-cd-label">รอบถัดไปออกใน</div>
+      <div style="font-size:10px;color:#1e1860;margin-top:2px" id="yg-cd-sub"></div>
+    </div>
+    <div class="yg-cd-time" id="yg-cd-time">--:--</div>
+  </div>
+
+  <!-- Round pills -->
+  <div style="padding:4px 16px 4px;font-size:11px;font-weight:700;color:#2a2860;letter-spacing:1px;text-transform:uppercase">เลือกรอบ</div>
+  <div class="round-wrap" id="round-pills"></div>
+
+  <!-- Result -->
+  <div class="yg-res" id="yg-result-card">
+    <div class="yg-res-head">
+      <div class="yg-round-badge" id="yg-badge">รอบ —</div>
+      <div class="yg-status" id="yg-status-txt" style="color:#ffa726">⏳ รอผล</div>
+      <div class="yg-time" id="yg-time-txt">—</div>
+    </div>
+    <div class="yg-nums">
+      <div class="yg-num">
+        <div class="yg-nlabel">3 ตัวบน</div>
+        <div class="yg-nval top wait" id="yg-3top">- - -</div>
+      </div>
+      <div class="yg-num">
+        <div class="yg-nlabel">2 ตัวล่าง</div>
+        <div class="yg-nval bot wait" id="yg-2bot">- -</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Check -->
+  <div class="yg-check">
+    <div class="ci-label" style="color:#3a3870">ตรวจเลขยี่กี</div>
+    <div class="ci-row">
+      <input class="ci-input" id="yg-tk" type="number" inputmode="numeric" maxlength="3"
+        placeholder="000" oninput="if(this.value.length>3)this.value=this.value.slice(0,3)"
+        style="border-color:#1a1a40;background:#03060a;color:#d0c8ff">
+      <button class="ci-btn" onclick="checkYG()" style="background:linear-gradient(135deg,#3d2ebf,#1e1080)">ตรวจ</button>
+    </div>
+    <div class="ci-res" id="yg-res-msg" style="--win-bg:rgba(155,109,255,.12);--win-border:rgba(155,109,255,.3)"></div>
+  </div>
+
+  <!-- History table -->
+  <div style="margin:0 16px 10px;background:#060810;border:1px solid #1a1a40;border-radius:var(--r);overflow:hidden">
+    <div style="padding:10px 14px;border-bottom:1px solid #1a1a40;font-size:11px;font-weight:700;color:#3a3870;letter-spacing:1.5px;text-transform:uppercase">ผลย้อนหลัง 10 รอบล่าสุด</div>
+    <div id="yg-history"></div>
+  </div>
+
+  <div class="info-box">
+    <strong>หวยยี่กี</strong> ออกผลทุก 15 นาที รอบแรก 06:00 น. รอบสุดท้าย 22:00 น. รวม 88 รอบต่อวัน<br>
+    <strong>หมายเหตุ:</strong> ผลที่แสดงเป็นข้อมูลจำลอง รอเชื่อมต่อ API จริง
+  </div>
+
+  <div class="share-strip">
+    <button class="sbtn s-fb" onclick="shareYG()">📘 แชร์</button>
+    <button class="sbtn s-cp yg" id="yg-cp" onclick="copyYG()">📋 คัดลอก</button>
+  </div>
+
+  <div class="ad ad-i" style="background:#060810;border-color:#1a1a40"><span>โฆษณา</span></div>
+  <div class="ad ad-r" style="background:#060810;border-color:#1a1a40;margin:8px 16px"><span>โฆษณา 300×250</span></div>
+</div>
+
+</main>
+
+<div class="bsp"></div>
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem active" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+
+<script>
+// ══════════════════════════════════════════
+// MARKETS CONFIG
+// ══════════════════════════════════════════
+// open/close in Thai time (UTC+7), format HH:MM
+const MARKETS = [
+  // ── ไทย (SET Index — ออกเฉพาะวันจันทร์-ศุกร์) ──
+  { id:'set',      flag:'🇹🇭', name:'หวยหุ้นไทย (SET)', group:'ไทย',
+    open:'10:00', close:'16:30',
+    sessions:[{label:'เที่ยง',time:'12:30'},{label:'บ่าย',time:'16:30'}],
+    note:'ตาม SET Index วันจันทร์–ศุกร์', digits:3 },
+  // ── เอเชีย ──
+  { id:'nikkei',   flag:'🇯🇵', name:'นิเคอิ (Nikkei)',  group:'เอเชีย',
+    open:'08:00', close:'14:30',
+    sessions:[{label:'เช้า',time:'11:30'},{label:'บ่าย',time:'14:30'}],
+    note:'ตลาดโตเกียว ออก 2 รอบ', digits:3 },
+  { id:'hangseng', flag:'🇭🇰', name:'ฮั่งเส็ง (HSI)',   group:'เอเชีย',
+    open:'09:30', close:'16:00',
+    sessions:[{label:'เช้า',time:'12:00'},{label:'บ่าย',time:'16:00'}],
+    note:'ตลาดฮ่องกง ออก 2 รอบ', digits:3 },
+  { id:'china',    flag:'🇨🇳', name:'จีน (SSE)',         group:'เอเชีย',
+    open:'09:30', close:'15:00',
+    sessions:[{label:'เช้า',time:'11:30'},{label:'บ่าย',time:'15:00'}],
+    note:'ตลาดเซี่ยงไฮ้ ออก 2 รอบ', digits:3 },
+  { id:'taiwan',   flag:'🇹🇼', name:'ไต้หวัน (TWSE)',   group:'เอเชีย',
+    open:'09:00', close:'13:30',
+    sessions:[{label:'บ่าย',time:'13:30'}],
+    note:'ตลาดไทเป ออก 1 รอบ', digits:3 },
+  { id:'korea',    flag:'🇰🇷', name:'เกาหลี (KOSPI)',   group:'เอเชีย',
+    open:'09:00', close:'15:30',
+    sessions:[{label:'บ่าย',time:'15:30'}],
+    note:'ตลาดโซล ออก 1 รอบ', digits:3 },
+  { id:'sing',     flag:'🇸🇬', name:'สิงคโปร์ (STI)',  group:'เอเชีย',
+    open:'09:00', close:'17:00',
+    sessions:[{label:'บ่าย',time:'17:00'}],
+    note:'ตลาดสิงคโปร์ ออก 1 รอบ', digits:3 },
+  // ── ยุโรป ──
+  { id:'ftse',     flag:'🇬🇧', name:'FTSE 100',         group:'ยุโรป',
+    open:'15:00', close:'23:30',
+    sessions:[{label:'ดึก',time:'23:30'}],
+    note:'ตลาดลอนดอน ออก 1 รอบ', digits:3 },
+  { id:'dax',      flag:'🇩🇪', name:'DAX',               group:'ยุโรป',
+    open:'15:30', close:'23:00',
+    sessions:[{label:'ดึก',time:'23:00'}],
+    note:'ตลาดแฟรงก์เฟิร์ต ออก 1 รอบ', digits:3 },
+  // ── สหรัฐฯ ──
+  { id:'dow',      flag:'🇺🇸', name:'ดาวโจนส์ (DJIA)',  group:'สหรัฐฯ',
+    open:'20:30', close:'05:00+',
+    sessions:[{label:'ดึก',time:'03:00'}],
+    note:'ตลาด NYSE ออก 1 รอบ (ตีสาม)', digits:3 },
+  { id:'nasdaq',   flag:'🇺🇸', name:'NASDAQ',            group:'สหรัฐฯ',
+    open:'20:30', close:'05:00+',
+    sessions:[{label:'ดึก',time:'04:00'}],
+    note:'ตลาด NASDAQ ออก 1 รอบ (ตีสี่)', digits:3 },
+];
+
+// ══════════════════════════════════════════
+// DEMO DATA GENERATOR
+// ══════════════════════════════════════════
+// deterministic seed-based so same day = same numbers
+function seedRng(seed) {
+  let s = seed;
+  return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 0xffffffff; };
+}
+function genResult(marketId, session, date) {
+  const seed = marketId.split('').reduce((a,c)=>a+c.charCodeAt(0),0)
+    + session.split('').reduce((a,c)=>a+c.charCodeAt(0),0)
+    + date.getFullYear()*10000 + date.getMonth()*100 + date.getDate();
+  const rng = seedRng(seed);
+  const top3 = String(Math.floor(rng()*1000)).padStart(3,'0');
+  const bot2 = top3.slice(-2);
+  return { top3, bot2 };
+}
+
+// ══════════════════════════════════════════
+// TIME HELPERS
+// ══════════════════════════════════════════
+function nowTH() {
+  // Thai time = UTC+7
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset()*60000;
+  return new Date(utc + 7*3600000);
+}
+function toMinutes(hhmm) {
+  const [h,m] = hhmm.split(':').map(Number);
+  return h*60+m;
+}
+function formatTime(d) {
+  return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0');
+}
+function formatHHMM(d) {
+  return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+const TH_M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const TH_D=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+function thDateFull(d) { return `วัน${TH_D[d.getDay()]}ที่ ${d.getDate()} ${TH_M[d.getMonth()]} ${d.getFullYear()+543}`; }
+
+// Market status
+function getMarketStatus(mkt) {
+  const now = nowTH();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const openMin = toMinutes(mkt.open);
+  let closeMin = toMinutes(mkt.close.replace('+',''));
+  if(mkt.close.endsWith('+')) closeMin += 24*60; // next day
+  if(nowMin >= openMin && nowMin < closeMin) return 'live';
+  if(nowMin < openMin) return 'soon';
+  return 'closed';
+}
+function getNextSession(mkt) {
+  const now = nowTH();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  for(const s of mkt.sessions) {
+    const sMin = toMinutes(s.time);
+    if(sMin > nowMin) return s;
+  }
+  return null;
+}
+function secondsUntil(hhmm) {
+  const now = nowTH();
+  const [h,m] = hhmm.split(':').map(Number);
+  let target = new Date(now);
+  target.setHours(h,m,0,0);
+  if(target <= now) target.setDate(target.getDate()+1);
+  return Math.floor((target - now)/1000);
+}
+
+// ══════════════════════════════════════════
+// STOCK PAGE
+// ══════════════════════════════════════════
+let curMkt = MARKETS[0];
+
+function buildMarketTabs() {
+  const tabs = document.getElementById('mkt-tabs');
+  // Group by country
+  const groups = {};
+  MARKETS.forEach(m => { if(!groups[m.group]) groups[m.group] = []; groups[m.group].push(m); });
+  tabs.innerHTML = Object.entries(groups).map(([g, ms]) =>
+    ms.map((m,i) => `<button class="mtab${m.id===curMkt.id?' active':''}" onclick="selectMkt('${m.id}',this)">${m.flag} ${m.name}</button>`).join('')
+  ).join('');
+}
+
+function selectMkt(id, btn) {
+  curMkt = MARKETS.find(m=>m.id===id)||MARKETS[0];
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderStockResult();
+}
+
+function renderStockResult() {
+  const el = document.getElementById('stock-result');
+  const now = nowTH();
+  const status = getMarketStatus(curMkt);
+  const statusDot = document.getElementById('mkt-dot');
+  const statusTxt = document.getElementById('mkt-status-txt');
+
+  // Status bar
+  statusDot.className = 'status-dot ' + (status==='live'?'dot-live':status==='soon'?'dot-soon':'dot-closed');
+  statusTxt.textContent = status==='live'?`${curMkt.name} เปิดตลาดอยู่`:status==='soon'?`${curMkt.name} กำลังจะเปิด`:`${curMkt.name} ปิดตลาดแล้ว`;
+
+  // Countdown
+  const cdWrap = document.getElementById('mkt-cd-wrap');
+  const nextSess = getNextSession(curMkt);
+  if(nextSess) {
+    cdWrap.style.display='flex';
+    document.getElementById('cd-label').textContent = `รอบ${nextSess.label}ออกใน`;
+    document.getElementById('cd-desc').textContent = `${curMkt.flag} ${curMkt.name} รอบ${nextSess.label} ${nextSess.time} น.`;
+  } else {
+    cdWrap.style.display='none';
+  }
+
+  // Weekday check for SET
+  const isSET = curMkt.id === 'set';
+  const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+  const setClosedMsg = isSET && isWeekend
+    ? `<div style="margin:0 16px 10px;padding:10px 14px;background:#060d14;border:1px solid #0a1e30;border-radius:var(--rs);font-size:12px;color:#2a6080">⚠️ หวยหุ้นไทย (SET) ไม่ออกวันเสาร์-อาทิตย์ ออกผลเฉพาะวันจันทร์–ศุกร์</div>`
+    : '';
+
+  // Sessions results
+  const sessionsHTML = curMkt.sessions.map(sess => {
+    const sessMin = toMinutes(sess.time);
+    const nowMin = now.getHours()*60 + now.getMinutes();
+    const isDone = nowMin >= sessMin;
+    const r = isDone ? genResult(curMkt.id, sess.label, now) : null;
+
+    return `<div class="res-card">
+      <div class="rc-head">
+        <span class="rc-flag">${curMkt.flag}</span>
+        <div><div class="rc-mkt">${curMkt.name} — รอบ${sess.label}</div><div class="rc-time">${sess.time} น.</div></div>
+        <div class="rc-badge ${isDone?'badge-live':'badge-wait'}">${isDone?'✅ ออกแล้ว':'⏳ รอผล'}</div>
+      </div>
+      <div class="nums-row">
+        <div class="num-box">
+          <div class="num-label">3 ตัวบน</div>
+          <div class="num-val big ${isDone?'':'wait'}">${isDone?r.top3:'- - -'}</div>
+        </div>
+        <div class="num-box">
+          <div class="num-label">2 ตัวล่าง</div>
+          <div class="num-val ${isDone?'':'wait'}">${isDone?r.bot2:'- -'}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Check input
+  const checkId = 'stock-check-'+curMkt.id;
+  el.innerHTML = setClosedMsg + sessionsHTML + `
+    <div style="margin:0 16px 8px;font-size:11px;color:#1a4060;padding:2px 4px">${curMkt.flag} ${curMkt.note||''}</div>
+    <div class="check-inline">
+      <div class="ci-label">ตรวจเลขหวยหุ้น</div>
+      <div class="ci-row">
+        <input class="ci-input" id="${checkId}" type="number" inputmode="numeric" maxlength="3"
+          placeholder="000" oninput="if(this.value.length>3)this.value=this.value.slice(0,3)">
+        <button class="ci-btn" onclick="checkStock('${curMkt.id}','${checkId}','stock-res-msg')">ตรวจ</button>
+      </div>
+      <div class="ci-res" id="stock-res-msg"></div>
+    </div>
+    <div class="share-strip">
+      <button class="sbtn s-fb" onclick="shareStock()">📘 แชร์</button>
+      <button class="sbtn s-cp" onclick="copyStock()">📋 คัดลอก</button>
+    </div>`;
+}
+
+function checkStock(mktId, inputId, resId) {
+  const v = document.getElementById(inputId).value.trim();
+  const el = document.getElementById(resId);
+  el.className='ci-res'; el.style.display='none';
+  if(!v||v.length<2) { showMsg(el,'near','⚠️ ใส่เลข 2 หรือ 3 ตัว'); return; }
+  const now = nowTH();
+  const mkt = MARKETS.find(m=>m.id===mktId);
+  if(!mkt) return;
+  for(const sess of mkt.sessions) {
+    const sessMin = toMinutes(sess.time);
+    const nowMin = now.getHours()*60 + now.getMinutes();
+    if(nowMin < sessMin) continue;
+    const r = genResult(mktId, sess.label, now);
+    if(v.length===3 && v===r.top3) { showMsg(el,'win',`✅ 3 ตัวบน รอบ${sess.label} ถูกรางวัล!`); return; }
+    if(v.length===2 && v===r.bot2) { showMsg(el,'win',`✅ 2 ตัวล่าง รอบ${sess.label} ถูกรางวัล!`); return; }
+    if(v.length===2 && r.top3.slice(-2)===v) { showMsg(el,'near',`🎉 2 ตัวบน รอบ${sess.label}!`); return; }
+  }
+  showMsg(el,'lose','❌ ไม่ถูกรางวัลในรอบที่ออกแล้ว');
+}
+
+function buildSchedule() {
+  const now = nowTH();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const grid = document.getElementById('sched-grid');
+  // Flatten all sessions
+  const all = [];
+  MARKETS.forEach(m => m.sessions.forEach(s => all.push({m, s, min:toMinutes(s.time)})));
+  all.sort((a,b)=>a.min-b.min);
+  const visible = all.slice(0,12);
+  grid.innerHTML = visible.map(({m,s,min}) => {
+    const done = nowMin >= min;
+    const isNext = !done && all.find(x=>!( nowMin >= x.min )) === all.find(x=>x.m===m&&x.s===s);
+    const r = done ? genResult(m.id, s.label, now) : null;
+    return `<div class="sched-item ${done?'done':isNext?'next':''}">
+      <span class="sched-ico">${m.flag}</span>
+      <div class="sched-info">
+        <div class="sched-mkt">${m.name} ${s.label}</div>
+        <div class="sched-t">${s.time} น.</div>
+      </div>
+      <div class="sched-num">${done?r.top3:(isNext?'⏳':'—')}</div>
+    </div>`;
+  }).join('');
+}
+
+function shareStock() {
+  const now = nowTH();
+  const lines = curMkt.sessions.map(s => {
+    const min = toMinutes(s.time);
+    const nowMin = now.getHours()*60+now.getMinutes();
+    if(nowMin < min) return null;
+    const r = genResult(curMkt.id, s.label, now);
+    return `รอบ${s.label} ${s.time}: ${r.top3} / ${r.bot2}`;
+  }).filter(Boolean).join('\n');
+  const t = `📈 หวยหุ้น ${curMkt.flag}${curMkt.name} ${thDateFull(now)}\n${lines}\nตรวจหวยหุ้น: ${location.href}`;
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(t)}`,'_blank','width=600,height=400');
+}
+function copyStock() {
+  const now = nowTH();
+  const lines = curMkt.sessions.map(s => {
+    const min = toMinutes(s.time);
+    const nowMin = now.getHours()*60+now.getMinutes();
+    if(nowMin < min) return null;
+    const r = genResult(curMkt.id, s.label, now);
+    return `รอบ${s.label}: ${r.top3} | ${r.bot2}`;
+  }).filter(Boolean).join('\n');
+  navigator.clipboard.writeText(`📈 หวยหุ้น ${curMkt.name} ${thDateFull(now)}\n${lines}\nตรวจหวยหุ้น: ${location.href}`);
+}
+
+// ══════════════════════════════════════════
+// YEEGEE
+// ══════════════════════════════════════════
+// 88 rounds: 06:00–22:00, every 15 min
+const YG_START = 6*60;   // 06:00
+const YG_END   = 22*60;  // 22:00
+const YG_INTERVAL = 15;
+const YG_TOTAL = (YG_END - YG_START) / YG_INTERVAL; // 96 slots but cap at 88
+
+function getYGRounds() {
+  const rounds = [];
+  for(let i=0; i<88; i++) {
+    const min = YG_START + i*YG_INTERVAL;
+    const hh = Math.floor(min/60), mm = min%60;
+    rounds.push({ no: i+1, time: `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}` });
+  }
+  return rounds;
+}
+
+function getCurrentYGRound() {
+  const now = nowTH();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  if(nowMin < YG_START) return { current: null, next: 1 };
+  if(nowMin >= YG_END) return { current: 88, next: null };
+  const passed = Math.floor((nowMin - YG_START) / YG_INTERVAL);
+  return { current: passed > 0 ? passed : null, next: passed+1 };
+}
+
+let curYGRound = 1;
+const ygRounds = getYGRounds();
+
+function buildYGPills() {
+  const { current, next } = getCurrentYGRound();
+  const wrap = document.getElementById('round-pills');
+  // Show last 5 done + next 10
+  const startIdx = Math.max(0, (current||0)-5);
+  const endIdx = Math.min(88, (current||0)+10);
+  wrap.innerHTML = ygRounds.slice(startIdx, endIdx).map(r => {
+    const isDone = current !== null && r.no <= current;
+    const isLive = r.no === current;
+    const isNext = r.no === next;
+    const cls = isLive?'live':isDone?'done':isNext?'active':'';
+    return `<button class="round-pill ${cls}${r.no===curYGRound?' active':''}" onclick="selectYGRound(${r.no},this)">
+      รอบ ${r.no}<br><span style="font-size:9px;opacity:.7">${r.time}</span>
+    </button>`;
+  }).join('');
+  // Update info
+  document.getElementById('yg-round-info').textContent = `รอบปัจจุบัน: ${current||'—'} / 88`;
+}
+
+function selectYGRound(no, btn) {
+  curYGRound = no;
+  document.querySelectorAll('.round-pill').forEach(p=>p.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderYGResult(no);
+}
+
+function renderYGResult(no) {
+  const { current } = getCurrentYGRound();
+  const round = ygRounds[no-1];
+  const isDone = current !== null && no <= current;
+  const now = nowTH();
+
+  document.getElementById('yg-badge').textContent = `รอบ ${no} (${round.time} น.)`;
+  const statusEl = document.getElementById('yg-status-txt');
+  const t3El = document.getElementById('yg-3top');
+  const b2El = document.getElementById('yg-2bot');
+  document.getElementById('yg-time-txt').textContent = round.time+' น.';
+
+  if(isDone) {
+    const r = genResult('yeegee', String(no), now);
+    t3El.textContent = r.top3; t3El.className = 'yg-nval top';
+    b2El.textContent = r.bot2; b2El.className = 'yg-nval bot';
+    statusEl.textContent = '✅ ออกแล้ว'; statusEl.style.color='#00e676';
+  } else {
+    t3El.textContent = '- - -'; t3El.className = 'yg-nval top wait';
+    b2El.textContent = '- -'; b2El.className = 'yg-nval bot wait';
+    statusEl.textContent = '⏳ รอผล'; statusEl.style.color='#ffa726';
+  }
+
+  // History
+  renderYGHistory(no, now, current);
+}
+
+function renderYGHistory(upToRound, now, current) {
+  const histEl = document.getElementById('yg-history');
+  const startRound = Math.max(1, upToRound-9);
+  const rounds = [];
+  for(let i=upToRound; i>=startRound; i--) {
+    const r = ygRounds[i-1];
+    const isDone = current !== null && i <= current;
+    if(isDone) rounds.push({ no:i, time:r.time, ...genResult('yeegee', String(i), now) });
+  }
+  if(!rounds.length) { histEl.innerHTML='<div style="padding:12px;text-align:center;font-size:13px;color:#2a2860">ยังไม่มีผลย้อนหลัง</div>'; return; }
+  histEl.innerHTML = rounds.map(r=>`
+    <div style="display:flex;align-items:center;padding:9px 14px;border-bottom:1px solid #0d0d28;gap:10px">
+      <div style="font-size:12px;font-weight:700;color:#3a3870;min-width:50px">รอบ ${r.no}</div>
+      <div style="font-size:11px;color:#1a1a40;min-width:44px">${r.time} น.</div>
+      <div style="flex:1;display:flex;gap:10px">
+        <span style="font-size:15px;font-weight:800;color:#b09fff;letter-spacing:2px">${r.top3}</span>
+        <span style="font-size:14px;font-weight:700;color:#7a6adf;letter-spacing:1px">${r.bot2}</span>
+      </div>
+    </div>`).join('');
+}
+
+function checkYG() {
+  const v = document.getElementById('yg-tk').value.trim();
+  const el = document.getElementById('yg-res-msg');
+  el.className='ci-res'; el.style.display='none';
+  if(!v||v.length<2) { showMsg(el,'near','⚠️ ใส่เลข 2 หรือ 3 ตัว'); return; }
+  const { current } = getCurrentYGRound();
+  if(!current) { showMsg(el,'near','⏳ ยังไม่มีรอบที่ออกแล้วในวันนี้'); return; }
+  const now = nowTH();
+  const r = genResult('yeegee', String(curYGRound), now);
+  const isDone = current !== null && curYGRound <= current;
+  if(!isDone) { showMsg(el,'near','⏳ รอบนี้ยังไม่ออกผล'); return; }
+  if(v.length===3 && v===r.top3) { showMsg(el,'win','✅ 3 ตัวบน ถูกรางวัล! 🎉'); return; }
+  if(v.length===2 && v===r.bot2) { showMsg(el,'win','✅ 2 ตัวล่าง ถูกรางวัล! 🎉'); return; }
+  if(v.length===2 && r.top3.slice(-2)===v) { showMsg(el,'near','🎉 2 ตัวบน ถูก!'); return; }
+  showMsg(el,'lose','❌ ไม่ถูกรางวัลรอบนี้');
+}
+
+function shareYG() {
+  const { current } = getCurrentYGRound();
+  if(!current) { alert('ยังไม่มีผลออก'); return; }
+  const now = nowTH();
+  const r = genResult('yeegee', String(curYGRound), now);
+  const t = `🎰 หวยยี่กี รอบ ${curYGRound} (${ygRounds[curYGRound-1].time} น.)\n3ตัวบน: ${r.top3} | 2ตัวล่าง: ${r.bot2}\nตรวจยี่กีฟรี: ${location.href}`;
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(t)}`,'_blank','width=600,height=400');
+}
+function copyYG() {
+  const { current } = getCurrentYGRound();
+  if(!current) return;
+  const now = nowTH();
+  const r = genResult('yeegee', String(curYGRound), now);
+  navigator.clipboard.writeText(`🎰 ยี่กี รอบ ${curYGRound} | 3บน: ${r.top3} | 2ล่าง: ${r.bot2} | ตรวจยี่กีฟรี: ${location.href}`);
+}
+
+// ══════════════════════════════════════════
+// SHARED HELPERS
+// ══════════════════════════════════════════
+function showMsg(el, cls, txt) { el.className='ci-res '+cls; el.textContent=txt; el.style.display='block'; }
+
+// ══════════════════════════════════════════
+// PAGE SWITCH
+// ══════════════════════════════════════════
+function switchPage(page, btn) {
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('page-stock').style.display  = page==='stock'  ?'block':'none';
+  document.getElementById('page-yeegee').style.display = page==='yeegee' ?'block':'none';
+}
+
+// ══════════════════════════════════════════
+// CLOCK + COUNTDOWNS
+// ══════════════════════════════════════════
+function updateClock() {
+  const now = nowTH();
+  document.getElementById('live-clock').textContent = formatTime(now);
+
+  // Market countdown
+  const cdWrap = document.getElementById('mkt-cd-wrap');
+  const nextSess = getNextSession(curMkt);
+  if(nextSess) {
+    const secs = secondsUntil(nextSess.time);
+    const h = Math.floor(secs/3600), m = Math.floor((secs%3600)/60), s = secs%60;
+    document.getElementById('cd-time').textContent =
+      (h>0?String(h).padStart(2,'0')+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  }
+
+  // YG countdown
+  const { next } = getCurrentYGRound();
+  if(next && next<=88) {
+    const secs = secondsUntil(ygRounds[next-1].time);
+    const m = Math.floor(secs/60), s = secs%60;
+    document.getElementById('yg-cd-time').textContent = String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    document.getElementById('yg-cd-label').textContent = `รอบ ${next} ออกใน`;
+    document.getElementById('yg-cd-sub').textContent = `${ygRounds[next-1].time} น. · รอบที่ ${next} จาก 88`;
+  } else if(!next) {
+    document.getElementById('yg-cd-time').textContent = 'ปิด';
+    document.getElementById('yg-cd-label').textContent = 'หยุดรับพนัน';
+    document.getElementById('yg-cd-sub').textContent = 'เปิดรอบใหม่ 06:00 น.';
+  }
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+(function init() {
+  const now = nowTH();
+  document.getElementById('stock-date-label').textContent = thDateFull(now);
+
+  buildMarketTabs();
+  renderStockResult();
+  buildSchedule();
+
+  // YG init
+  const { current, next } = getCurrentYGRound();
+  curYGRound = current || next || 1;
+  buildYGPills();
+  renderYGResult(curYGRound);
+
+  // Clock tick
+  updateClock();
+  setInterval(updateClock, 1000);
+  // Refresh schedule every minute
+  setInterval(() => { buildSchedule(); buildYGPills(); }, 60000);
+})();
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

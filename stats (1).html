@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="สถิติหวยไทย หวยลาว หวยฮานอย เลขออกบ่อย เลขนานไม่ออก วิเคราะห์ย้อนหลัง">
+
+<meta property="og:title" content="สถิติหวย — วิเคราะห์ไทย ลาว ฮานอย">
+<meta property="og:description" content="สถิติหวยย้อนหลัง เลขออกบ่อย เลขดับ สถิติรายวัน 12 ประเภท สำหรับหวยไทย ลาว ฮานอย">
+<meta property="og:type" content="website">
+
+<title>สถิติหวย — วิเคราะห์ไทย ลาว ฮานอย</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.ltype-tabs{display:flex;background:var(--panel);border-bottom:2px solid var(--border)}
+.ltype-tab{flex:1;padding:11px 8px 9px;text-align:center;font-size:13px;font-weight:600;font-family:var(--font);color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ltype-tab .tflag{font-size:18px;display:block;margin-bottom:2px}
+.ltype-tab.active{color:var(--gold-lt);border-bottom-color:var(--gold)}
+.cat-wrap{display:flex;flex-wrap:wrap;gap:7px;padding:10px 16px 12px}
+.cat-btn{padding:6px 13px;border-radius:20px;font-size:12px;font-weight:700;font-family:var(--font);cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s;-webkit-tap-highlight-color:transparent}
+.cat-btn.active{background:var(--gold-dk);border-color:var(--gold);color:var(--white)}
+.stat-row{display:flex;align-items:center;padding:9px 14px;border-bottom:1px solid var(--border);gap:10px}
+.stat-row:last-child{border-bottom:none}
+.srank{width:26px;font-size:12px;font-weight:700;color:var(--muted);flex-shrink:0;text-align:center}
+.srank.top{font-size:16px;color:var(--gold)}
+.snum{font-size:19px;font-weight:800;color:var(--white);letter-spacing:2px;min-width:56px}
+.sbar-wrap{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.sbar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold-dk),var(--gold))}
+.scnt{font-size:12px;font-weight:700;color:var(--gold-lt);min-width:36px;text-align:right}
+.sextra{font-size:10px;color:var(--muted);min-width:58px;text-align:right}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}
+.sgc{background:var(--panel);border:1px solid var(--border);border-radius:var(--rs);padding:10px;text-align:center}
+.sgc-l{font-size:11px;color:var(--muted);margin-bottom:4px}
+.sgc-v{font-size:22px;font-weight:800;color:var(--gold-lt);letter-spacing:2px}
+.sgc-s{font-size:10px;color:var(--muted);margin-top:3px}
+.demo-note{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:11px;color:var(--muted);line-height:1.6}
+.demo-note strong{color:var(--dim)}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="logo">
+    <div class="logo-ico">📊</div>
+    <div>
+      <div class="logo-txt">สถิติหวย</div>
+      <div class="logo-sub" id="stat-sub">วิเคราะห์จากข้อมูลย้อนหลัง</div>
+    </div>
+  </div>
+  <div style="text-align:right">
+    <div style="font-size:12px;color:var(--muted)"><span class="s-dot"></span>Live</div>
+  </div>
+</header>
+
+<div class="ad ad-b"><span>โฆษณา 320×50</span></div>
+
+<!-- Lottery type -->
+<div class="ltype-tabs">
+  <button class="ltype-tab active" onclick="setLotto('thai',this)"><span class="tflag">🇹🇭</span>หวยไทย</button>
+  <button class="ltype-tab" onclick="setLotto('lao',this)"><span class="tflag">🇱🇦</span>หวยลาว</button>
+  <button class="ltype-tab" onclick="setLotto('hanoi',this)"><span class="tflag">🇻🇳</span>ฮานอย</button>
+</div>
+
+<!-- Category pills -->
+<div style="padding:10px 16px 2px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase">เลือกประเภทสถิติ</div>
+<div class="cat-wrap" id="cat-wrap"></div>
+
+<div class="ad ad-i"><span>โฆษณา</span></div>
+
+<main style="max-width:480px;margin:0 auto;padding:0 0 80px">
+  <div id="stat-load" class="lbox"><div class="spin"></div><div class="ltxt">กำลังโหลดข้อมูลสถิติ...</div></div>
+  <div id="stat-content" style="display:none;padding:0 16px 16px"></div>
+  <div id="demo-note" class="demo-note" style="display:none">
+    <strong>⚠️ หมายเหตุ:</strong> สถิติหวยลาวและฮานอยใช้ข้อมูลตัวอย่าง รอเชื่อม scraper จริงแล้วจะอัปเดตอัตโนมัติ
+  </div>
+  <div class="ad ad-r" style="margin-top:8px"><span>โฆษณา 300×250</span></div>
+</main>
+
+<div class="bsp"></div>
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem active" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+
+<script>
+const TH_M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const TH_MF=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const TH_D=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+const hdCache={};
+
+let curLotto='thai',curCat='hot',rawData={thai:null,lao:null,hanoi:null};
+
+const CATS={
+  thai:[
+    {k:'hot',l:'🔥 เลขออกบ่อย (ที่1)'},{k:'cold',l:'🧊 นานไม่ออก'},
+    {k:'day',l:'📆 แยกตามวัน'},{k:'month',l:'📅 แยกตามเดือน'},
+    {k:'b2',l:'2️⃣ 2ตัวล่างบ่อย'},{k:'b3',l:'3️⃣ 3ตัวล่างบ่อย'},
+    {k:'f3',l:'🔢 3ตัวบนบ่อย'},{k:'streak',l:'📈 ออกซ้ำติดกัน'},
+    {k:'decade',l:'🔟 หลักสิบนิยม'},{k:'oe',l:'⚖️ คี่/คู่ท้าย'},
+    {k:'sum',l:'➕ ผลรวม 6หลัก'},{k:'pair',l:'🔗 คู่เลขประจำ'},
+  ],
+  lao:[
+    {k:'hot',l:'🔥 เลข6ตัวบ่อย'},{k:'cold',l:'🧊 นานไม่ออก'},
+    {k:'day',l:'📆 แยกตามวัน'},{k:'month',l:'📅 แยกตามเดือน'},
+    {k:'b2',l:'2️⃣ 2ตัวท้ายบ่อย'},{k:'b3',l:'3️⃣ 3ตัวท้ายบ่อย'},
+    {k:'decade',l:'🔟 หลักสิบนิยม'},{k:'oe',l:'⚖️ คี่/คู่ท้าย'},
+    {k:'streak',l:'📈 ออกซ้ำติดกัน'},{k:'pair',l:'🔗 คู่เลขประจำ'},
+  ],
+  hanoi:[
+    {k:'hot',l:'🔥 3ตัวบนบ่อย'},{k:'b2',l:'2️⃣ 2ตัวล่างบ่อย'},
+    {k:'cold',l:'🧊 นานไม่ออก'},{k:'day',l:'📆 แยกตามวัน'},
+    {k:'oe',l:'⚖️ คี่/คู่ท้าย'},{k:'decade',l:'🔟 หลักสิบนิยม'},
+    {k:'streak',l:'📈 ออกซ้ำติดกัน'},{k:'pair',l:'🔗 คู่เลขประจำ'},
+  ],
+};
+
+function setLotto(type,btn){
+  curLotto=type;curCat=CATS[type][0].k;
+  document.querySelectorAll('.ltype-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('demo-note').style.display=type!=='thai'?'block':'none';
+  buildCatPills();
+  if(!rawData[type]) loadData(type);else render();
+}
+function buildCatPills(){
+  document.getElementById('cat-wrap').innerHTML=CATS[curLotto].map(c=>
+    `<button class="cat-btn${c.k===curCat?' active':''}" onclick="setCat('${c.k}',this)">${c.l}</button>`
+  ).join('');
+}
+function setCat(k,btn){
+  curCat=k;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+// ── DATA LOAD ──
+async function loadData(type){
+  document.getElementById('stat-load').style.display='flex';
+  document.getElementById('stat-content').style.display='none';
+  if(type==='thai') await loadThaiData();
+  else if(type==='lao') rawData.lao=genLao();
+  else rawData.hanoi=genHanoi();
+  document.getElementById('stat-sub').textContent=`วิเคราะห์จาก ${(rawData[type]||[]).length} งวดล่าสุด`;
+  document.getElementById('stat-load').style.display='none';
+  document.getElementById('stat-content').style.display='block';
+  render();
+}
+async function loadThaiData(){
+  try{
+    const pages=await Promise.all([1,2,3,4,5,6,7,8].map(p=>fetch(`https://lotto.api.rayriffy.com/list/${p}`).then(r=>r.json()).catch(()=>null)));
+    let ids=[];
+    for(const pg of pages)if(pg?.status==='success')ids.push(...pg.response.map(i=>({id:i.id,date:i.date})));
+    const draws=[];
+    for(let i=0;i<Math.min(ids.length,60);i+=10){
+      const batch=ids.slice(i,i+10);
+      await Promise.all(batch.map(async item=>{
+        try{
+          if(!hdCache[item.id]){const r=await fetch(`https://lotto.api.rayriffy.com/lotto/${item.id}`);const j=await r.json();if(j.status==='success')hdCache[item.id]=j.response;}
+          const d=hdCache[item.id];if(!d)return;
+          const p=d.prizes,dn=parseTHDate(d.date?.nice)||parseTHDate(d.date?.raw);
+          draws.push({dateShort:d.date?.nice||d.date?.raw||'',dateObj:dn,dow:dn?dn.getDay():-1,month:dn?dn.getMonth():-1,
+            first:p.first?.number?.[0]||'',back2:p.back2?.number?.[0]||'',back3:p.back3?.number?.[0]||'',front3:p.front3?.number?.[0]||''});
+        }catch(e){}
+      }));
+    }
+    rawData.thai=draws;
+  }catch(e){rawData.thai=[];}
+}
+function parseTHDate(str){
+  if(!str)return null;
+  if(str.includes('-'))return new Date(str);
+  const parts=str.trim().split(' ');
+  if(parts.length>=3){const d=parseInt(parts[0]),m=TH_MF.indexOf(parts[1]),y=parseInt(parts[2])-543;if(!isNaN(d)&&m>=0&&!isNaN(y))return new Date(y,m,d);}
+  return null;
+}
+function thDate(d){return`${d.getDate()} ${TH_M[d.getMonth()]} ${d.getFullYear()+543}`;}
+function genLao(){
+  const now=new Date(),rows=[];const d=new Date(now);d.setDate(d.getDate()-1);
+  while(rows.length<60){const dw=d.getDay();
+    if(dw>=1&&dw<=5){const n6=rnd6();rows.push({dateShort:`${TH_D[dw]} ${thDate(new Date(d))}`,dateObj:new Date(d),dow:dw,month:d.getMonth(),first:n6,back2:n6.slice(-2),back3:n6.slice(-3),front3:n6.slice(0,3)});}
+    d.setDate(d.getDate()-1);}
+  return rows;
+}
+function genHanoi(){
+  const now=new Date(),rows=[];
+  for(let i=1;i<=30;i++){const d=new Date(now);d.setDate(d.getDate()-i);const ds=thDate(d);
+    [{k:'special',l:'พิเศษ'},{k:'normal',l:'ปกติ'},{k:'vip',l:'VIP'}].forEach(rd=>{
+      const t3=rnd3(),b2=rnd2();rows.push({dateShort:`${ds}(${rd.l})`,dateObj:new Date(d),dow:d.getDay(),month:d.getMonth(),first:t3,back2:b2,back3:t3,front3:t3,round:rd.l});
+    });
+  }
+  return rows;
+}
+function rnd6(){return String(Math.floor(Math.random()*1000000)).padStart(6,'0');}
+function rnd3(){return String(Math.floor(Math.random()*1000)).padStart(3,'0');}
+function rnd2(){return String(Math.floor(Math.random()*100)).padStart(2,'0');}
+
+// ── FREQ UTILS ──
+function freq(arr){const m={};arr.forEach(v=>{if(v)m[v]=(m[v]||0)+1;});return m;}
+function topN(m,n){return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,n);}
+
+// ── RENDER ──
+function render(){
+  const el=document.getElementById('stat-content');
+  const data=rawData[curLotto]||[];
+  if(!data.length){el.innerHTML='<div style="text-align:center;padding:32px;color:var(--muted);font-size:14px">ยังไม่มีข้อมูล</div>';return;}
+  switch(curCat){
+    case 'hot':    el.innerHTML=renderHot(data);break;
+    case 'cold':   el.innerHTML=renderCold(data);break;
+    case 'day':    el.innerHTML=renderDay(data);break;
+    case 'month':  el.innerHTML=renderMonth(data);break;
+    case 'b2':     el.innerHTML=renderFreqField(data,'back2',curLotto==='hanoi'?'2️⃣ 2 ตัวล่าง ออกบ่อยสุด':'2️⃣ 2 ตัวท้าย ออกบ่อยสุด',30);break;
+    case 'b3':     el.innerHTML=renderFreqField(data,'back3',curLotto==='hanoi'?'3️⃣ 3 ตัวบน ออกบ่อยสุด':'3️⃣ 3 ตัวล่าง ออกบ่อยสุด',20);break;
+    case 'f3':     el.innerHTML=renderFreqField(data,'front3','🔢 3 ตัวบน ออกบ่อยสุด',20);break;
+    case 'streak': el.innerHTML=renderStreak(data);break;
+    case 'decade': el.innerHTML=renderDecade(data);break;
+    case 'oe':     el.innerHTML=renderOE(data);break;
+    case 'sum':    el.innerHTML=renderSum(data);break;
+    case 'pair':   el.innerHTML=renderPair(data);break;
+  }
+}
+
+function statRowHTML(rank,num,cnt,maxC,extra=''){
+  const pct=maxC>0?cnt/maxC*100:0;
+  const medals=['🥇','🥈','🥉'];
+  const r=rank<=3?`<span class="srank top">${medals[rank-1]}</span>`:`<span class="srank">${rank}</span>`;
+  return`<div class="stat-row">${r}<div class="snum">${num}</div><div class="sbar-wrap"><div class="sbar" style="width:${Math.min(pct*3,100)}%"></div></div><div class="scnt">${cnt}×</div>${extra?`<div class="sextra">${extra}</div>`:''}</div>`;
+}
+function miniCard(label,val,sub=''){return`<div class="sgc"><div class="sgc-l">${label}</div><div class="sgc-v">${val}</div>${sub?`<div class="sgc-s">${sub}</div>`:''}</div>`;}
+function cardWrap(title,inner,notice=''){return`<div class="card" style="margin-bottom:14px"><div class="card-hdr">${title}</div>${notice?`<div class="notice">${notice}</div>`:''}${inner}</div>`;}
+
+function renderHot(data){
+  const m=freq(data.map(d=>d.first).filter(Boolean));
+  const top=topN(m,20);const maxC=top[0]?top[0][1]:1;
+  const lastDate={};data.forEach(d=>{if(d.first&&!lastDate[d.first])lastDate[d.first]=d.dateShort?.slice(0,12);});
+  return cardWrap(curLotto==='hanoi'?'🔥 3 ตัวบน ออกบ่อยสุด':'🔥 รางวัลที่ 1 ออกบ่อยสุด',
+    top.map(([n,c],i)=>statRowHTML(i+1,n,c,maxC,lastDate[n]||'')).join(''),
+    `จาก ${data.filter(d=>d.first).length} งวด · คอลัมน์ขวาคืองวดล่าสุดที่ออก`);
+}
+function renderCold(data){
+  const seen={};[...data].reverse().forEach((d,i)=>{if(d.first&&!(d.first in seen))seen[d.first]={idx:i+1,date:d.dateShort?.slice(0,12)||'—'};});
+  const sorted=Object.entries(seen).sort((a,b)=>b[1].idx-a[1].idx).slice(0,15);
+  const inner=sorted.map(([n,{idx,date}],i)=>`<div class="stat-row"><span class="srank${i<3?' top':''}">${i<3?['🥇','🥈','🥉'][i]:i+1}</span><div class="snum">${n}</div><div style="flex:1;font-size:11px;color:var(--muted)">ห่าง ${idx} งวด</div><div class="sextra">${date}</div></div>`).join('');
+  return cardWrap('🧊 เลขนานไม่ออก',inner,'เลขที่เคยออกแต่ไม่ออกมานานที่สุด');
+}
+function renderFreqField(data,field,title,n){
+  const m=freq(data.map(d=>d[field]).filter(Boolean));
+  const top=topN(m,n);const maxC=top[0]?top[0][1]:1;
+  return cardWrap(title,top.map(([n,c],i)=>statRowHTML(i+1,n,c,maxC)).join(''),`จาก ${data.filter(d=>d[field]).length} งวด`);
+}
+function renderDay(data){
+  const byDay={};
+  data.forEach(d=>{if(d.dow<0||!d.first)return;const k=TH_D[d.dow];if(!byDay[k])byDay[k]={count:0,nums:{},b2:{},b3:{}};byDay[k].count++;byDay[k].nums[d.first]=(byDay[k].nums[d.first]||0)+1;if(d.back2)byDay[k].b2[d.back2]=(byDay[k].b2[d.back2]||0)+1;if(d.back3)byDay[k].b3[d.back3]=(byDay[k].b3[d.back3]||0)+1;});
+  return TH_D.filter(d=>byDay[d]).map(day=>{
+    const s=byDay[day];const top1=topN(s.nums,1)[0];const top2=topN(s.b2,3);const top3=topN(s.b3,3);
+    return`<div class="card" style="margin-bottom:12px"><div class="card-hdr">📆 วัน${day} · ${s.count} งวด</div><div class="sgrid">${miniCard('รางวัลที่1/3บนนิยม',top1?top1[0]:'—',top1?top1[1]+' ครั้ง':'')}${miniCard('2ตัวท้ายนิยม',top2[0]?top2[0][0]:'—',top2.map(x=>x[0]).join(' / '))}</div><div style="padding:0 14px 12px"><div style="font-size:11px;color:var(--muted);margin-bottom:6px">3ตัวล่าง/3ตัวบน ออกบ่อย</div><div style="display:flex;gap:7px;flex-wrap:wrap">${top3.map(([n,c])=>`<span style="background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:14px;font-weight:700;color:var(--white)">${n}<span style="font-size:10px;color:var(--muted);margin-left:3px">${c}×</span></span>`).join('')}</div></div></div>`;
+  }).join('');
+}
+function renderMonth(data){
+  const bm={};data.forEach(d=>{if(d.month<0||!d.first)return;if(!bm[d.month])bm[d.month]={count:0,nums:{},b2:{}};bm[d.month].count++;bm[d.month].nums[d.first]=(bm[d.month].nums[d.first]||0)+1;if(d.back2)bm[d.month].b2[d.back2]=(bm[d.month].b2[d.back2]||0)+1;});
+  const rows=Array.from({length:12},(_,i)=>i).filter(i=>bm[i]).map(i=>{
+    const s=bm[i];const top=topN(s.nums,2);const top2=topN(s.b2,2);
+    return`<div class="stat-row"><div style="min-width:38px;font-size:13px;font-weight:700;color:var(--gold)">${TH_M[i]}</div><div style="flex:1"><div style="font-size:12px;color:var(--dim)">${top.map(([n,c])=>n+'('+c+')').join('  ')}</div><div style="font-size:11px;color:var(--muted)">2ล่าง: ${top2.map(([n,c])=>n+'('+c+')').join('  ')}</div></div><div style="font-size:11px;color:var(--muted)">${s.count}งวด</div></div>`;
+  }).join('');
+  return cardWrap('📅 เลขออกบ่อยแยกตามเดือน',rows);
+}
+function renderStreak(data){
+  const draws=[...data].reverse();const streaks=[];let cur={num:'',len:0,end:''};
+  draws.forEach(d=>{if(!d.first)return;if(d.first===cur.num){cur.len++;cur.end=d.dateShort?.slice(0,12);}else{if(cur.len>1)streaks.push({...cur});cur={num:d.first,len:1,end:d.dateShort?.slice(0,12)||'—'};}});
+  if(cur.len>1)streaks.push(cur);streaks.sort((a,b)=>b.len-a.len);
+  if(!streaks.length)return`<div class="notice">ยังไม่พบการออกซ้ำติดกัน</div>`;
+  const inner=streaks.slice(0,10).map(({num,len,end},i)=>`<div class="stat-row"><span class="srank${i<3?' top':''}">${i<3?['🥇','🥈','🥉'][i]:i+1}</span><div class="snum">${num}</div><div style="flex:1;font-size:12px;color:var(--dim)">ติดกัน ${len} งวด</div><div class="sextra">${end}</div></div>`).join('');
+  return cardWrap('📈 ออกซ้ำติดกัน',inner,'งวดที่ออกเลขเดิมหลายงวดต่อเนื่อง');
+}
+function renderDecade(data){
+  const dec={};data.forEach(d=>{if(!d.back2||d.back2.length<2)return;const k=d.back2[0]+'x';dec[k]=(dec[k]||0)+1;});
+  const total=Object.values(dec).reduce((a,b)=>a+b,0);
+  const sorted=Object.entries(dec).sort((a,b)=>b[1]-a[1]);const maxC=sorted[0]?sorted[0][1]:1;
+  return cardWrap('🔟 หลักสิบของ 2 ตัวท้าย/ล่าง',sorted.map(([d,c],i)=>statRowHTML(i+1,d,c,maxC,Math.round(c/total*100)+'%')).join(''),'1x=10–19, 2x=20–29 ...');
+}
+function renderOE(data){
+  let o2=0,e2=0,o3=0,e3=0;
+  data.forEach(d=>{if(d.back2){parseInt(d.back2)%2===0?e2++:o2++;}if(d.back3){parseInt(d.back3)%2===0?e3++:o3++;}});
+  const pct=(a,b)=>b>0?Math.round(a/(a+b)*100):0;
+  const grid=`<div class="sgrid">${miniCard('2ตัวล่าง คู่',pct(e2,o2)+'%',e2+' ครั้ง')}${miniCard('2ตัวล่าง คี่',pct(o2,e2)+'%',o2+' ครั้ง')}${miniCard('3ตัวล่าง คู่',pct(e3,o3)+'%',e3+' ครั้ง')}${miniCard('3ตัวล่าง คี่',pct(o3,e3)+'%',o3+' ครั้ง')}</div>`;
+  return cardWrap('⚖️ คี่/คู่ท้าย',grid,`จาก ${data.length} งวด — สัดส่วนทั่วไปใกล้เคียง 50:50`);
+}
+function renderSum(data){
+  const sums={};data.forEach(d=>{if(!d.first||d.first.length!==6)return;const s=d.first.split('').reduce((a,c)=>a+parseInt(c),0);sums[s]=(sums[s]||0)+1;});
+  const top=topN(sums,15);const maxC=top[0]?top[0][1]:1;
+  const valid=data.filter(d=>d.first?.length===6);
+  const avg=valid.length>0?valid.reduce((a,d)=>a+d.first.split('').reduce((x,c)=>x+parseInt(c),0),0)/valid.length:0;
+  return cardWrap('➕ ผลรวมตัวเลข 6 หลัก (รางวัลที่ 1)',top.map(([s,c],i)=>statRowHTML(i+1,'รวม '+s,c,maxC)).join(''),`ค่าเฉลี่ย = ${avg.toFixed(1)} · ช่วง 0–54`);
+}
+function renderPair(data){
+  const pairs={};data.forEach(d=>{if(!d.back2||!d.back3)return;const k=`${d.back2}|${d.back3}`;pairs[k]=(pairs[k]||0)+1;});
+  const top=topN(pairs,12).filter(x=>x[1]>1);
+  if(!top.length)return`<div class="notice">ไม่พบคู่เลขที่ออกซ้ำ (ต้องการข้อมูลมากกว่านี้)</div>`;
+  const inner=top.map(([pair,c],i)=>{const[b2,b3]=pair.split('|');return`<div class="stat-row"><span class="srank${i<3?' top':''}">${i<3?['🥇','🥈','🥉'][i]:i+1}</span><div style="flex:1"><span style="font-size:17px;font-weight:800;color:var(--white)">${b2}</span><span style="color:var(--muted);margin:0 6px">+</span><span style="font-size:17px;font-weight:800;color:var(--dim)">${b3}</span></div><div class="scnt">${c}×</div></div>`;}).join('');
+  return cardWrap('🔗 คู่เลข 2ตัวท้าย + 3ตัวท้าย ที่มักออกด้วยกัน',inner);
+}
+
+// INIT
+buildCatPills();loadData('thai');
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

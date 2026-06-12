@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ดูดวงออนไลน์ฟรี ดวงไทย ราศีตะวันตก ราศีจีน Numerology ดวงประจำวัน ฤกษ์มงคล">
+<meta property="og:title" content="ดูดวง — ไทย ราศี นักษัตร เลขศาสตร์ ฟรี">
+<meta property="og:description" content="ดูดวงฟรีครบ 6 ศาสตร์ ดวงวันเกิด ราศี นักษัตร เลขศาสตร์ โหราศาสตร์ไทย ฤกษ์งามยามดี">
+<meta property="og:type" content="website">
+
+<title>ดูดวง — ไทย ราศี นักษัตร เลขศาสตร์ ฟรี</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#06080f}
+.stabs{display:flex;background:#0a0d18;border-bottom:2px solid #1a2040;overflow-x:auto;scrollbar-width:none;position:sticky;top:57px;z-index:90}
+.stabs::-webkit-scrollbar{display:none}
+.stab{flex-shrink:0;padding:10px 14px 8px;text-align:center;font-size:12px;font-weight:600;font-family:var(--font);color:#4a5580;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.stab .ico{font-size:17px;display:block;margin-bottom:2px}
+.stab.active{color:#c9b8ff;border-bottom-color:#7c5cbf}
+.ph{background:linear-gradient(135deg,#0a0d18,#141830);padding:16px;border-bottom:1px solid #1a2040}
+.ph-title{font-size:17px;font-weight:800;color:#e8e0ff;margin-bottom:3px}
+.ph-sub{font-size:12px;color:#5a6090}
+.inp-card{margin:14px 16px;background:#0d1020;border:1px solid #1a2040;border-radius:var(--r);padding:16px}
+.lbl{font-size:11px;font-weight:700;color:#7c5cbf;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px}
+.finput{width:100%;background:#060810;border:1px solid #1a2040;border-radius:var(--rs);color:#e8e0ff;font-family:var(--font);font-size:15px;padding:10px 12px;outline:none;transition:border-color .2s;margin-bottom:10px}
+.finput:focus{border-color:#7c5cbf}
+.finput::placeholder{color:#2a3060}
+select.finput{appearance:none;-webkit-appearance:none;cursor:pointer}
+.row{display:flex;gap:8px;margin-bottom:10px}
+.row .finput{margin-bottom:0;flex:1}
+.go-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:linear-gradient(135deg,#7c5cbf,#4a2e9e);border:none;border-radius:var(--rs);color:#fff;font-size:16px;font-weight:800;font-family:var(--font);cursor:pointer;box-shadow:0 3px 16px rgba(124,58,237,.4);transition:opacity .2s,transform .1s}
+.go-btn:active{opacity:.85;transform:scale(.98)}
+.disc{margin:8px 16px 14px;padding:10px 14px;background:#060810;border:1px solid #1e1540;border-radius:10px;font-size:11px;color:#2a2050;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="hdr" style="background:linear-gradient(135deg,#06080f,#0d1020);border-bottom-color:#1a2040">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#7c5cbf,#4a2e9e)">🔮</div>
+    <div><div class="logo-txt" style="color:#e8e0ff">ดูดวง</div><div class="logo-sub">6 ศาสตร์ · ฟรี 100%</div></div>
+  </div>
+  <div id="today-lbl" style="font-size:11px;color:#4a5580;text-align:right"></div>
+</header>
+<div class="ad ad-b" style="background:#0a0d18;border-color:#1a2040"><span>โฆษณา 320×50</span></div>
+
+<div class="stabs">
+  <button class="stab active" onclick="sw('thai',this)"><span class="ico">🇹🇭</span>ดวงไทย</button>
+  <button class="stab" onclick="sw('zodiac',this)"><span class="ico">♈</span>ราศีตะวันตก</button>
+  <button class="stab" onclick="sw('chinese',this)"><span class="ico">🐉</span>ราศีจีน</button>
+  <button class="stab" onclick="sw('numeral',this)"><span class="ico">🔢</span>Numerology</button>
+  <button class="stab" onclick="sw('daily',this)"><span class="ico">📅</span>ดวงวันนี้</button>
+  <button class="stab" onclick="sw('auspicious',this)"><span class="ico">🌟</span>ฤกษ์มงคล</button>
+</div>
+
+<main style="max-width:480px;margin:0 auto;padding-bottom:80px">
+
+<div id="p-thai">
+  <div class="ph"><div class="ph-title">🇹🇭 ดวงไทยตามวันเกิด</div><div class="ph-sub">วิเคราะห์ตามหลักโหราศาสตร์ไทย 7 วัน</div></div>
+  <div class="inp-card">
+    <div class="lbl">วันเกิด</div>
+    <div class="row">
+      <select class="finput" id="th-d"><option value="">วันที่</option></select>
+      <select class="finput" id="th-m"><option value="">เดือน</option></select>
+      <select class="finput" id="th-y"><option value="">ปี พ.ศ.</option></select>
+    </div>
+    <button class="go-btn" onclick="go('thai')">✨ ดูดวงไทย</button>
+  </div>
+</div>
+
+<div id="p-zodiac" style="display:none">
+  <div class="ph"><div class="ph-title">♈ ราศีตะวันตก Zodiac</div><div class="ph-sub">12 ราศี ตามวันเดือนเกิด</div></div>
+  <div class="inp-card">
+    <div class="lbl">วันเดือนเกิด</div>
+    <div class="row">
+      <select class="finput" id="zd-d"><option value="">วันที่</option></select>
+      <select class="finput" id="zd-m"><option value="">เดือน</option></select>
+    </div>
+    <button class="go-btn" onclick="go('zodiac')">♈ ดูดวงราศี</button>
+  </div>
+</div>
+
+<div id="p-chinese" style="display:none">
+  <div class="ph"><div class="ph-title">🐉 ราศีจีน 12 นักษัตร</div><div class="ph-sub">ตามปีเกิด ค.ศ.</div></div>
+  <div class="inp-card">
+    <div class="lbl">ปีเกิด (ค.ศ.)</div>
+    <input class="finput" id="cn-y" type="number" inputmode="numeric" placeholder="เช่น 1990" min="1900" max="2025">
+    <button class="go-btn" onclick="go('chinese')">🐉 ดูดวงนักษัตร</button>
+  </div>
+</div>
+
+<div id="p-numeral" style="display:none">
+  <div class="ph"><div class="ph-title">🔢 Numerology เลขศาสตร์</div><div class="ph-sub">วิเคราะห์จากชื่อและวันเกิด</div></div>
+  <div class="inp-card">
+    <div class="lbl">ชื่อจริง (ไทย หรือ อังกฤษ)</div>
+    <input class="finput" id="nm-first" type="text" placeholder="ชื่อจริง">
+    <div class="lbl">นามสกุล</div>
+    <input class="finput" id="nm-last" type="text" placeholder="นามสกุล (ไม่บังคับ)">
+    <div class="lbl" style="margin-top:4px">วันเกิด (ไม่บังคับ)</div>
+    <div class="row">
+      <select class="finput" id="nm-d"><option value="">วันที่</option></select>
+      <select class="finput" id="nm-m"><option value="">เดือน</option></select>
+      <select class="finput" id="nm-y"><option value="">ปี ค.ศ.</option></select>
+    </div>
+    <button class="go-btn" onclick="go('numeral')">🔢 คำนวณ Numerology</button>
+  </div>
+</div>
+
+<div id="p-daily" style="display:none">
+  <div class="ph"><div class="ph-title">📅 ดวงประจำวัน</div><div class="ph-sub">ดวงรายวันแยกตามราศี เปลี่ยนทุกวัน</div></div>
+  <div class="inp-card">
+    <div class="lbl">ราศีของคุณ</div>
+    <select class="finput" id="dl-sign"><option value="">-- เลือกราศี --</option></select>
+    <div class="lbl" style="margin-top:4px">ช่วงเวลา</div>
+    <select class="finput" id="dl-period" style="margin-bottom:10px">
+      <option value="today">วันนี้</option>
+      <option value="week">สัปดาห์นี้</option>
+      <option value="month">เดือนนี้</option>
+    </select>
+    <button class="go-btn" onclick="go('daily')">📖 ดูดวง</button>
+  </div>
+</div>
+
+<div id="p-auspicious" style="display:none">
+  <div class="ph"><div class="ph-title">🌟 ฤกษ์มงคล + ปฏิทินวันดี/เสีย</div><div class="ph-sub">ปฏิทินมงคลประจำเดือน</div></div>
+  <div class="inp-card">
+    <div class="lbl">เดือน / ปี</div>
+    <div class="row">
+      <select class="finput" id="au-m"><option value="">เดือน</option></select>
+      <select class="finput" id="au-y"><option value="">ปี พ.ศ.</option></select>
+    </div>
+    <button class="go-btn" onclick="go('auspicious')">🌟 ดูปฏิทินมงคล</button>
+  </div>
+</div>
+
+</main>
+<div class="ad ad-r" style="background:#0a0d18;border-color:#1a2040;margin:0 16px 12px"><span>โฆษณา 300×250</span></div>
+<div class="disc">เนื้อหาเพื่อความบันเทิงและความเชื่อเท่านั้น ไม่ใช่คำแนะนำทางชีวิตหรือการเงิน</div>
+<div class="bsp"></div>
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem active" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+
+<script>
+const TH_M=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const ZN=['มังกร','กุมภ์','มีน','เมษ','พฤษภ','เมถุน','กรกฎ','สิงห์','กันย์','ตุลย์','พิจิก','ธนู'];
+const ZI=['♑','♒','♓','♈','♉','♊','♋','♌','♍','♎','♏','♐'];
+
+function fill(id,opts){const s=document.getElementById(id);if(!s)return;opts.forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;s.appendChild(o);});}
+function strSeed(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,0x01000193);}return h>>>0;}
+
+(function init(){
+  const days=Array.from({length:31},(_,i)=>[i+1,i+1]);
+  const months=TH_M.map((m,i)=>[i+1,m]);
+  const yTH=Array.from({length:80},(_,i)=>[2567-i,2567-i]);
+  const yCE=Array.from({length:80},(_,i)=>[2025-i,2025-i]);
+  fill('th-d',days);fill('th-m',months);fill('th-y',yTH);
+  fill('zd-d',days);fill('zd-m',months);
+  fill('nm-d',days);fill('nm-m',months);fill('nm-y',yCE);
+  fill('au-m',months);fill('au-y',yTH);
+  ZN.forEach((z,i)=>{const o=document.createElement('option');o.value=i;o.textContent=ZI[i]+' ราศี'+z;document.getElementById('dl-sign').appendChild(o);});
+  const now=new Date();
+  document.getElementById('today-lbl').textContent=`${now.getDate()} ${TH_M[now.getMonth()].slice(0,3)} ${now.getFullYear()+543}`;
+  document.getElementById('au-m').value=now.getMonth()+1;
+  document.getElementById('au-y').value=now.getFullYear()+543;
+})();
+
+function sw(type,btn){
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['thai','zodiac','chinese','numeral','daily','auspicious'].forEach(p=>document.getElementById('p-'+p).style.display=p===type?'block':'none');
+}
+
+function go(type){
+  const now=new Date();
+  const dateKey=now.toDateString();
+  let p={type};
+  if(type==='thai'){
+    const d=document.getElementById('th-d').value,m=document.getElementById('th-m').value,y=document.getElementById('th-y').value;
+    if(!d||!m||!y){alert('กรุณากรอกวันเกิดให้ครบ');return;}
+    const yAD=parseInt(y)>2500?parseInt(y)-543:parseInt(y);
+    p.dow=new Date(yAD,parseInt(m)-1,parseInt(d)).getDay();p.d=d;p.m=m;p.y=y;
+    p.seed=strSeed(p.dow+dateKey);
+  } else if(type==='zodiac'){
+    const d=document.getElementById('zd-d').value,m=document.getElementById('zd-m').value;
+    if(!d||!m){alert('กรุณาเลือกวันและเดือน');return;}
+    const borders=[[1,20],[2,19],[3,20],[4,20],[5,21],[6,21],[7,23],[8,23],[9,23],[10,23],[11,22],[12,22]];
+    let idx=parseInt(m)-1;if(parseInt(d)<borders[parseInt(m)-1][1])idx=(parseInt(m)-2+12)%12;
+    p.idx=idx;p.d=d;p.m=m;p.seed=strSeed(idx+dateKey);
+  } else if(type==='chinese'){
+    const y=document.getElementById('cn-y').value;
+    if(!y||parseInt(y)<1900){alert('กรุณากรอกปีเกิด ค.ศ.');return;}
+    p.idx=((parseInt(y)-2008)%12+12)%12;p.y=y;p.seed=strSeed(p.idx+dateKey);
+  } else if(type==='numeral'){
+    const first=document.getElementById('nm-first').value.trim();
+    if(!first){alert('กรุณากรอกชื่อ');return;}
+    const last=document.getElementById('nm-last').value.trim();
+    const d=document.getElementById('nm-d').value,m=document.getElementById('nm-m').value,y=document.getElementById('nm-y').value;
+    p.first=encodeURIComponent(first);p.last=encodeURIComponent(last);p.d=d;p.m=m;p.y=y;
+    p.seed=strSeed(first+last+d+m+y+dateKey);
+  } else if(type==='daily'){
+    const sign=document.getElementById('dl-sign').value,period=document.getElementById('dl-period').value;
+    if(sign===''){alert('กรุณาเลือกราศี');return;}
+    p.idx=sign;p.period=period;p.seed=strSeed(sign+period+dateKey);
+  } else if(type==='auspicious'){
+    const m=document.getElementById('au-m').value,y=document.getElementById('au-y').value;
+    p.m=m;p.y=y;p.seed=strSeed(m+y);
+  }
+  window.location.href='horoscope-result.html?'+Object.entries(p).map(([k,v])=>`${k}=${v}`).join('&');
+}
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

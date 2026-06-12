@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="เลขเด็ดจากข่าว AI แปลงข่าวเป็นเลขเด็ด วิเคราะห์ข่าวหาเลขมงคล">
+
+<meta property="og:title" content="เลขเด็ดจากข่าว — AI วิเคราะห์หวย">
+<meta property="og:description" content="วิเคราะห์เลขเด็ดจากข่าวด้วย AI แปลงข่าวเป็นเลขหวย เลขนำโชคจากเหตุการณ์จริง">
+<meta property="og:type" content="website">
+
+<title>เลขเด็ดจากข่าว — AI วิเคราะห์หวย</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#080a05}
+/* HERO */
+.hero{padding:22px 16px 14px;text-align:center}
+.hero-ico{font-size:48px;display:block;margin-bottom:8px;animation:float 3.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.hero-title{font-size:22px;font-weight:800;color:#f0ffe0;margin-bottom:5px}
+.hero-sub{font-size:13px;color:#5a7040;line-height:1.6}
+/* INPUT */
+.inp-card{margin:0 16px 10px;background:#0d1208;border:1px solid #1a2810;border-radius:var(--r);padding:16px}
+.inp-label{font-size:11px;font-weight:700;color:#8bc34a;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.news-textarea{width:100%;min-height:110px;background:#060a03;border:2px solid #1a2810;border-radius:var(--rs);color:#f0ffe0;font-family:var(--font);font-size:14px;line-height:1.6;padding:12px 14px;resize:none;outline:none;transition:border-color .2s}
+.news-textarea:focus{border-color:#8bc34a}
+.news-textarea::placeholder{color:#2a3820;font-size:13px}
+.go-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;padding:13px;background:linear-gradient(135deg,#6a9b20,#3a6010);border:none;border-radius:var(--rs);color:#f0ffe0;font-size:16px;font-weight:800;font-family:var(--font);cursor:pointer;transition:opacity .2s,transform .1s;box-shadow:0 3px 14px rgba(106,155,32,.3)}
+.go-btn:active{opacity:.85;transform:scale(.98)}
+.go-btn:disabled{opacity:.5;cursor:not-allowed}
+.char-count{text-align:right;padding:3px 0 0;font-size:11px;color:#3a5020}
+/* QUICK NEWS */
+.quick-label{font-size:11px;font-weight:700;color:#3a5020;letter-spacing:1px;text-transform:uppercase;padding:6px 16px 4px}
+.quick-wrap{display:flex;flex-direction:column;gap:5px;padding:0 16px 10px}
+.quick-item{background:#0d1208;border:1px solid #1a2810;border-radius:var(--rs);padding:10px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s}
+.quick-item:active{border-color:#8bc34a}
+.qi-title{font-size:13px;font-weight:600;color:#c8e88a;margin-bottom:2px}
+.qi-desc{font-size:11px;color:#4a6030}
+/* THINKING */
+.thinking-wrap{margin:12px 16px;padding:18px;background:#0d1208;border:1px solid #1a2810;border-radius:var(--r);text-align:center;display:none}
+.thinking-dots{display:inline-flex;gap:6px;margin-bottom:10px}
+.thinking-dots span{width:8px;height:8px;border-radius:50%;background:#8bc34a;animation:db 1.2s ease-in-out infinite}
+.thinking-dots span:nth-child(2){animation-delay:.2s}
+.thinking-dots span:nth-child(3){animation-delay:.4s}
+@keyframes db{0%,80%,100%{transform:scale(.8);opacity:.4}40%{transform:scale(1.2);opacity:1}}
+.thinking-txt{font-size:13px;color:#5a7040}
+/* RESULT */
+.result-card{margin:0 16px 12px;background:#0d1208;border:1px solid #1a2810;border-radius:var(--r);overflow:hidden;display:none;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.rc-header{padding:13px 16px;border-bottom:1px solid #1a2810;display:flex;align-items:center;gap:10px}
+.rc-ico{font-size:24px}
+.rc-title{font-size:15px;font-weight:700;color:#f0ffe0}
+.rc-sub{font-size:11px;color:#4a6030;margin-top:2px}
+/* NUMBERS */
+.nums-section{padding:16px 16px 12px;text-align:center;border-bottom:1px solid #1a2810}
+.nums-eyebrow{font-size:11px;font-weight:700;color:#8bc34a;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.nums-grid{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.npill{padding:8px 16px;border-radius:10px;font-weight:800;letter-spacing:2px;animation:numPop .4s ease forwards;opacity:0}
+@keyframes numPop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+.npill.main{font-size:30px;background:linear-gradient(135deg,#6a9b20,#3a6010);color:#f0ffe0;box-shadow:0 3px 14px rgba(106,155,32,.4)}
+.npill.sec{font-size:22px;background:#0d1208;border:1px solid #2a4010;color:#c8e88a}
+.npill.sm{font-size:18px;background:#080a05;border:1px solid #1a2810;color:#8ab870}
+.nums-note{font-size:11px;color:#3a5020}
+/* KEYWORD CHIPS */
+.kw-section{padding:12px 16px;border-bottom:1px solid #1a2810}
+.kw-label{font-size:10px;font-weight:700;color:#8bc34a;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px}
+.kw-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.kw-chip{padding:5px 10px;border-radius:10px;font-size:12px;font-weight:600;background:#0d1a08;border:1px solid #2a4010;color:#c8e88a}
+.kw-chip .kw-num{color:#8bc34a;font-weight:800;margin-left:4px}
+/* ANALYSIS */
+.an-section{padding:12px 16px;border-bottom:1px solid #1a2810}
+.an-label{font-size:10px;font-weight:700;color:#8bc34a;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.an-txt{font-size:13px;color:#a8d080;line-height:1.7}
+/* REASON ROWS */
+.reason-section{padding:12px 16px;border-bottom:1px solid #1a2810}
+.reason-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px dashed #1a2810}
+.reason-row:last-child{border-bottom:none}
+.reason-num{font-size:18px;font-weight:800;color:#c8e88a;min-width:50px;letter-spacing:1px}
+.reason-txt{font-size:12px;color:#5a7040;flex:1;line-height:1.5}
+/* SHARE */
+.share-row{display:flex;gap:8px;padding:12px 16px}
+.shbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--rs);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;border:none}
+.sh-fb{background:#1877f2;color:#fff}
+.sh-cp{background:#0d1208;border:1px solid #1a2810;color:#5a7040}
+/* HISTORY */
+.hist-section{padding:0 16px 8px}
+.hist-label{font-size:11px;font-weight:700;color:#3a5020;letter-spacing:1px;text-transform:uppercase;padding:8px 0 6px}
+.hist-item{background:#0d1208;border:1px solid #1a2810;border-radius:var(--rs);padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.hist-item:active{border-color:#8bc34a}
+.hist-news{flex:1;font-size:12px;color:#5a7040;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist-nums{font-size:14px;font-weight:800;color:#c8e88a;letter-spacing:1px;flex-shrink:0}
+.hist-time{font-size:10px;color:#2a4020;flex-shrink:0}
+.disclaimer{margin:0 16px 12px;padding:10px 14px;background:#060a03;border:1px solid #1a2810;border-radius:10px;font-size:11px;color:#2a4020;line-height:1.6}
+</style>
+</head>
+<body>
+
+<header class="hdr" style="background:linear-gradient(135deg,#080a05,#0d1208);border-bottom-color:#1a2810">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#8bc34a,#4a7010)">📰</div>
+    <div>
+      <div class="logo-txt" style="color:#f0ffe0">เลขเด็ดจากข่าว</div>
+      <div class="logo-sub">AI แปลงข่าวเป็นเลขมงคล</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#3a5020">Claude AI</div>
+</header>
+
+<div class="ad ad-b" style="background:#0a0d05;border-color:#1a2810"><span>โฆษณา 320×50</span></div>
+
+<main style="max-width:480px;margin:0 auto;padding-bottom:80px">
+
+<div class="hero">
+  <span class="hero-ico">📰</span>
+  <div class="hero-title">เลขเด็ดจากข่าว</div>
+  <div class="hero-sub">วางข่าวที่สนใจ AI จะหาเลขมงคล<br>จากตัวเลข สัญลักษณ์ และความหมายในข่าว</div>
+</div>
+
+<div class="inp-card">
+  <div class="inp-label">วางข่าวหรือเล่าเหตุการณ์</div>
+  <textarea class="news-textarea" id="news-input" maxlength="800"
+    placeholder="วางข้อความข่าว หรือเล่าเหตุการณ์ที่สนใจ เช่น &quot;พบช้างเผือก 3 เชือก ที่อุทยาน&quot; หรือ &quot;แผ่นดินไหว 6.5 ริกเตอร์ที่เชียงราย&quot;..."></textarea>
+  <div class="char-count"><span id="char-cnt">0</span>/800</div>
+  <button class="go-btn" id="news-btn" onclick="analyzeNews()">
+    <span style="font-size:18px">🔍</span> หาเลขเด็ดจากข่าว
+  </button>
+</div>
+
+<div class="quick-label">ตัวอย่างข่าวยอดฮิต</div>
+<div class="quick-wrap" id="quick-news"></div>
+
+<div class="ad ad-i" style="background:#0a0d05;border-color:#1a2810"><span>โฆษณา</span></div>
+
+<div class="thinking-wrap" id="thinking">
+  <div class="thinking-dots"><span></span><span></span><span></span></div>
+  <div class="thinking-txt" id="thinking-txt">กำลังวิเคราะห์ข่าว...</div>
+</div>
+
+<div class="result-card" id="result-card">
+  <div class="rc-header">
+    <span class="rc-ico">🎯</span>
+    <div>
+      <div class="rc-title">เลขเด็ดจากข่าวนี้</div>
+      <div class="rc-sub" id="rc-sub">—</div>
+    </div>
+  </div>
+  <div class="nums-section">
+    <div class="nums-eyebrow">เลขเด็ดที่ AI วิเคราะห์</div>
+    <div class="nums-grid" id="nums-grid"></div>
+    <div class="nums-note" id="nums-note">วิเคราะห์จากตัวเลข สัญลักษณ์ และความหมายในข่าว</div>
+  </div>
+  <div class="kw-section">
+    <div class="kw-label">คีย์เวิร์ดและเลขที่พบ</div>
+    <div class="kw-wrap" id="kw-wrap"></div>
+  </div>
+  <div class="an-section">
+    <div class="an-label">การวิเคราะห์</div>
+    <div class="an-txt" id="an-txt">—</div>
+  </div>
+  <div class="reason-section">
+    <div class="an-label">ที่มาของแต่ละเลข</div>
+    <div id="reason-list"></div>
+  </div>
+  <div class="share-row">
+    <button class="shbtn sh-fb" onclick="shareNews()">📘 แชร์ Facebook</button>
+    <button class="shbtn sh-cp" id="news-cp" onclick="copyNews()">📋 คัดลอก</button>
+  </div>
+</div>
+
+<div class="hist-section" id="hist-section" style="display:none">
+  <div class="hist-label">ข่าวที่วิเคราะห์ล่าสุด</div>
+  <div id="hist-list"></div>
+</div>
+
+<div class="ad ad-r" style="background:#0a0d05;border-color:#1a2810;margin:8px 16px"><span>โฆษณา 300×250</span></div>
+
+<div class="disclaimer">⚠️ เนื้อหาเพื่อความบันเทิงเท่านั้น ตัวเลขที่ได้จาก AI เป็นการตีความเชิงสัญลักษณ์ ไม่ใช่การพยากรณ์จริง</div>
+
+</main>
+<div class="bsp"></div>
+
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem active" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+
+<script>
+// ══════════════════════════════════════
+// QUICK NEWS EXAMPLES
+// ══════════════════════════════════════
+const QUICK=[
+  {ico:'🐘',title:'พบช้างเผือก 3 เชือกในป่า',desc:'สัตว์มงคล ตัวเลขพิเศษ',text:'ชาวบ้านพบช้างเผือก 3 เชือก เดินอยู่ในป่าอุทยานแห่งชาติ นักวิชาการระบุหาได้ยากมาก ถือเป็นสัตว์มงคล'},
+  {ico:'⚡',title:'ฟ้าผ่าต้นไม้อายุ 100 ปี',desc:'ปรากฎการณ์ธรรมชาติ',text:'ฟ้าผ่าต้นโพธิ์อายุกว่า 100 ปีหน้าวัด ประชาชนแห่ดูจำนวนมาก ต้นไม้แตกออกเป็น 3 ท่อน'},
+  {ico:'🐟',title:'ปลาบึกยักษ์ตัวใหญ่ 500 กก.',desc:'ขนาดมหึมา ตัวเลขน้ำหนัก',text:'ชาวประมงจับปลาบึกน้ำหนัก 500 กิโลกรัม ความยาว 3 เมตร ถือเป็นสถิติใหม่ของแม่น้ำโขง'},
+  {ico:'🌕',title:'พระจันทร์เต็มดวงคืนพิเศษ 13 ค่ำ',desc:'ดาราศาสตร์มงคล',text:'คืนนี้พระจันทร์เต็มดวงใหญ่กว่าปกติ 13% ปรากฎการณ์ Super Full Moon เกิดทุก 13 เดือน'},
+  {ico:'🏆',title:'นักกีฬาไทยคว้าเหรียญทอง',desc:'ชัยชนะ ตัวเลขกีฬา',text:'นักกีฬาไทยคว้าเหรียญทองโอลิมปิก สร้างประวัติศาสตร์เป็นครั้งที่ 3 คะแนนชนะ 9 ต่อ 6'},
+  {ico:'🔥',title:'ไฟไหม้โรงงาน 7 ชั่วโมง',desc:'เหตุการณ์ฉุกเฉิน',text:'ไฟไหม้โรงงานในนิคมอุตสาหกรรม ใช้เวลาดับไฟ 7 ชั่วโมง รถดับเพลิง 15 คัน ไม่มีผู้เสียชีวิต'},
+  {ico:'💎',title:'พบทองคำในแม่น้ำ 33 บาท',desc:'โชคลาภ ตัวเลขทอง',text:'ชาวบ้านขุดพบทองคำในแม่น้ำน้ำหนัก 33 บาท คาดว่าเป็นของโบราณสมัยอยุธยา'},
+  {ico:'🐍',title:'งูเห่าขาวหายากออกไข่ 18 ฟอง',desc:'สัตว์หายาก มงคล',text:'งูเห่าขาวหายากออกไข่ในวัด 18 ฟอง พระอาจารย์ระบุเป็นสัญญาณมงคลแก่ชุมชน'},
+];
+
+document.getElementById('quick-news').innerHTML=QUICK.map((q,i)=>`
+  <div class="quick-item" onclick="fillNews(${i})">
+    <div class="qi-title">${q.ico} ${q.title}</div>
+    <div class="qi-desc">${q.desc}</div>
+  </div>`).join('');
+
+document.getElementById('news-input').addEventListener('input',function(){
+  document.getElementById('char-cnt').textContent=this.value.length;
+});
+
+function fillNews(i){
+  const ta=document.getElementById('news-input');
+  ta.value=QUICK[i].text;
+  document.getElementById('char-cnt').textContent=ta.value.length;
+  ta.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// ══════════════════════════════════════
+// HISTORY
+// ══════════════════════════════════════
+let newsHistory=[];
+try{newsHistory=JSON.parse(localStorage.getItem('news_hist')||'[]');}catch(e){}
+
+function saveHist(news,result){
+  newsHistory.unshift({news:news.slice(0,50),nums:(result.numbers||[]).slice(0,2).join(' '),ts:Date.now()});
+  if(newsHistory.length>10)newsHistory=newsHistory.slice(0,10);
+  try{localStorage.setItem('news_hist',JSON.stringify(newsHistory));}catch(e){}
+  renderHist();
+}
+function renderHist(){
+  if(!newsHistory.length)return;
+  document.getElementById('hist-section').style.display='block';
+  document.getElementById('hist-list').innerHTML=newsHistory.map(h=>`
+    <div class="hist-item" onclick="fillTA('${h.news.replace(/'/g,'')}')">
+      <div class="hist-news">📰 ${h.news}</div>
+      <div class="hist-nums">${h.nums}</div>
+      <div class="hist-time">${timeAgo(h.ts)}</div>
+    </div>`).join('');
+}
+function fillTA(t){document.getElementById('news-input').value=t;}
+function timeAgo(ts){
+  const d=Math.floor((Date.now()-ts)/60000);
+  if(d<1)return'เมื่อกี้';if(d<60)return d+'นาทีที่แล้ว';
+  const h=Math.floor(d/60);if(h<24)return h+'ชม.ที่แล้ว';
+  return Math.floor(h/24)+'วันที่แล้ว';
+}
+renderHist();
+
+// ══════════════════════════════════════
+// CURRENT RESULT
+// ══════════════════════════════════════
+let currentResult=null;
+
+// ══════════════════════════════════════
+// ANALYZE
+// ══════════════════════════════════════
+async function analyzeNews(){
+  const news=document.getElementById('news-input').value.trim();
+  if(!news||news.length<5){
+    document.getElementById('news-input').style.borderColor='#e74c3c';
+    setTimeout(()=>document.getElementById('news-input').style.borderColor='',1500);
+    return;
+  }
+  const btn=document.getElementById('news-btn');
+  const thinking=document.getElementById('thinking');
+  const resultCard=document.getElementById('result-card');
+  btn.disabled=true;resultCard.style.display='none';thinking.style.display='block';
+  thinking.scrollIntoView({behavior:'smooth',block:'center'});
+
+  const msgs=['กำลังวิเคราะห์ข่าว...','สกัดตัวเลขจากข้อความ...','คำนวณพลังเลขมงคล...','จัดเรียงเลขเด็ด...'];
+  let mi=0;
+  const ti=setInterval(()=>{mi=(mi+1)%msgs.length;document.getElementById('thinking-txt').textContent=msgs[mi];},1100);
+
+  try{
+    const prompt=`คุณคือนักวิเคราะห์เลขเด็ดจากข่าวชาวไทย ผู้เชี่ยวชาญการแปลงเหตุการณ์และตัวเลขในข่าวเป็นเลขสลากกินแบ่ง
+
+ข่าวที่ต้องวิเคราะห์: "${news}"
+
+วิเคราะห์และตอบเป็น JSON รูปแบบนี้เท่านั้น ไม่มี markdown หรือ backtick:
+{
+  "numbers": ["XX", "XXX", "XX"],
+  "twoDigit": "XX",
+  "threeDigit": "XXX",
+  "keywords": [
+    {"word": "คำหรือตัวเลขสำคัญ", "number": "XX", "reason": "เหตุผลสั้นๆ"}
+  ],
+  "analysis": "การวิเคราะห์ 2-3 ประโยค อธิบายที่มาของเลขและความเชื่อมโยงกับข่าว",
+  "reasons": [
+    {"number": "XX", "reason": "ที่มาของเลขนี้จากข่าว"}
+  ]
+}
+
+กฎการวิเคราะห์:
+- ดึงตัวเลขที่ปรากฎในข่าวโดยตรง
+- แปลงคำที่มีนัยเชิงตัวเลข เช่น "สาม" = 3, "ร้อย" = 100
+- ใช้หลักเลขศาสตร์ไทย เช่น ช้าง=88, งู=56, ปลา=68, ไฟ=19
+- สัตว์มงคล นำมาแปลงตามตำราไทย-จีน
+- จำนวนสิ่งของ บุคคล หรือเหตุการณ์ นำมาคำนวณ
+- numbers คือ array เลขเด็ดอย่างน้อย 3 ตัว (mix 2-3 หลัก)
+- keywords อย่างน้อย 4 รายการ
+- reasons อย่างน้อย 3 รายการ
+- ตอบ JSON เท่านั้น`;
+
+    const response=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await response.json();
+    let raw=data.content?.map(b=>b.text||'').join('').trim().replace(/```json|```/g,'').trim();
+    const result=JSON.parse(raw);
+    currentResult={...result,news};
+    clearInterval(ti);thinking.style.display='none';
+    renderResult(result,news);
+    saveHist(news,result);
+    btn.disabled=false;
+  }catch(e){
+    const fb=fallback(news);
+    currentResult={...fb,news};
+    clearInterval(ti);thinking.style.display='none';
+    renderResult(fb,news);
+    saveHist(news,fb);
+    btn.disabled=false;
+  }
+}
+
+// ══════════════════════════════════════
+// FALLBACK (static extraction)
+// ══════════════════════════════════════
+const ANIMAL_NUM={'ช้าง':'88','งู':'56','ปลา':'68','เสือ':'73','สิงโต':'16','กระต่าย':'12','นก':'34','แมว':'45','หมา':'52','วัว':'98','หมู':'62','กุ้ง':'27','ปู':'27','ไก่':'91','จระเข้':'08','ลิง':'62'};
+const EVENT_NUM={'ไฟไหม้':'19','น้ำท่วม':'36','แผ่นดินไหว':'73','อุบัติเหตุ':'49','พบทอง':'89','เงิน':'69','วัด':'59','พระ':'59','หลวง':'78','ทหาร':'28','ตำรวจ':'28'};
+
+function fallback(news){
+  const nums=[];const keywords=[];const reasons=[];
+  // Extract explicit numbers
+  const explicitNums=(news.match(/\d+/g)||[]).slice(0,5);
+  explicitNums.forEach(n=>{
+    if(n.length>=2&&n.length<=4){nums.push(n.slice(-2));keywords.push({word:n,number:n.slice(-2),reason:'ตัวเลขในข่าว'});}
+  });
+  // Animal/event keywords
+  Object.entries(ANIMAL_NUM).forEach(([k,v])=>{if(news.includes(k)){nums.push(v);keywords.push({word:k,number:v,reason:`${k}ตามตำราไทย`});}});
+  Object.entries(EVENT_NUM).forEach(([k,v])=>{if(news.includes(k)){nums.push(v);keywords.push({word:k,number:v,reason:`${k}ตามความเชื่อ`});}});
+  // Fallback seed
+  const seed=news.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  if(nums.length<2){nums.push(String(seed%100).padStart(2,'0'));nums.push(String(seed%1000).padStart(3,'0'));}
+  const unique=[...new Set(nums)].slice(0,5);
+  unique.forEach((n,i)=>{if(!reasons[i])reasons.push({number:n,reason:keywords[i]?.reason||'คำนวณจากเนื้อหาข่าว'});});
+  return{
+    numbers:unique,twoDigit:unique[0]||'00',threeDigit:unique.find(n=>n.length>=3)||unique[0]+'0',
+    keywords:keywords.slice(0,5),
+    analysis:`วิเคราะห์จากตัวเลขและสัญลักษณ์ที่ปรากฎในข่าว พบเลขสำคัญ ${unique.slice(0,3).join(', ')} ซึ่งมีนัยทางเลขศาสตร์ไทย`,
+    reasons:reasons.slice(0,4),_fallback:true
+  };
+}
+
+// ══════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════
+function renderResult(result,news){
+  const card=document.getElementById('result-card');
+  document.getElementById('rc-sub').textContent=news.slice(0,60)+(news.length>60?'...':'');
+
+  // Numbers
+  const grid=document.getElementById('nums-grid');
+  grid.innerHTML='';
+  (result.numbers||[]).slice(0,5).forEach((n,i)=>{
+    const cls=i===0?'main':i<=2?'sec':'sm';
+    const el=document.createElement('div');
+    el.className=`npill ${cls}`;
+    el.textContent=n;
+    el.style.animationDelay=(i*.15)+'s';
+    grid.appendChild(el);
+  });
+
+  // Keywords
+  document.getElementById('kw-wrap').innerHTML=(result.keywords||[]).map(k=>
+    `<div class="kw-chip">${k.word}<span class="kw-num">${k.number}</span></div>`
+  ).join('');
+
+  // Analysis
+  document.getElementById('an-txt').textContent=result.analysis||'—';
+
+  // Reasons
+  document.getElementById('reason-list').innerHTML=(result.reasons||[]).map(r=>`
+    <div class="reason-row">
+      <div class="reason-num">${r.number}</div>
+      <div class="reason-txt">${r.reason}</div>
+    </div>`).join('');
+
+  if(result._fallback){
+    document.getElementById('nums-note').textContent='⚠️ วิเคราะห์จากตำราเบื้องต้น (API ไม่พร้อม)';
+  }
+
+  card.style.display='block';
+  setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+function shareNews(){
+  if(!currentResult)return;
+  const nums=(currentResult.numbers||[]).slice(0,3).join(' / ');
+  const t=`📰 เลขเด็ดจากข่าว: ${currentResult.news?.slice(0,50)||''}\n🎯 เลข: ${nums}\n💡 ${currentResult.analysis?.slice(0,80)||''}\nหาเลขเด็ดจากข่าวฟรี: ${location.href}`;
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(t)}`,'_blank','width=600,height=400');
+}
+function copyNews(){
+  if(!currentResult)return;
+  const nums=(currentResult.numbers||[]).join(', ');
+  const t=`📰 ${currentResult.news?.slice(0,80)||''}\n🎯 เลขเด็ด: ${nums}\n${currentResult.analysis||''}\nหาเลขเด็ดจากข่าวฟรี: ${location.href}`;
+  navigator.clipboard.writeText(t).then(()=>{
+    const btn=document.getElementById('news-cp');
+    const orig=btn.innerHTML;btn.textContent='✅ คัดลอก!';
+    setTimeout(()=>{btn.innerHTML=orig;},2000);
+  });
+}
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="คำทำนายความฝัน เลขเด็ดจากความฝัน วิเคราะห์สัญลักษณ์ในฝัน">
+<title>ผลทำนายฝัน — เลขเด็ด</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#080510}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4}
+.wrap{position:relative;z-index:1;padding-bottom:80px}
+/* header recap */
+.dream-recap{background:linear-gradient(135deg,#0f0a1e,#180f38);border-bottom:1px solid #2d1a5e;padding:12px 16px;font-size:13px;color:#8a6ac4;line-height:1.6}
+.dream-recap strong{color:#e8d5ff}
+/* numbers */
+.nums-hero{padding:20px 16px;text-align:center;border-bottom:1px solid #2d1a5e}
+.nums-eyebrow{font-size:11px;font-weight:700;color:#6c3fc7;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.nums-grid{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.npill{padding:8px 16px;border-radius:10px;font-weight:800;letter-spacing:2px;animation:np .5s ease forwards;opacity:0}
+@keyframes np{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+.npill.main{font-size:32px;background:linear-gradient(135deg,#6c3fc7,#9b59b6);color:#fff;box-shadow:0 4px 16px rgba(108,63,199,.5)}
+.npill.sec{font-size:22px;background:#1a1030;border:1px solid #3a2060;color:#c9a8ff}
+.npill.sm{font-size:18px;background:#120e28;border:1px solid #2d1a5e;color:#9a7fd4}
+/* result card */
+.rcard{margin:12px 16px;background:linear-gradient(135deg,#0f0a1e,#180f38);border:1px solid #2d1a5e;border-radius:16px;overflow:hidden}
+.rcard-hdr{padding:12px 14px;border-bottom:1px solid #2d1a5e;font-size:11px;font-weight:700;color:#6c3fc7;letter-spacing:1.5px;text-transform:uppercase}
+.analysis-text{font-size:14px;color:#c9a8ff;line-height:1.85;padding:14px}
+.analysis-text p{margin-bottom:12px}
+.analysis-text p:last-child{margin-bottom:0}
+/* symbols */
+.sym-row{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;border-bottom:1px solid #1a1030}
+.sym-row:last-child{border-bottom:none}
+.sym-ico{font-size:20px;flex-shrink:0;margin-top:1px}
+.sym-name{font-size:13px;font-weight:700;color:#e8d5ff}
+.sym-mean{font-size:12px;color:#7a6a9a;margin-top:2px;line-height:1.5}
+.sym-num{font-size:16px;font-weight:800;color:#c9a8ff;letter-spacing:1px}
+/* lucky */
+.lucky-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 14px}
+.lcard{background:#120e28;border:1px solid #2d1a5e;border-radius:10px;padding:10px;text-align:center}
+.lcard-l{font-size:10px;color:#5a4a7a;margin-bottom:4px}
+.lcard-v{font-size:15px;font-weight:800;color:#c9a8ff}
+/* share */
+.share-row{display:flex;gap:8px;padding:12px 16px}
+.shbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;border:none}
+.sh-fb{background:#1877f2;color:#fff}
+.sh-cp{background:#1a1030;border:1px solid #3a2060;color:#9a7fd4}
+/* retry */
+.retry-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:calc(100% - 32px);margin:4px 16px 12px;padding:12px;background:#1a1030;border:1px solid #3a2060;border-radius:12px;color:#c9a8ff;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;text-decoration:none}
+.disc{margin:0 16px 14px;padding:10px 14px;background:#0a0818;border:1px solid #1e1540;border-radius:10px;font-size:11px;color:#2e2050;line-height:1.6}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="wrap">
+<header class="hdr" style="background:linear-gradient(135deg,#080510,#110828);border-bottom-color:#2d1a5e">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#6c3fc7,#4a1f9e)">🔮</div>
+    <div><div class="logo-txt" style="color:#e8d5ff">ผลทำนายฝัน</div><div class="logo-sub">วิเคราะห์สัญลักษณ์ · เลขเด็ด</div></div>
+  </div>
+</header>
+<div class="ad ad-b" style="background:#0f0a1e;border-color:#2d1a5e"><span>โฆษณา 320×50</span></div>
+
+<div class="dream-recap" id="dream-recap">กำลังวิเคราะห์...</div>
+
+<div class="nums-hero" id="nums-hero">
+  <div class="nums-eyebrow">เลขเด็ดจากความฝัน</div>
+  <div class="nums-grid" id="nums-grid"></div>
+</div>
+
+<div class="rcard" id="rcard-analysis">
+  <div class="rcard-hdr">คำทำนาย</div>
+  <div class="analysis-text" id="analysis-text"></div>
+</div>
+
+<div class="ad ad-i" style="background:#0f0a1e;border-color:#2d1a5e;margin-top:4px"><span>โฆษณา</span></div>
+
+<div class="rcard" id="rcard-symbols" style="margin-top:4px">
+  <div class="rcard-hdr">สัญลักษณ์ที่พบในฝัน</div>
+  <div id="symbols-list"></div>
+</div>
+
+<div class="rcard" id="rcard-lucky" style="margin-top:4px">
+  <div class="rcard-hdr">สิ่งมงคลประจำฝัน</div>
+  <div class="lucky-grid" id="lucky-grid"></div>
+</div>
+
+<div class="share-row">
+  <button class="shbtn sh-fb" id="btn-share" onclick="shareDream()">📘 แชร์ Facebook</button>
+  <button class="shbtn sh-cp" id="btn-copy" onclick="copyDream()">📋 คัดลอก</button>
+</div>
+
+<a class="retry-btn" href="dream.html">🌙 ทำนายฝันใหม่</a>
+
+<div class="ad ad-r" style="background:#0f0a1e;border-color:#2d1a5e;margin:0 16px"><span>โฆษณา 300×250</span></div>
+<div class="disc">⚠️ เนื้อหาเพื่อความบันเทิงและความเชื่อเท่านั้น ไม่ใช่คำแนะนำทางการเงิน</div>
+</div>
+
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem active" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+
+<script src="dream-data.js"></script>
+<script>
+// ── RNG ──
+function mkRng(seed){let s=seed>>>0;return()=>{s=Math.imul(s^(s>>>15),s|1);s^=s+Math.imul(s^(s>>>7),s|61);return((s^(s>>>14))>>>0)/0xFFFFFFFF;};}
+function pick(arr,rng){return arr[Math.floor(rng()*arr.length)];}
+
+// ── URL PARAMS ──
+const params=new URLSearchParams(location.search);
+const dream=params.get('q')||'';
+const seedVal=parseInt(params.get('s'))||12345;
+
+// ── DETECT SYMBOLS ──
+function detectSymbols(text){
+  const found=[];const seen=new Set();
+  for(const [kw,key] of window.DREAM_KEYWORDS){
+    if(text.includes(kw)&&!seen.has(key)){seen.add(key);const d=window.DREAM_DATA[key];if(d)found.push({key,...d});}
+  }
+  // Sort by priority (lower = higher priority)
+  return found.sort((a,b)=>a.priority-b.priority);
+}
+
+// ── BUILD ANALYSIS ──
+function buildAnalysis(symbols,rng){
+  const primary=symbols[0];
+  const modifiers=symbols.slice(1,4);
+
+  let paragraphs=[];
+
+  if(primary){
+    // Para 1: primary intro
+    paragraphs.push(pick(primary.intro,rng));
+    // Para 2: primary meaning
+    paragraphs.push(pick(primary.meaning,rng));
+    // Para 3: modifier context if exists
+    if(modifiers.length>0){
+      const mod=modifiers[0];
+      const modIntro=primary.modifier_context||'สัญลักษณ์เพิ่มเติมในฝันนี้บอกว่า';
+      paragraphs.push(`${modIntro} ${mod.short||''} — ${pick(mod.meaning,rng)}`);
+    }
+    if(modifiers.length>1){
+      const mod2=modifiers[1];
+      paragraphs.push(`นอกจากนี้ ${mod2.short||''}`);
+    }
+  } else {
+    // no symbol detected — use generic intro
+    paragraphs.push('ความฝันที่คุณเพิ่งประสบในคืนนี้มีความหมายลึกซึ้งและสำคัญยิ่งกว่าที่คิด ตำราโหราศาสตร์ไทยโบราณได้บันทึกไว้ว่าความฝันในยามดึกสงัดมักเป็นสื่อกลางระหว่างจิตใต้สำนึกของเราและพลังจักรวาลที่อยู่รอบตัว');
+    paragraphs.push('สัญลักษณ์ที่ปรากฎในความฝันสื่อถึงพลังงานพิเศษที่กำลังเคลื่อนเข้าสู่ชีวิต ทั้งในด้านโชคลาภและความเปลี่ยนแปลงที่ดี');
+  }
+
+  // Generic layers
+  const g=window.DREAM_GENERIC;
+  paragraphs.push(pick(g.money,rng));
+  paragraphs.push(pick(g.love,rng));
+  paragraphs.push(pick(g.work,rng));
+  paragraphs.push(pick(g.warning,rng));
+  paragraphs.push(pick(g.lotto,rng));
+  paragraphs.push(pick(g.close,rng));
+
+  return paragraphs.map(p=>`<p>${p}</p>`).join('');
+}
+
+// ── BUILD NUMBERS ──
+function buildNumbers(symbols,rng){
+  const nums=new Set();
+  // From each symbol
+  symbols.forEach(s=>{if(s.nums&&s.nums.length){nums.add(pick(s.nums,rng));}});
+  // Seed-derived fill
+  while(nums.size<5){
+    const n=String(Math.floor(rng()*100)).padStart(2,'0');
+    nums.add(n);
+  }
+  // Add a 3-digit
+  const n3=String(Math.floor(rng()*1000)).padStart(3,'0');
+  const arr=[...nums];arr.splice(2,0,n3);
+  return [...new Set(arr)].slice(0,5);
+}
+
+// ── RENDER ──
+function render(){
+  if(!dream){document.getElementById('dream-recap').textContent='ไม่พบข้อมูลความฝัน กรุณากลับหน้าหลัก';return;}
+
+  const rng=mkRng(seedVal);
+  const symbols=detectSymbols(dream);
+  const nums=buildNumbers(symbols,rng);
+  const analysis=buildAnalysis(symbols,rng);
+  const L=window.DREAM_LUCKY;
+  const color=pick(L.colors,rng);
+  const day=pick(L.days,rng);
+  const time=pick(L.times,rng);
+  const dir=pick(L.dirs,rng);
+  const gem=pick(L.gems,rng);
+  const conf=pick(L.conf,rng);
+
+  // Recap
+  document.getElementById('dream-recap').innerHTML=`<strong>ความฝันของคุณ:</strong> ${dream.slice(0,80)}${dream.length>80?'...':''}`;
+
+  // Numbers
+  const grid=document.getElementById('nums-grid');
+  nums.forEach((n,i)=>{
+    const el=document.createElement('div');
+    el.className=`npill ${i===0?'main':i<=2?'sec':'sm'}`;
+    el.textContent=n;el.style.animationDelay=(i*.12)+'s';
+    grid.appendChild(el);
+  });
+
+  // Analysis
+  document.getElementById('analysis-text').innerHTML=analysis;
+
+  // Symbols
+  const symEl=document.getElementById('symbols-list');
+  if(symbols.length>0){
+    symEl.innerHTML=symbols.slice(0,4).map(s=>`
+      <div class="sym-row">
+        <span class="sym-ico">${s.ico||'✨'}</span>
+        <div style="flex:1">
+          <div class="sym-name">${s.key}</div>
+          <div class="sym-mean">${s.short||''}</div>
+        </div>
+        <div class="sym-num">${s.nums?s.nums[0]:'—'}</div>
+      </div>`).join('');
+  } else {
+    symEl.innerHTML='<div style="padding:12px 14px;font-size:13px;color:#5a4a7a">วิเคราะห์จากพลังงานรวมของความฝัน</div>';
+  }
+
+  // Lucky
+  document.getElementById('lucky-grid').innerHTML=`
+    <div class="lcard"><div class="lcard-l">สีมงคล</div><div class="lcard-v">${color}</div></div>
+    <div class="lcard"><div class="lcard-l">วันมงคล</div><div class="lcard-v">${day}</div></div>
+    <div class="lcard"><div class="lcard-l">เวลามงคล</div><div class="lcard-v" style="font-size:13px">${time}</div></div>
+    <div class="lcard"><div class="lcard-l">ทิศมงคล</div><div class="lcard-v" style="font-size:13px">${dir}</div></div>
+    <div class="lcard"><div class="lcard-l">อัญมณี</div><div class="lcard-v">${gem}</div></div>
+    <div class="lcard"><div class="lcard-l">ความแม่น</div><div class="lcard-v" style="font-size:12px">${conf}</div></div>`;
+
+  // Set og tags dynamically
+  document.title=`ทำนายฝัน: ${dream.slice(0,30)} — เลข ${nums[0]}`;
+
+  // Save history
+  let hist=[];try{hist=JSON.parse(localStorage.getItem('dream_hist')||'[]');}catch(e){}
+  hist.unshift({dream:dream.slice(0,40),nums:nums.slice(0,2).join(' '),time:new Date().toLocaleDateString('th-TH')});
+  if(hist.length>10)hist=hist.slice(0,10);
+  try{localStorage.setItem('dream_hist',JSON.stringify(hist));}catch(e){}
+
+  // Store for share
+  window._result={dream,nums,color,day,analysis};
+}
+
+function shareDream(){
+  const r=window._result;if(!r)return;
+  const t=`💭 ทำนายฝัน: ${r.dream.slice(0,50)}\n✨ เลขเด็ด: ${r.nums.slice(0,3).join(' / ')}\n🎨 สีมงคล: ${r.color} | วันมงคล: ${r.day}\nทำนายฝันฟรี: ${location.origin}/dream.html`;
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(t)}`,'_blank','width=600,height=400');
+}
+function copyDream(){
+  const r=window._result;if(!r)return;
+  const t=`💭 ฝันว่า: ${r.dream.slice(0,80)}\n✨ เลขเด็ด: ${r.nums.join(' | ')}\n🎨 สีมงคล: ${r.color} | วันมงคล: ${r.day}\nทำนายฝันฟรี: ${location.origin}/dream.html`;
+  navigator.clipboard.writeText(t).then(()=>{const b=document.getElementById('btn-copy');b.textContent='✅ คัดลอก!';setTimeout(()=>{b.innerHTML='📋 คัดลอก';},2000);});
+}
+
+// Starfield
+(function(){const c=document.getElementById('stars'),ctx=c.getContext('2d');let stars=[];function r(){c.width=window.innerWidth;c.height=window.innerHeight;stars=Array.from({length:100},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+.3,o:Math.random()*.6+.2,s:Math.random()*.3+.1}));}r();window.addEventListener('resize',r);let t=0;(function d(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,160,255,${s.o*(0.5+0.5*Math.sin(t*s.s))})`;ctx.fill();});t+=0.02;requestAnimationFrame(d);})();})();
+
+// Init after data loads
+if(window.DREAM_DATA){render();}else{window.addEventListener('load',render);}
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

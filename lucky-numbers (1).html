@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="วิเคราะห์ทะเบียนรถมงคล เบอร์มือถือมงคล เลขนำโชค ดูว่าเลขดีไหม">
+
+<meta property="og:title" content="วิเคราะห์ทะเบียนรถ & เบอร์มือถือมงคล">
+<meta property="og:description" content="วิเคราะห์ทะเบียนรถมงคล เบอร์โทรศัพท์มงคล คะแนนความเป็นสิริมงคล เลขนำโชค">
+<meta property="og:type" content="website">
+
+<title>วิเคราะห์ทะเบียนรถ & เบอร์มือถือมงคล</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#050a0a}
+.page-wrap{position:relative;z-index:1}
+/* TAB */
+.ftabs{display:flex;background:#0a1010;border-bottom:2px solid #0d2020}
+.ftab{flex:1;padding:13px 8px 11px;text-align:center;font-size:13px;font-weight:700;font-family:var(--font);color:#3a6060;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .2s,border-color .2s}
+.ftab .ftico{font-size:20px;display:block;margin-bottom:3px}
+.ftab.active{color:#5dffd0;border-bottom-color:#00c896}
+/* HERO */
+.hero{padding:22px 16px 14px;text-align:center}
+.hero-ico{font-size:48px;display:block;margin-bottom:8px;animation:float 3.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.hero-title{font-size:22px;font-weight:800;color:#c8fff0;margin-bottom:5px}
+.hero-sub{font-size:13px;color:#3a7060;line-height:1.6}
+/* INPUT */
+.inp-card{margin:0 16px 12px;background:#0a1a18;border:1px solid #0d2a28;border-radius:var(--r);padding:16px}
+.inp-label{font-size:11px;font-weight:700;color:#00c896;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+/* PLATE INPUT */
+.plate-wrap{display:flex;gap:8px;align-items:center}
+.plate-prov{flex:1}
+.plate-num{flex:2}
+.plate-input{width:100%;background:#03100e;border:2px solid #0d2a28;border-radius:var(--rs);color:#c8fff0;font-family:var(--font);font-size:18px;font-weight:700;padding:11px 14px;outline:none;transition:border-color .2s;letter-spacing:3px;text-align:center}
+.plate-input:focus{border-color:#00c896}
+.plate-input::placeholder{color:#1a4040;font-size:14px;letter-spacing:1px}
+.province-sel{width:100%;background:#03100e;border:2px solid #0d2a28;border-radius:var(--rs);color:#c8fff0;font-family:var(--font);font-size:14px;padding:11px 14px;outline:none;appearance:none;-webkit-appearance:none;cursor:pointer}
+.province-sel:focus{border-color:#00c896}
+.go-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;padding:13px;background:linear-gradient(135deg,#00c896,#008060);border:none;border-radius:var(--rs);color:#021a16;font-size:16px;font-weight:800;font-family:var(--font);cursor:pointer;transition:opacity .2s,transform .1s}
+.go-btn:active{opacity:.85;transform:scale(.98)}
+/* PHONE INPUT */
+.phone-input{width:100%;background:#03100e;border:2px solid #0d2a28;border-radius:var(--rs);color:#c8fff0;font-family:var(--font);font-size:22px;font-weight:700;padding:12px 14px;outline:none;transition:border-color .2s;letter-spacing:4px;text-align:center;-moz-appearance:textfield}
+.phone-input::-webkit-inner-spin-button,.phone-input::-webkit-outer-spin-button{-webkit-appearance:none}
+.phone-input:focus{border-color:#00c896}
+/* SCORE METER */
+.score-outer{margin:0 16px 12px;background:#0a1a18;border:1px solid #0d2a28;border-radius:var(--r);overflow:hidden}
+.score-header{padding:14px 16px;border-bottom:1px solid #0d2a28;display:flex;align-items:center;gap:12px}
+.score-ico{font-size:32px}
+.score-title{font-size:16px;font-weight:800;color:#c8fff0}
+.score-subtitle{font-size:12px;color:#3a7060;margin-top:2px}
+.score-meter-wrap{padding:16px 16px 12px}
+.score-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.score-label{font-size:13px;font-weight:700;color:#5dffd0}
+.score-num{font-size:28px;font-weight:800;color:#c8fff0}
+.score-bar-bg{height:14px;background:#0d2a28;border-radius:7px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:7px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.score-verdict{margin-top:10px;padding:10px 14px;border-radius:var(--rs);font-size:14px;font-weight:700;text-align:center}
+.v-great{background:rgba(0,200,150,.15);border:1px solid rgba(0,200,150,.4);color:#5dffd0}
+.v-good{background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.3);color:#f0c84a}
+.v-ok{background:rgba(90,120,150,.1);border:1px solid rgba(90,120,150,.2);color:#7ab0d0}
+.v-bad{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.25);color:#e74c3c}
+/* ANALYSIS GRID */
+.an-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 16px}
+.an-card{background:#03100e;border:1px solid #0d2a28;border-radius:var(--rs);padding:11px 12px;text-align:center}
+.an-label{font-size:10px;color:#3a7060;font-weight:700;letter-spacing:.5px;margin-bottom:4px}
+.an-val{font-size:20px;font-weight:800;color:#c8fff0;letter-spacing:1px}
+.an-sub{font-size:10px;color:#3a7060;margin-top:3px}
+/* DIGIT BREAKDOWN */
+.digit-row{display:flex;gap:6px;padding:0 16px 12px;justify-content:center;flex-wrap:wrap}
+.digit-box{background:#03100e;border:1px solid #0d2a28;border-radius:8px;padding:8px 10px;text-align:center;min-width:52px}
+.digit-n{font-size:22px;font-weight:800;color:#5dffd0;letter-spacing:1px}
+.digit-m{font-size:10px;color:#3a7060;margin-top:2px;line-height:1.3}
+/* SECTIONS */
+.rsect{padding:12px 16px;border-top:1px solid #0d2a28}
+.rsect-lbl{font-size:10px;font-weight:700;color:#00c896;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:7px}
+.rsect-txt{font-size:13px;color:#8ad0c0;line-height:1.7}
+/* TAG CHIPS */
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.tag-green{background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.25);color:#5dffd0}
+.tag-gold{background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.25);color:#f0c84a}
+.tag-red{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.2);color:#e74c3c}
+/* SIMILAR LUCKY */
+.lucky-list{padding:0 16px 14px}
+.lucky-item{background:#03100e;border:1px solid #0d2a28;border-radius:var(--rs);padding:10px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.lucky-num{font-size:18px;font-weight:800;color:#5dffd0;letter-spacing:2px;min-width:100px}
+.lucky-reason{font-size:12px;color:#5a9080;flex:1}
+.lucky-score{font-size:13px;font-weight:700;color:#f0c84a}
+/* SHARE */
+.share-row{display:flex;gap:8px;padding:0 16px 14px}
+.shbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--rs);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;border:none}
+.sh-fb{background:#1877f2;color:#fff}
+.sh-cp{background:#0a1a18;border:1px solid #0d2a28;color:#5a9080}
+.disclaimer{margin:0 16px 12px;padding:10px 14px;background:#03100e;border:1px solid #0d2a28;border-radius:10px;font-size:11px;color:#2a5040;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<header class="hdr" style="background:linear-gradient(135deg,#050a0a,#0a1a18);border-bottom-color:#0d2a28">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#00c896,#007050)">🔢</div>
+    <div>
+      <div class="logo-txt" style="color:#c8fff0">วิเคราะห์เลขมงคล</div>
+      <div class="logo-sub">ทะเบียนรถ · เบอร์มือถือ</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#2a5040;text-align:right">Static · ฟรี</div>
+</header>
+
+<div class="ad ad-b" style="background:#0a1010;border-color:#0d2020"><span>โฆษณา 320×50</span></div>
+
+<div class="ftabs">
+  <button class="ftab active" onclick="switchTab('plate',this)">
+    <span class="ftico">🚗</span>ทะเบียนรถ
+  </button>
+  <button class="ftab" onclick="switchTab('phone',this)">
+    <span class="ftico">📱</span>เบอร์มือถือ
+  </button>
+</div>
+
+<main style="max-width:480px;margin:0 auto;padding-bottom:80px">
+
+<!-- ══ PLATE ══ -->
+<div id="pane-plate">
+  <div class="hero">
+    <span class="hero-ico">🚗</span>
+    <div class="hero-title">วิเคราะห์ทะเบียนรถ</div>
+    <div class="hero-sub">ดูความหมายและพลังเลขมงคล<br>ตามหลักเลขศาสตร์และโหราศาสตร์ไทย</div>
+  </div>
+  <div class="inp-card">
+    <div class="inp-label">จังหวัด / หมวดอักษร</div>
+    <div style="margin-bottom:10px">
+      <select class="province-sel" id="plate-prov">
+        <option value="กทม">กรุงเทพมหานคร</option>
+        <option value="กระบี่">กระบี่</option><option value="กาญจนบุรี">กาญจนบุรี</option>
+        <option value="กาฬสินธุ์">กาฬสินธุ์</option><option value="กำแพงเพชร">กำแพงเพชร</option>
+        <option value="ขอนแก่น">ขอนแก่น</option><option value="จันทบุรี">จันทบุรี</option>
+        <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option><option value="ชลบุรี">ชลบุรี</option>
+        <option value="ชัยนาท">ชัยนาท</option><option value="ชัยภูมิ">ชัยภูมิ</option>
+        <option value="ชุมพร">ชุมพร</option><option value="เชียงราย">เชียงราย</option>
+        <option value="เชียงใหม่">เชียงใหม่</option><option value="ตรัง">ตรัง</option>
+        <option value="ตราด">ตราด</option><option value="นครปฐม">นครปฐม</option>
+        <option value="นครราชสีมา">นครราชสีมา</option><option value="นครศรีธรรมราช">นครศรีธรรมราช</option>
+        <option value="นครสวรรค์">นครสวรรค์</option><option value="นนทบุรี">นนทบุรี</option>
+        <option value="ปทุมธานี">ปทุมธานี</option><option value="ประจวบคีรีขันธ์">ประจวบคีรีขันธ์</option>
+        <option value="ปราจีนบุรี">ปราจีนบุรี</option><option value="ปัตตานี">ปัตตานี</option>
+        <option value="พระนครศรีอยุธยา">พระนครศรีอยุธยา</option><option value="พะเยา">พะเยา</option>
+        <option value="พังงา">พังงา</option><option value="พัทลุง">พัทลุง</option>
+        <option value="พิจิตร">พิจิตร</option><option value="พิษณุโลก">พิษณุโลก</option>
+        <option value="เพชรบุรี">เพชรบุรี</option><option value="เพชรบูรณ์">เพชรบูรณ์</option>
+        <option value="แพร่">แพร่</option><option value="ภูเก็ต">ภูเก็ต</option>
+        <option value="มหาสารคาม">มหาสารคาม</option><option value="ระนอง">ระนอง</option>
+        <option value="ระยอง">ระยอง</option><option value="ราชบุรี">ราชบุรี</option>
+        <option value="ร้อยเอ็ด">ร้อยเอ็ด</option><option value="ลพบุรี">ลพบุรี</option>
+        <option value="ลำปาง">ลำปาง</option><option value="ลำพูน">ลำพูน</option>
+        <option value="สกลนคร">สกลนคร</option><option value="สงขลา">สงขลา</option>
+        <option value="สมุทรปราการ">สมุทรปราการ</option><option value="สมุทรสงคราม">สมุทรสงคราม</option>
+        <option value="สมุทรสาคร">สมุทรสาคร</option><option value="สระแก้ว">สระแก้ว</option>
+        <option value="สระบุรี">สระบุรี</option><option value="สิงห์บุรี">สิงห์บุรี</option>
+        <option value="สุโขทัย">สุโขทัย</option><option value="สุพรรณบุรี">สุพรรณบุรี</option>
+        <option value="สุราษฎร์ธานี">สุราษฎร์ธานี</option><option value="สุรินทร์">สุรินทร์</option>
+        <option value="หนองคาย">หนองคาย</option><option value="อ่างทอง">อ่างทอง</option>
+        <option value="อุดรธานี">อุดรธานี</option><option value="อุตรดิตถ์">อุตรดิตถ์</option>
+        <option value="อุบลราชธานี">อุบลราชธานี</option>
+      </select>
+    </div>
+    <div class="inp-label">หมายเลขทะเบียน</div>
+    <input class="plate-input" id="plate-num" type="text" placeholder="เช่น 5กข 1234" maxlength="12"
+      oninput="this.value=this.value.toUpperCase()">
+    <button class="go-btn" onclick="analyzePlate()">
+      <span style="font-size:18px">🔍</span> วิเคราะห์ทะเบียน
+    </button>
+  </div>
+  <div id="plate-result"></div>
+</div>
+
+<!-- ══ PHONE ══ -->
+<div id="pane-phone" style="display:none">
+  <div class="hero">
+    <span class="hero-ico">📱</span>
+    <div class="hero-title">วิเคราะห์เบอร์มือถือ</div>
+    <div class="hero-sub">ดูความหมาย พลังงาน และโชคชะตา<br>จากเบอร์มือถือของคุณ</div>
+  </div>
+  <div class="inp-card">
+    <div class="inp-label">เบอร์มือถือ (10 หลัก)</div>
+    <input class="phone-input" id="phone-num" type="tel" inputmode="numeric"
+      placeholder="0XX-XXX-XXXX" maxlength="10"
+      oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
+    <button class="go-btn" onclick="analyzePhone()">
+      <span style="font-size:18px">🔍</span> วิเคราะห์เบอร์มือถือ
+    </button>
+  </div>
+  <div id="phone-result"></div>
+</div>
+
+</main>
+
+<div class="ad ad-r" style="background:#0a1010;border-color:#0d2020;margin:0 16px 12px"><span>โฆษณา 300×250</span></div>
+<div class="disclaimer">
+  ⚠️ เนื้อหาเพื่อความบันเทิงและความเชื่อเท่านั้น ไม่ใช่คำแนะนำในการตัดสินใจทางการเงิน
+</div>
+<div class="bsp"></div>
+
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem active" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// DATA
+// ══════════════════════════════════════
+
+// Digit meanings (numerology + Thai belief)
+const DIGIT_MEANING={
+  0:{name:'ศูนย์',th:'พระอิศวร',meaning:'ความสมบูรณ์ วงกลมแห่งชีวิต ความไม่สิ้นสุด',energy:'กลาง',lotto:'ตัวลงท้าย 0',score:6},
+  1:{name:'หนึ่ง',th:'พระอาทิตย์',meaning:'ผู้นำ ริเริ่ม กล้าหาญ เป็นเลขแห่งชัยชนะ',energy:'ไฟ',lotto:'มักเป็นเลขนำ',score:8},
+  2:{name:'สอง',th:'พระจันทร์',meaning:'สมดุล ความร่วมมือ ความรัก เป็นคู่มงคล',energy:'น้ำ',lotto:'เลขคู่มงคล',score:7},
+  3:{name:'สาม',th:'พระพฤหัส',meaning:'โชคลาภ ความสำเร็จ ศาสตร์แห่งสามพระรัตน์',energy:'ไม้',lotto:'เลขมงคลพิเศษ',score:9},
+  4:{name:'สี่',th:'พระราหู',meaning:'ความมั่นคง พื้นฐาน บางคนเชื่อว่าเสี่ยง',energy:'ดิน',lotto:'ระวังเลข 4',score:5},
+  5:{name:'ห้า',th:'พระพุธ',meaning:'การเปลี่ยนแปลง อิสระ โชคชะตา เลขกลาง',energy:'ลม',lotto:'เลขเปลี่ยนดวง',score:7},
+  6:{name:'หก',th:'พระศุกร์',meaning:'ความรัก ความงาม ครอบครัว เป็นเลขสวยมงคล',energy:'โลหะ',lotto:'นิยมมาก',score:9},
+  7:{name:'เจ็ด',th:'พระเกตุ',meaning:'ปัญญา จิตวิญญาณ โชคพิเศษ เลขศักดิ์สิทธิ์',energy:'ไฟ',lotto:'เลขดวง เสี่ยงได้',score:8},
+  8:{name:'แปด',th:'พระเสาร์',meaning:'ความมั่งคั่ง อำนาจ เลขแห่งความร่ำรวยจีน',energy:'ดิน',lotto:'เลขรวย ฮิตมาก',score:10},
+  9:{name:'เก้า',th:'พระอังคาร',meaning:'ความสำเร็จ ความสมบูรณ์ เลขสูงสุด ก้าวหน้า',energy:'ไฟ',lotto:'เลขสูงสุด มงคล',score:9},
+};
+
+// Pattern analysis
+const PATTERNS=[
+  {test:n=>n.split('').every(d=>d===n[0]),name:'เลขซ้ำทั้งหมด',desc:'หายากมาก โชคดีมากผิดปกติ ถือว่ามงคลสูงสุด',score:15,tag:'green'},
+  {test:n=>{const d=n.split('').map(Number);return d.every((_,i)=>i===0||d[i]-d[i-1]===1);},name:'เลขเรียงหน้า',desc:'เลขไต่ขึ้น สื่อถึงความก้าวหน้า รุ่งเรืองขึ้นเรื่อยๆ',score:10,tag:'green'},
+  {test:n=>{const d=n.split('').map(Number);return d.every((_,i)=>i===0||d[i-1]-d[i]===1);},name:'เลขเรียงหลัง',desc:'เลขลดลง บางคนเชื่อว่าสื่อถึงการปลดปล่อย',score:5,tag:'gold'},
+  {test:n=>n.split('').filter((v,i,a)=>a.indexOf(v)===i).length===1,name:'เลขซ้ำ',desc:'เลขซ้ำเสริมพลังหลายเท่า',score:8,tag:'green'},
+  {test:n=>{const d=n.replace(/\D/g,'');return d.includes('888')||d.includes('999')||d.includes('666');},name:'ซีรีย์มงคล',desc:'888/999/666 เป็นเลขมงคลในตำราจีนและไทย',score:12,tag:'green'},
+  {test:n=>{const d=n.replace(/\D/g,'');return d.includes('13')||d.includes('666')||d.includes('444');},name:'เลขระวัง',desc:'บางตำราเชื่อว่า 13, 444 ควรระวัง',score:-5,tag:'red'},
+  {test:n=>{const s=n.replace(/\D/g,'').split('').reduce((a,c)=>a+parseInt(c),0);return s%9===0&&s>0;},name:'ผลรวมหาร 9 ลงตัว',desc:'เลขแห่งความสมบูรณ์ ครบถ้วน',score:7,tag:'green'},
+  {test:n=>{const s=n.replace(/\D/g,'').split('').reduce((a,c)=>a+parseInt(c),0);return s%8===0&&s>0;},name:'ผลรวมหาร 8 ลงตัว',desc:'เลขแห่งความร่ำรวยตามตำราจีน',score:8,tag:'green'},
+  {test:n=>n.replace(/\D/g,'').endsWith('9'),name:'ลงท้าย 9',desc:'เลขท้าย 9 สื่อถึงความก้าวหน้า มั่งคั่ง',score:5,tag:'gold'},
+  {test:n=>n.replace(/\D/g,'').endsWith('8'),name:'ลงท้าย 8',desc:'เลขท้าย 8 มงคลด้านการเงิน รวย',score:6,tag:'gold'},
+  {test:n=>n.replace(/\D/g,'').endsWith('6'),name:'ลงท้าย 6',desc:'เลขท้าย 6 มงคลด้านความรักและครอบครัว',score:5,tag:'gold'},
+];
+
+// Numerology reduction
+function reduceNum(n){
+  while(n>9&&n!==11&&n!==22&&n!==33){
+    n=String(n).split('').reduce((a,c)=>a+parseInt(c),0);
+  }
+  return n;
+}
+
+// Score → color/label
+function scoreInfo(s){
+  if(s>=85)return{cls:'v-great',label:'🌟 มงคลสูงมาก',barColor:'#00c896'};
+  if(s>=70)return{cls:'v-good',label:'✨ มงคลดี',barColor:'#f0c84a'};
+  if(s>=50)return{cls:'v-ok',label:'👍 พอใช้ได้',barColor:'#5a9090'};
+  return{cls:'v-bad',label:'⚠️ ควรพิจารณา',barColor:'#e74c3c'};
+}
+
+// ══════════════════════════════════════
+// SHARED RENDERER
+// ══════════════════════════════════════
+function renderAnalysis(digits, title, subtitle, ico, container){
+  const clean=digits.replace(/[^0-9]/g,'');
+  if(!clean){container.innerHTML='<div class="disclaimer">⚠️ ไม่พบตัวเลขในข้อมูลที่กรอก กรุณาลองใหม่</div>';return;}
+
+  // Base score from digits
+  let score=50;
+  const matched=[];
+  PATTERNS.forEach(p=>{
+    if(p.test(clean)){score+=p.score;matched.push(p);}
+  });
+  // Digit quality
+  clean.split('').forEach(d=>{score+=(DIGIT_MEANING[parseInt(d)]?.score||5)-5;});
+  score=Math.max(10,Math.min(100,score));
+
+  const si=scoreInfo(score);
+  const sum=clean.split('').reduce((a,c)=>a+parseInt(c),0);
+  const reduced=reduceNum(sum);
+  const last2=clean.slice(-2);
+  const last3=clean.slice(-3);
+
+  // Digit boxes
+  const digitBoxes=clean.split('').map(d=>{
+    const dm=DIGIT_MEANING[parseInt(d)];
+    return`<div class="digit-box"><div class="digit-n">${d}</div><div class="digit-m">${dm?.th||''}</div></div>`;
+  }).join('');
+
+  // Pattern tags
+  const tags=matched.map(p=>`<span class="tag tag-${p.tag}">${p.name}</span>`).join('');
+
+  // Analysis sections
+  const sections=matched.map(p=>`
+    <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px">
+      <span style="font-size:16px">${p.tag==='green'?'✅':p.tag==='red'?'⚠️':'💡'}</span>
+      <div><div style="font-size:13px;font-weight:700;color:#c8fff0">${p.name}</div>
+      <div style="font-size:12px;color:#5a9080;margin-top:2px">${p.desc}</div></div>
+    </div>`).join('');
+
+  // Lucky lotto numbers from this plate/phone
+  const luckNums=genLottoHints(clean,sum,reduced);
+
+  container.innerHTML=`
+    <div class="score-outer">
+      <div class="score-header">
+        <span class="score-ico">${ico}</span>
+        <div><div class="score-title">${title}</div><div class="score-subtitle">${subtitle}</div></div>
+      </div>
+      <div class="score-meter-wrap">
+        <div class="score-label-row">
+          <span class="score-label">คะแนนมงคล</span>
+          <span class="score-num">${score}<span style="font-size:16px;color:#3a7060">/100</span></span>
+        </div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:${score}%;background:${si.barColor}"></div></div>
+        <div class="score-verdict ${si.cls}">${si.label}</div>
+      </div>
+    </div>
+
+    <div class="an-grid">
+      <div class="an-card"><div class="an-label">ผลรวมตัวเลข</div><div class="an-val">${sum}</div><div class="an-sub">→ ลดเหลือ ${reduced}</div></div>
+      <div class="an-card"><div class="an-label">เลขชีวิต</div><div class="an-val">${reduced}</div><div class="an-sub">${DIGIT_MEANING[reduced>9?1:reduced]?.name||''}</div></div>
+      <div class="an-card"><div class="an-label">เลข 2 ตัวท้าย</div><div class="an-val">${last2}</div><div class="an-sub">เลขท้ายสลาก</div></div>
+      <div class="an-card"><div class="an-label">เลข 3 ตัวท้าย</div><div class="an-val">${last3}</div><div class="an-sub">เลขท้าย 3 ตัว</div></div>
+    </div>
+
+    <div class="score-outer" style="margin:0 16px 12px">
+      <div style="padding:12px 14px;border-bottom:1px solid #0d2a28;font-size:11px;font-weight:700;color:#00c896;letter-spacing:1px;text-transform:uppercase">รายละเอียดแต่ละหลัก</div>
+      <div class="digit-row">${digitBoxes}</div>
+      ${tags?`<div style="padding:0 14px 12px"><div class="tag-row">${tags}</div></div>`:''}
+    </div>
+
+    ${matched.length?`<div class="score-outer" style="margin:0 16px 12px">
+      <div style="padding:12px 14px;border-bottom:1px solid #0d2a28;font-size:11px;font-weight:700;color:#00c896;letter-spacing:1px;text-transform:uppercase">พลังงานที่พบ</div>
+      <div style="padding:12px 14px">${sections}</div>
+    </div>`:''}
+
+    <div class="score-outer" style="margin:0 16px 12px">
+      <div style="padding:12px 14px;border-bottom:1px solid #0d2a28;font-size:11px;font-weight:700;color:#00c896;letter-spacing:1px;text-transform:uppercase">🎯 เลขเด็ดที่ควรลุ้น</div>
+      <div class="lucky-list">
+        ${luckNums.map(l=>`<div class="lucky-item">
+          <div class="lucky-num">${l.num}</div>
+          <div class="lucky-reason">${l.reason}</div>
+          <div class="lucky-score">${l.stars}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="score-outer" style="margin:0 16px 12px">
+      <div style="padding:12px 14px;border-bottom:1px solid #0d2a28;font-size:11px;font-weight:700;color:#00c896;letter-spacing:1px;text-transform:uppercase">ความหมายเลขชีวิต ${reduced}</div>
+      <div style="padding:12px 14px">
+        <div style="font-size:13px;color:#8ad0c0;line-height:1.7">${DIGIT_MEANING[reduced<=9?reduced:1]?.meaning||'—'}</div>
+        <div style="margin-top:8px;font-size:12px;color:#3a7060">พลังงาน: ${DIGIT_MEANING[reduced<=9?reduced:1]?.energy||'—'} · เทพประจำ: ${DIGIT_MEANING[reduced<=9?reduced:1]?.th||'—'}</div>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <button class="shbtn sh-fb" onclick="doShare('${title}','${score}','${last2}','${last3}')">📘 แชร์ Facebook</button>
+      <button class="shbtn sh-cp" onclick="doCopy('${title}','${score}','${last2}','${last3}')">📋 คัดลอก</button>
+    </div>`;
+}
+
+function genLottoHints(clean, sum, reduced){
+  const last2=clean.slice(-2).padStart(2,'0');
+  const last3=clean.slice(-3).padStart(3,'0');
+  const mirror=last2.split('').reverse().join('');
+  const doubleSum=String(sum).slice(-2).padStart(2,'0');
+  const hints=[
+    {num:last2,reason:'เลข 2 ตัวท้ายของหมายเลข',stars:'⭐⭐⭐⭐⭐'},
+    {num:last3,reason:'เลข 3 ตัวท้ายของหมายเลข',stars:'⭐⭐⭐⭐⭐'},
+    {num:mirror,reason:'เลขสะท้อน (กลับ 2 ตัวท้าย)',stars:'⭐⭐⭐⭐'},
+    {num:doubleSum,reason:'เลขจากผลรวมทั้งหมด',stars:'⭐⭐⭐⭐'},
+    {num:String(reduced).padStart(2,'0'),reason:'เลขชีวิตลดทอนแล้ว',stars:'⭐⭐⭐'},
+    {num:(parseInt(last2)+9)%100<10?'0'+((parseInt(last2)+9)%100):String((parseInt(last2)+9)%100),reason:'เลข +9 จากท้าย (หมุนวนโชค)',stars:'⭐⭐⭐'},
+  ];
+  return hints.slice(0,5);
+}
+
+// ══════════════════════════════════════
+// PLATE ANALYSIS
+// ══════════════════════════════════════
+// Thai letter values for province
+const PROVINCE_NUM={
+  'กทม':5,'กระบี่':3,'กาญจนบุรี':1,'ขอนแก่น':2,'จันทบุรี':6,
+  'ชลบุรี':8,'เชียงใหม่':9,'นครราชสีมา':4,'นนทบุรี':7,'ปทุมธานี':6,
+  'พระนครศรีอยุธยา':1,'ภูเก็ต':8,'ระยอง':9,'สงขลา':5,'สุราษฎร์ธานี':3,
+};
+
+function analyzePlate(){
+  const prov=document.getElementById('plate-prov').value;
+  const num=document.getElementById('plate-num').value.trim();
+  if(!num){alert('กรุณากรอกหมายเลขทะเบียน');return;}
+  const digits=num.replace(/[^0-9]/g,'');
+  if(!digits){alert('กรุณากรอกตัวเลขในทะเบียน');return;}
+  const provNum=PROVINCE_NUM[prov]||5;
+  const fullDigits=String(provNum)+digits;
+  const title=`ทะเบียน ${num}`;
+  const subtitle=`จังหวัด${prov} · ${digits.length} หลัก`;
+  renderAnalysis(fullDigits,'🚗 '+title,subtitle,'🚗',document.getElementById('plate-result'));
+  document.getElementById('plate-result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ══════════════════════════════════════
+// PHONE ANALYSIS
+// ══════════════════════════════════════
+// Phone prefix meanings
+const PREFIX_MEANING={
+  '06':  {op:'DTAC/True',meaning:'เลขสาย 6 มงคลด้านความรัก สร้างความสัมพันธ์ดี'},
+  '08':  {op:'AIS/DTAC',meaning:'เลขสาย 8 มงคลด้านการเงิน ธุรกิจ ร่ำรวย'},
+  '09':  {op:'True/AIS',meaning:'เลขสาย 9 มงคลด้านความก้าวหน้า ประสบความสำเร็จ'},
+  '02':  {op:'กทม.',meaning:'เบอร์บ้าน กรุงเทพฯ เสถียร มั่นคง'},
+};
+
+function analyzePhone(){
+  const num=document.getElementById('phone-num').value.replace(/\D/g,'');
+  if(num.length!==10){alert('กรุณากรอกเบอร์มือถือ 10 หลัก');return;}
+  if(!num.startsWith('0')){alert('เบอร์มือถือไทยต้องขึ้นต้นด้วย 0');return;}
+
+  const prefix=num.slice(0,2);
+  const pInfo=PREFIX_MEANING[prefix]||{op:'ผู้ให้บริการ',meaning:'เบอร์ทั่วไป'};
+
+  // Format display
+  const formatted=num.slice(0,3)+'-'+num.slice(3,6)+'-'+num.slice(6);
+  const title=`เบอร์ ${formatted}`;
+  const subtitle=`${pInfo.op} · ${pInfo.meaning}`;
+
+  renderAnalysis(num,'📱 '+title,subtitle,'📱',document.getElementById('phone-result'));
+
+  // Add extra phone-specific info at top
+  const result=document.getElementById('phone-result');
+  const extra=document.createElement('div');
+  extra.style.cssText='margin:0 16px 10px;background:#0a1a18;border:1px solid #0d2a28;border-radius:var(--rs);padding:12px 14px';
+  extra.innerHTML=`
+    <div style="font-size:10px;font-weight:700;color:#00c896;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">ข้อมูลสาย</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="font-size:28px">📡</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#c8fff0">${pInfo.op}</div>
+        <div style="font-size:12px;color:#5a9080;margin-top:2px">${pInfo.meaning}</div>
+      </div>
+    </div>`;
+  result.insertBefore(extra,result.firstChild);
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ══════════════════════════════════════
+// SHARE / COPY
+// ══════════════════════════════════════
+function doShare(title,score,l2,l3){
+  const t=`🔢 ${title}\nคะแนนมงคล: ${score}/100\nเลขเด็ด: ${l2} / ${l3}\nวิเคราะห์เลขมงคลฟรี: ${location.href}`;
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(t)}`,'_blank','width=600,height=400');
+}
+function doCopy(title,score,l2,l3){
+  const t=`🔢 ${title}\nคะแนนมงคล: ${score}/100\nเลขเด็ด 2 ตัว: ${l2} | เลขเด็ด 3 ตัว: ${l3}\nวิเคราะห์เลขมงคลฟรี: ${location.href}`;
+  navigator.clipboard.writeText(t);
+}
+
+// ══════════════════════════════════════
+// TAB SWITCH
+// ══════════════════════════════════════
+function switchTab(type,btn){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['plate','phone'].forEach(p=>document.getElementById('pane-'+p).style.display=p===type?'block':'none');
+}
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>

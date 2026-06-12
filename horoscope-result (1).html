@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ผลดูดวง ดวงไทย ราศี นักษัตร Numerology ดวงประจำวัน ฤกษ์มงคล">
+<title>ผลดูดวง</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:#06080f}
+.result-wrap{padding:0 16px 16px;max-width:480px;margin:0 auto}
+/* section card */
+.sc{background:#0d1020;border:1px solid #1a2040;border-radius:var(--r);overflow:hidden;margin-bottom:12px}
+.sc-head{padding:12px 14px;border-bottom:1px solid #1a2040;display:flex;align-items:center;gap:10px}
+.sc-ico{font-size:26px}
+.sc-title{font-size:15px;font-weight:800;color:#e8e0ff}
+.sc-sub{font-size:11px;color:#5a6090;margin-top:2px}
+/* text section */
+.sect{padding:12px 14px;border-bottom:1px solid #1a2040}
+.sect:last-child{border-bottom:none}
+.sect-lbl{font-size:10px;font-weight:700;color:#7c5cbf;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.sect-txt{font-size:13px;color:#c9b8ff;line-height:1.75}
+.sect-txt p{margin-bottom:10px}
+.sect-txt p:last-child{margin-bottom:0}
+/* star rating */
+.stars-row{display:flex;gap:6px;padding:12px 14px 10px;border-bottom:1px solid #1a2040}
+.star-item{flex:1;text-align:center}
+.star-lbl{font-size:10px;color:#5a6090;margin-bottom:4px}
+.stars{display:flex;justify-content:center;gap:2px;font-size:14px}
+.son{color:#f0c84a}.sof{color:#1a2040}
+/* lucky grid */
+.lucky-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 14px}
+.lc{background:#060810;border:1px solid #1a2040;border-radius:var(--rs);padding:9px;text-align:center}
+.lc-l{font-size:9px;color:#5a6090;margin-bottom:3px}
+.lc-v{font-size:14px;font-weight:800;color:#c9b8ff}
+/* lotto nums */
+.lotto-nums{display:flex;gap:8px;flex-wrap:wrap;padding:12px 14px;justify-content:center}
+.ln{padding:7px 14px;border-radius:8px;font-size:18px;font-weight:800;letter-spacing:2px}
+.ln.main{background:linear-gradient(135deg,#7c5cbf,#4a2e9e);color:#fff;box-shadow:0 3px 12px rgba(124,58,237,.4)}
+.ln.sec{background:#0d1020;border:1px solid #2a2060;color:#c9b8ff}
+/* calendar */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:10px 12px}
+.cal-head{text-align:center;font-size:10px;font-weight:700;color:#4a5580;padding:3px 0}
+.cal-day{text-align:center;font-size:12px;padding:6px 2px;border-radius:5px}
+.cal-day.good{background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.3);color:#2ecc71;font-weight:700}
+.cal-day.bad{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.2);color:#e74c3c}
+.cal-day.ok{background:#0d1020;border:1px solid #1a2040;color:#4a5580}
+.cal-day.today{outline:2px solid #7c5cbf}
+.cal-day.empty{background:none;border:none}
+/* share */
+.share-row{display:flex;gap:8px;padding:0 16px 12px}
+.shbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--rs);font-size:13px;font-weight:600;font-family:var(--font);cursor:pointer;border:none}
+.sh-fb{background:#1877f2;color:#fff}
+.sh-cp{background:#0d1020;border:1px solid #1a2040;color:#7a6a9a}
+.retry-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:calc(100% - 32px);margin:4px 16px 12px;padding:12px;background:#0d1020;border:1px solid #2a2060;border-radius:12px;color:#c9b8ff;font-size:14px;font-weight:600;font-family:var(--font);cursor:pointer;text-decoration:none}
+.disc{margin:0 16px 14px;padding:10px;background:#060810;border:1px solid #1e1540;border-radius:10px;font-size:11px;color:#2a2050;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="hdr" style="background:linear-gradient(135deg,#06080f,#0d1020);border-bottom-color:#1a2040">
+  <div class="logo">
+    <div class="logo-ico" style="background:linear-gradient(135deg,#7c5cbf,#4a2e9e)">🔮</div>
+    <div><div class="logo-txt" style="color:#e8e0ff" id="hdr-title">ผลดูดวง</div><div class="logo-sub" id="hdr-sub">—</div></div>
+  </div>
+</header>
+<div class="ad ad-b" style="background:#0a0d18;border-color:#1a2040"><span>โฆษณา 320×50</span></div>
+
+<div id="result-wrap" class="result-wrap" style="padding-top:14px"></div>
+
+<div class="share-row">
+  <button class="shbtn sh-fb" onclick="doShare()">📘 แชร์ Facebook</button>
+  <button class="shbtn sh-cp" id="cp-btn" onclick="doCopy()">📋 คัดลอก</button>
+</div>
+<a class="retry-btn" href="horoscope.html">🔮 ดูดวงใหม่</a>
+
+<div class="ad ad-r" style="background:#0a0d18;border-color:#1a2040;margin:0 16px 12px"><span>โฆษณา 300×250</span></div>
+<div class="disc">เนื้อหาเพื่อความบันเทิงและความเชื่อเท่านั้น ไม่ใช่คำแนะนำทางชีวิตหรือการเงิน</div>
+<div class="bsp"></div>
+
+<nav class="bnav">
+  <a class="nitem" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
+  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
+  <a class="nitem active" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
+  <button class="nitem" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
+</nav>
+
+<script src="horoscope-data.js"></script>
+<script>
+// ── RNG (same as dream) ──
+function mkRng(seed){let s=seed>>>0;return()=>{s=Math.imul(s^(s>>>15),s|1);s^=s+Math.imul(s^(s>>>7),s|61);return((s^(s>>>14))>>>0)/0xFFFFFFFF;};}
+function pick(arr,rng){return arr[Math.floor(rng()*arr.length)];}
+function stars(n,max=5){return Array.from({length:max},(_,i)=>`<span class="${i<n?'son':'sof'}">★</span>`).join('');}
+function score(rng,min=3,max=5){return Math.floor(rng()*(max-min+1))+min;}
+
+const TH_M=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const TH_MS=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const TH_D=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+
+const params=new URLSearchParams(location.search);
+const type=params.get('type');
+const seed=parseInt(params.get('seed'))||99999;
+let shareText='';
+
+function secCard(ico,title,sub,body){
+  return`<div class="sc"><div class="sc-head"><span class="sc-ico">${ico}</span><div><div class="sc-title">${title}</div><div class="sc-sub">${sub}</div></div></div>${body}</div>`;
+}
+function sectHTML(lbl,txt){return`<div class="sect"><div class="sect-lbl">${lbl}</div><div class="sect-txt">${txt}</div></div>`;}
+function lottoHTML(nums){
+  return`<div class="sect"><div class="sect-lbl">🎯 เลขมงคล</div><div class="lotto-nums">${nums.map((n,i)=>`<div class="ln ${i===0?'main':'sec'}">${n}</div>`).join('')}</div></div>`;
+}
+function luckyGridHTML(items){
+  return`<div class="sect"><div class="sect-lbl">สิ่งมงคล</div><div class="lucky-grid">${items.map(([l,v])=>`<div class="lc"><div class="lc-l">${l}</div><div class="lc-v">${v}</div></div>`).join('')}</div></div>`;
+}
+
+function render(){
+  if(!window.HR){setTimeout(render,100);return;}
+  const rng=mkRng(seed);
+  const el=document.getElementById('result-wrap');
+  let html='';
+
+  if(type==='thai'){
+    const dow=parseInt(params.get('dow'));
+    const d=window.HR.THAI_DAY[dow];
+    document.getElementById('hdr-title').textContent='ดวงไทย '+d.name;
+    document.getElementById('hdr-sub').textContent=`พระ${d.god} · สี${d.color}`;
+    shareText=`🇹🇭 ดวงไทย${d.name} — ${pick(d.fortune,rng).slice(0,60)} เลขนำโชค: ${d.lucky_nums.slice(0,3).join(' ')}`;
+    const sLove=score(rng),sWork=score(rng),sMoney=score(rng),sHealth=score(rng);
+    html += secCard(d.planet,'ดวงวันเกิด'+d.name,`${d.god} · ${d.gem} · เลขประจำวัน ${d.num}`,
+      `<div class="stars-row">
+        <div class="star-item"><div class="star-lbl">ความรัก</div><div class="stars">${stars(sLove)}</div></div>
+        <div class="star-item"><div class="star-lbl">การงาน</div><div class="stars">${stars(sWork)}</div></div>
+        <div class="star-item"><div class="star-lbl">การเงิน</div><div class="stars">${stars(sMoney)}</div></div>
+        <div class="star-item"><div class="star-lbl">สุขภาพ</div><div class="stars">${stars(sHealth)}</div></div>
+      </div>
+      ${sectHTML('ลักษณะนิสัย',`<p>${pick(d.trait,rng)}</p>`)}
+      ${sectHTML('ดวงชะตา',`<p>${pick(d.fortune,rng)}</p>`)}
+      ${sectHTML('💰 การเงิน',`<p>${pick(d.money,rng)}</p>`)}
+      ${sectHTML('💕 ความรัก',`<p>${pick(d.love,rng)}</p>`)}
+      ${sectHTML('💼 การงาน',`<p>${pick(d.work,rng)}</p>`)}
+      ${sectHTML('⚠️ ข้อควรระวัง',`<p>${pick(d.warning,rng)}</p>`)}
+      ${lottoHTML(d.lucky_nums)}
+      ${luckyGridHTML([['สีมงคล',d.color.split(' ')[0]],['วันเสริมดวง',d.lucky_day],['อัญมณี',d.gem],['พระเคราะห์',d.god]])}`
+    );
+  }
+  else if(type==='zodiac'){
+    const idx=parseInt(params.get('idx'));
+    const z=window.HR.ZODIAC[idx];
+    document.getElementById('hdr-title').textContent='ราศี'+z.name;
+    document.getElementById('hdr-sub').textContent=`${z.en} · ${z.dates} · ธาตุ${z.element}`;
+    shareText=`♈ ราศี${z.name} — ${pick(z.fortune,rng).slice(0,60)} เลขมงคล: ${z.lucky_nums.slice(0,3).join(' ')}`;
+    const sLove=score(rng),sWork=score(rng),sMoney=score(rng);
+    html += secCard(z.ico,'ราศี'+z.name+' ('+z.en+')',`${z.dates} · ธาตุ${z.element} · ปกครองโดย${z.ruler}`,
+      `<div class="stars-row">
+        <div class="star-item"><div class="star-lbl">ความรัก</div><div class="stars">${stars(sLove)}</div></div>
+        <div class="star-item"><div class="star-lbl">การงาน</div><div class="stars">${stars(sWork)}</div></div>
+        <div class="star-item"><div class="star-lbl">การเงิน</div><div class="stars">${stars(sMoney)}</div></div>
+      </div>
+      ${sectHTML('บุคลิกและพรสวรรค์',`<p>${pick(z.trait,rng)}</p>`)}
+      ${sectHTML('ดวงชะตาและโชคลาภ',`<p>${pick(z.fortune,rng)}</p>`)}
+      ${sectHTML('💕 ความรัก',`<p>${pick(z.love,rng)}</p>`)}
+      ${sectHTML('💰 การเงิน',`<p>${pick(z.money,rng)}</p>`)}
+      ${lottoHTML(z.lucky_nums)}
+      ${luckyGridHTML([['สีมงคล',z.lucky_color.split(' ')[0]],['ธาตุ',z.element],['ปกครองโดย',z.ruler]])}`
+    );
+  }
+  else if(type==='chinese'){
+    const idx=parseInt(params.get('idx'));
+    const z=window.HR.CHINESE[idx];
+    document.getElementById('hdr-title').textContent='ปี'+z.name;
+    document.getElementById('hdr-sub').textContent=`${z.en} · ธาตุ${z.element} · ปี ${z.years.split(' ')[0]}`;
+    shareText=`🐉 ปี${z.name} — ${pick(z.fortune,rng).slice(0,60)} เลขมงคล: ${z.lucky_nums.slice(0,3).join(' ')}`;
+    const sLove=score(rng),sWork=score(rng),sMoney=score(rng);
+    html += secCard(z.ico,'ปี'+z.name+' ('+z.en+')',`ธาตุ${z.element} · ปีที่ใกล้: ${z.years}`,
+      `<div class="stars-row">
+        <div class="star-item"><div class="star-lbl">ความรัก</div><div class="stars">${stars(sLove)}</div></div>
+        <div class="star-item"><div class="star-lbl">การงาน</div><div class="stars">${stars(sWork)}</div></div>
+        <div class="star-item"><div class="star-lbl">การเงิน</div><div class="stars">${stars(sMoney)}</div></div>
+      </div>
+      ${sectHTML('ลักษณะนิสัย',`<p>${pick(z.trait,rng)}</p>`)}
+      ${sectHTML('ดวงชะตา',`<p>${pick(z.fortune,rng)}</p>`)}
+      ${sectHTML('💕 ความรัก',`<p>${pick(z.love,rng)}</p>`)}
+      ${sectHTML('💰 การเงิน',`<p>${pick(z.money,rng)}</p>`)}
+      ${sectHTML('💚 ราศีที่เข้ากันได้',z.compat)}
+      ${lottoHTML(z.lucky_nums)}
+      ${luckyGridHTML([['สีมงคล',z.lucky_color.split(' ')[0]],['ธาตุ',z.element],['หลีกเลี่ยง','ปี'+z.avoid]])}`
+    );
+  }
+  else if(type==='numeral'){
+    const first=decodeURIComponent(params.get('first')||'');
+    const last=decodeURIComponent(params.get('last')||'');
+    const d=parseInt(params.get('d'))||0;
+    const m=parseInt(params.get('m'))||0;
+    const y=parseInt(params.get('y'))||0;
+    const fullName=(first+' '+last).trim();
+    // Calc life path
+    const EN_V={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
+    const TH_V={ก:1,ข:2,ค:3,ง:5,จ:6,ช:8,ซ:9,ณ:8,ด:9,ต:1,ถ:2,ท:3,ธ:4,น:5,บ:6,ป:7,พ:1,ฟ:2,ภ:3,ม:4,ย:5,ร:6,ล:7,ว:8,ส:2,ห:3,อ:5,ฮ:6};
+    let exprSum=0;
+    fullName.replace(/\s/g,'').toUpperCase().split('').forEach(c=>{exprSum+=(EN_V[c]||TH_V[c]||0);});
+    const exprNum=window.HR.reduce(exprSum);
+    let lifeNum=0;
+    if(d&&m&&y){const sv=n=>String(n).split('').reduce((a,c)=>a+parseInt(c),0);let lp=sv(d)+sv(m)+sv(y);lifeNum=window.HR.reduce(lp);}
+    const mainNum=lifeNum||exprNum;
+    const nd=window.HR.NUM_LAYERS[mainNum]||window.HR.NUM_LAYERS[1];
+    document.getElementById('hdr-title').textContent='Numerology: '+fullName;
+    document.getElementById('hdr-sub').textContent=`เลขชีวิต ${mainNum} — ${nd.name}`;
+    shareText=`🔢 Numerology: ${fullName}\nเลขชีวิต: ${mainNum} — ${nd.name}\n${pick(nd.persona,rng).slice(0,60)}`;
+    const sLove=score(rng),sWork=score(rng),sMoney=score(rng);
+    html += secCard('🔢',`เลขชีวิต ${mainNum} — ${nd.name}`,`พระ${nd.planet}${lifeNum?' · เลขชีวิต '+lifeNum+' เลขชื่อ '+exprNum:''}`,
+      `<div class="stars-row">
+        <div class="star-item"><div class="star-lbl">ความรัก</div><div class="stars">${stars(sLove)}</div></div>
+        <div class="star-item"><div class="star-lbl">การงาน</div><div class="stars">${stars(sWork)}</div></div>
+        <div class="star-item"><div class="star-lbl">การเงิน</div><div class="stars">${stars(sMoney)}</div></div>
+      </div>
+      ${sectHTML('บุคลิกและพรสวรรค์',`<p>${pick(nd.persona,rng)}</p>`)}
+      ${sectHTML('ความท้าทายในชีวิต',`<p>${pick(nd.challenge,rng)}</p>`)}
+      ${lottoHTML(nd.lotto.match(/\d+/g)||[mainNum.toString()])}`
+    );
+  }
+  else if(type==='daily'){
+    const idx=parseInt(params.get('idx'));
+    const period=params.get('period')||'today';
+    const z=window.HR.ZODIAC[idx];
+    const D=window.HR.DAILY;
+    const now=new Date();
+    const periodLabel={today:'วันนี้ '+now.getDate()+' '+TH_MS[now.getMonth()],week:'สัปดาห์นี้',month:'เดือน'+TH_MS[now.getMonth()]}[period];
+    document.getElementById('hdr-title').textContent='ดวงราศี'+z.name;
+    document.getElementById('hdr-sub').textContent=periodLabel;
+    const sLove=score(rng),sWork=score(rng),sMoney=score(rng),sHealth=score(rng);
+    const luckNums=[String(Math.floor(rng()*100)).padStart(2,'0'),String(Math.floor(rng()*100)).padStart(2,'0'),String(Math.floor(rng()*1000)).padStart(3,'0')];
+    const luckColors=['แดง','ทอง','เขียว','ฟ้า','ม่วง','ส้ม','ชมพู','ขาว'];
+    const luckColor=pick(luckColors,rng);
+    shareText=`${z.ico} ราศี${z.name} ${periodLabel}\n${pick(D.overall,rng).slice(0,60)}\nเลขมงคล: ${luckNums.join(' ')}`;
+    html += secCard(z.ico,'ราศี'+z.name+' — '+periodLabel,z.dates,
+      `<div class="stars-row">
+        <div class="star-item"><div class="star-lbl">ความรัก</div><div class="stars">${stars(sLove)}</div></div>
+        <div class="star-item"><div class="star-lbl">การงาน</div><div class="stars">${stars(sWork)}</div></div>
+        <div class="star-item"><div class="star-lbl">การเงิน</div><div class="stars">${stars(sMoney)}</div></div>
+        <div class="star-item"><div class="star-lbl">สุขภาพ</div><div class="stars">${stars(sHealth)}</div></div>
+      </div>
+      ${sectHTML('ภาพรวม',`<p>${pick(D.overall,rng)}</p>`)}
+      ${sectHTML('💕 ความรัก',`<p>${pick(D.love,rng)}</p>`)}
+      ${sectHTML('💰 การเงิน',`<p>${pick(D.money,rng)}</p>`)}
+      ${sectHTML('💼 การงาน',`<p>${pick(D.work.slice?D.work:Object.values(D.work),rng)}</p>`)
+        .replace('💼 การงาน','💼 การงาน')}
+      ${sectHTML('💪 สุขภาพ',`<p>${pick(D.health,rng)}</p>`)}
+      ${lottoHTML(luckNums)}
+      ${luckyGridHTML([['สีมงคล',luckColor],['ราศี',z.name]])}`
+    );
+  }
+  else if(type==='auspicious'){
+    const m=parseInt(params.get('m'));
+    const y=parseInt(params.get('y'));
+    const yAD=y>2500?y-543:y;
+    const daysInMonth=new Date(yAD,m,0).getDate();
+    const firstDay=new Date(yAD,m-1,1).getDay();
+    const now=new Date();
+    const isCurrentMonth=(now.getMonth()+1===m&&now.getFullYear()===yAD);
+    const todayDate=isCurrentMonth?now.getDate():0;
+    const rng2=mkRng(seed);
+    const ratings=Array.from({length:daysInMonth},()=>{const r=rng2();return r<0.25?'good':r<0.38?'bad':'ok';});
+    // Calendar HTML
+    let calHTML=`<div style="padding:10px 12px"><div class="cal-grid">
+      ${['อา','จ','อ','พ','พฤ','ศ','ส'].map(d=>`<div class="cal-head">${d}</div>`).join('')}
+      ${Array.from({length:firstDay},()=>`<div class="cal-day empty"></div>`).join('')}
+      ${ratings.map((r,i)=>{const day=i+1;const cls=day===todayDate?r+' today':r;return`<div class="cal-day ${cls}">${day}</div>`;}).join('')}
+    </div>
+    <div style="display:flex;gap:10px;padding:8px 0 0;font-size:11px;color:#4a5580">
+      <span style="color:#2ecc71">■</span> วันดี &nbsp;
+      <span style="color:#e74c3c">■</span> ระวัง &nbsp;
+      <span style="color:#2a3060">■</span> ปกติ
+    </div></div>`;
+    // Auspicious list
+    const goodDays=ratings.map((r,i)=>r==='good'?i+1:null).filter(Boolean);
+    const AE=window.HR.AUSPICIOUS_EVENTS;
+    const rng3=mkRng(seed+7);
+    const eventList=goodDays.slice(0,6).map(day=>{
+      const ev=pick(AE,rng3);
+      return`<div style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid #1a2040">
+        <div style="min-width:44px;font-size:13px;font-weight:700;color:#e8e0ff">${day} ${TH_MS[m-1]}</div>
+        <div style="flex:1"><div style="font-size:12px;font-weight:700;color:#c9b8ff">${ev.title}</div><div style="font-size:11px;color:#5a6090;margin-top:2px">${ev.desc}</div></div>
+        <div style="padding:3px 7px;border-radius:8px;font-size:10px;font-weight:700;background:rgba(39,174,96,.15);color:#2ecc71">ดี</div>
+      </div>`;
+    }).join('');
+    document.getElementById('hdr-title').textContent='ปฏิทินมงคล';
+    document.getElementById('hdr-sub').textContent=`${TH_M[m-1]} ${y}`;
+    shareText=`🌟 ปฏิทินมงคล ${TH_M[m-1]} ${y}\nวันดีในเดือนนี้: ${goodDays.slice(0,5).join(', ')} ${TH_MS[m-1]}`;
+    html += secCard('🗓️',`ปฏิทินวันดี/เสีย`,`${TH_M[m-1]} ${y}`,calHTML);
+    html += secCard('🌟','ฤกษ์มงคลแนะนำ',`${goodDays.length} วันดีในเดือนนี้`,eventList||'<div style="padding:12px 14px;font-size:13px;color:#5a6090">ไม่มีฤกษ์พิเศษในเดือนนี้</div>');
+  }
+
+  el.innerHTML=html||'<div style="padding:24px;text-align:center;color:#5a6090">ไม่พบข้อมูล กรุณากลับหน้าดูดวง</div>';
+}
+
+function doShare(){
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}&quote=${encodeURIComponent(shareText+'\nดูดวงฟรี: '+location.origin+'/horoscope.html')}`,'_blank','width=600,height=400');
+}
+function doCopy(){
+  navigator.clipboard.writeText(shareText+'\nดูดวงฟรี: '+location.origin+'/horoscope.html').then(()=>{
+    const b=document.getElementById('cp-btn');b.textContent='✅ คัดลอก!';setTimeout(()=>{b.innerHTML='📋 คัดลอก';},2000);
+  });
+}
+
+if(window.HR){render();}else{document.addEventListener('DOMContentLoaded',()=>{if(window.HR)render();else setTimeout(render,200);});}
+</script>
+
+<div class="more-overlay" id="more-ov" onclick="closeMore()"></div>
+<div class="more-drawer" id="more-dr">
+  <div class="more-drawer-handle"></div>
+  <div class="more-drawer-title">เมนูทั้งหมด</div>
+  <div class="more-grid">
+    <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
+    <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
+    <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
+    <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
+  </div>
+</div>
+<script>
+function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
+function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
+// mark active item in drawer
+(function(){
+  const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
+  const page=location.pathname.split('/').pop()||'index.html';
+  const id=map[page];if(id){const el=document.getElementById(id);if(el)el.classList.add('active');}
+})();
+</script>
+</body>
+</html>
