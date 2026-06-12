@@ -26,22 +26,30 @@
 .d-label{font-size:12px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.5px}
 .d-date{font-size:15px;font-weight:700;color:#fff}
 .rfbtn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:20px;padding:4px 12px;font-size:12px;font-family:var(--font);cursor:pointer;display:flex;align-items:center;gap:5px}
-/* JACKPOT */
-.jbox{background:linear-gradient(180deg,#1e1206,#120b02);padding:22px 16px 18px;text-align:center;position:relative;overflow:hidden}
-.jbox::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,160,23,.12),transparent 70%);pointer-events:none}
-.jeyebrow{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
-.jnum{font-size:62px;font-weight:800;color:var(--gold-lt);letter-spacing:6px;line-height:1;text-shadow:0 0 40px rgba(212,160,23,.5),0 2px 0 var(--gold-dk);margin-bottom:5px}
-.jnum.md{font-size:44px;letter-spacing:4px}
-.jlabel{font-size:13px;color:var(--muted)}
+/* JACKPOT — golden ticket */
+.jbox{margin:14px 16px 4px;padding:0;text-align:center;position:relative}
+.jticket{position:relative;background:linear-gradient(160deg,#2a1a05 0%,#1a0f03 45%,#241503 100%);border:1px solid var(--gold-dk);border-radius:14px;padding:24px 16px 20px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.55),inset 0 1px 0 rgba(240,200,74,.25)}
+.jticket::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(212,160,23,.18),transparent 60%);pointer-events:none}
+.jticket::after{content:'';position:absolute;top:0;bottom:0;left:14px;right:14px;border-left:2px dashed rgba(212,160,23,.18);border-right:2px dashed rgba(212,160,23,.18);pointer-events:none}
+.jnotch-l,.jnotch-r{position:absolute;top:50%;width:18px;height:18px;background:var(--black);border-radius:50%;transform:translateY(-50%);z-index:2}
+.jnotch-l{left:-9px;border-right:1px solid var(--gold-dk)}
+.jnotch-r{right:-9px;border-left:1px solid var(--gold-dk)}
+.jeyebrow{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:10px}
+.jeyebrow::before,.jeyebrow::after{content:'';width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dk));display:block}
+.jeyebrow::after{background:linear-gradient(90deg,var(--gold-dk),transparent)}
+.jnum{font-size:56px;font-weight:800;color:var(--gold-lt);letter-spacing:7px;line-height:1.05;text-shadow:0 0 36px rgba(212,160,23,.45),0 2px 0 var(--gold-dk);margin-bottom:7px;font-variant-numeric:tabular-nums}
+.jnum.md{font-size:42px;letter-spacing:5px}
+.jlabel{font-size:13px;color:var(--dim);font-weight:500}
 .jsub{font-size:11px;color:var(--muted);margin-top:3px}
 /* NUMBER GRID */
-.nsec{padding:12px 16px 4px}
-.stitle{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.nsec{padding:14px 16px 4px}
+.stitle{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.stitle::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 .ngrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .ngrid.g3{grid-template-columns:repeat(3,1fr)}
-.nc{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:12px 8px;text-align:center}
+.nc{background:var(--card);border:1px solid var(--border);border-top:2px solid var(--gold-dk);border-radius:var(--rs);padding:12px 8px;text-align:center;transition:border-color .15s}
 .nc-label{font-size:11px;color:var(--gold);font-weight:600;margin-bottom:4px}
-.nc-val{font-size:26px;font-weight:800;color:var(--white);letter-spacing:2px;line-height:1}
+.nc-val{font-size:26px;font-weight:800;color:var(--white);letter-spacing:2px;line-height:1;font-variant-numeric:tabular-nums}
 .nc-val.lg{font-size:34px;letter-spacing:4px}
 .nc-sub{font-size:10px;color:var(--muted);margin-top:3px}
 /* LAO GRID */
@@ -67,15 +75,16 @@
 .pnums{font-size:13px;font-weight:700;color:var(--white);text-align:right;max-width:180px;word-break:break-all;line-height:1.7}
 /* CHECK TICKET */
 .cwrap{padding:0 16px 6px}
-.ccard{background:linear-gradient(135deg,#1e1206,#2d1800);border:1px solid var(--gold-dk);border-radius:var(--r);padding:16px}
+.ccard{background:linear-gradient(150deg,#1e1206,#2d1800);border:1px solid var(--gold-dk);border-radius:var(--r);padding:16px;position:relative;overflow:hidden}
+.ccard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .ctitle{font-size:15px;font-weight:700;color:var(--gold-lt);margin-bottom:3px}
 .csub{font-size:12px;color:var(--muted);margin-bottom:12px}
 .crow{display:flex;gap:8px}
-.cinput{flex:1;background:var(--black);border:1px solid var(--border);border-radius:var(--rs);color:var(--white);font-size:22px;font-weight:700;font-family:var(--font);padding:10px 12px;letter-spacing:4px;text-align:center;outline:none;transition:border-color .2s;-moz-appearance:textfield}
+.cinput{flex:1;min-width:0;background:var(--black);border:1px solid var(--border);border-radius:var(--rs);color:var(--white);font-size:22px;font-weight:700;font-family:var(--font);padding:10px 12px;letter-spacing:4px;text-align:center;outline:none;transition:border-color .2s,box-shadow .2s;-moz-appearance:textfield;font-variant-numeric:tabular-nums}
 .cinput::-webkit-inner-spin-button,.cinput::-webkit-outer-spin-button{-webkit-appearance:none}
-.cinput:focus{border-color:var(--gold)}
-.cbtn{background:linear-gradient(135deg,var(--gold),var(--gold-dk));border:none;border-radius:var(--rs);color:var(--black);font-size:15px;font-weight:800;font-family:var(--font);padding:10px 18px;cursor:pointer}
-.cbtn:active{opacity:.85}
+.cinput:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,160,23,.15)}
+.cbtn{background:linear-gradient(135deg,var(--gold-lt),var(--gold) 45%,var(--gold-dk));border:none;border-radius:var(--rs);color:#1a0f00;font-size:15px;font-weight:800;font-family:var(--font);padding:10px 20px;cursor:pointer;box-shadow:0 3px 10px rgba(212,160,23,.3);transition:transform .1s,box-shadow .15s}
+.cbtn:active{transform:scale(.97);box-shadow:0 1px 4px rgba(212,160,23,.3)}
 .cres{margin-top:10px;padding:11px;border-radius:var(--rs);font-size:14px;font-weight:600;text-align:center;display:none}
 .cres.win{background:rgba(39,174,96,.15);border:1px solid rgba(39,174,96,.4);color:#2ecc71;display:block}
 .cres.lose{background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.3);color:#e74c3c;display:block}
@@ -119,6 +128,10 @@
 /* INFO BOX */
 .ibox{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:11px 14px;font-size:12px;color:var(--muted);line-height:1.6}
 .ibox strong{color:var(--dim)}
+/* REVEAL */
+#t-res,#l-res,#h-res{animation:reveal .4s ease}
+@keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#t-res,#l-res,#h-res{animation:none}}
 </style>
 </head>
 <body>
@@ -140,13 +153,19 @@
 <div class="ad ad-b"><!-- AdSense banner --><span>โฆษณา 320×50</span></div>
 
 <!-- FEATURE STRIP -->
-<div style="display:flex;gap:6px;overflow-x:auto;padding:10px 12px;scrollbar-width:none;border-bottom:1px solid var(--border)">
-  <a href="dream.html" style="flex-shrink:0;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(108,63,199,.15);border:1px solid rgba(108,63,199,.3);border-radius:20px;text-decoration:none;font-size:12px;font-weight:600;color:#c9a8ff;white-space:nowrap">💭 ทำนายฝัน</a>
-  <a href="horoscope.html" style="flex-shrink:0;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(124,92,191,.15);border:1px solid rgba(124,92,191,.3);border-radius:20px;text-decoration:none;font-size:12px;font-weight:600;color:#d4b8ff;white-space:nowrap">🔮 ดูดวง</a>
-  <a href="lucky-numbers.html" style="flex-shrink:0;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.25);border-radius:20px;text-decoration:none;font-size:12px;font-weight:600;color:#5dffd0;white-space:nowrap">🔢 วิเคราะห์เลข</a>
-  <a href="numerology.html" style="flex-shrink:0;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(108,63,199,.12);border:1px solid rgba(108,63,199,.25);border-radius:20px;text-decoration:none;font-size:12px;font-weight:600;color:#b8a0ff;white-space:nowrap">🔡 เลขศาสตร์</a>
-  <a href="news-numbers.html" style="flex-shrink:0;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(139,195,74,.1);border:1px solid rgba(139,195,74,.25);border-radius:20px;text-decoration:none;font-size:12px;font-weight:600;color:#b8e077;white-space:nowrap">📰 เลขจากข่าว</a>
-  <a href="stock-lottery.html" style="flex-shrink:0;display:flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(10,154,191,.1);border:1px solid rgba(10,154,191,.25);border-radius:20px;text-decoration:none;font-size:12px;font-weight:600;color:#7dd6f5;white-space:nowrap">📈 หวยหุ้น/ยี่กี</a>
+<style>
+.fstrip{display:flex;gap:7px;overflow-x:auto;padding:11px 12px;scrollbar-width:none;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(212,160,23,.04),transparent)}
+.fstrip::-webkit-scrollbar{display:none}
+.fchip{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;text-decoration:none;font-size:12.5px;font-weight:600;white-space:nowrap;border:1px solid;transition:transform .1s}
+.fchip:active{transform:scale(.96)}
+</style>
+<div class="fstrip">
+  <a class="fchip" href="dream.html" style="background:rgba(108,63,199,.13);border-color:rgba(108,63,199,.35);color:#c9a8ff">💭 ทำนายฝัน</a>
+  <a class="fchip" href="horoscope.html" style="background:rgba(124,92,191,.13);border-color:rgba(124,92,191,.35);color:#d4b8ff">🔮 ดูดวง</a>
+  <a class="fchip" href="lucky-numbers.html" style="background:rgba(0,200,150,.1);border-color:rgba(0,200,150,.3);color:#5dffd0">🔢 วิเคราะห์เลข</a>
+  <a class="fchip" href="numerology.html" style="background:rgba(108,63,199,.1);border-color:rgba(108,63,199,.3);color:#b8a0ff">🔡 เลขศาสตร์</a>
+  <a class="fchip" href="news-numbers.html" style="background:rgba(139,195,74,.1);border-color:rgba(139,195,74,.3);color:#b8e077">📰 เลขจากข่าว</a>
+  <a class="fchip" href="stock-lottery.html" style="background:rgba(10,154,191,.1);border-color:rgba(10,154,191,.3);color:#7dd6f5">📈 หวยหุ้น/ยี่กี</a>
 </div>
 
 <div class="ltabs">
@@ -167,9 +186,12 @@
       <button class="rfbtn" onclick="loadThai()">🔄 รีเฟรช</button>
     </div>
     <div class="jbox">
-      <div class="jeyebrow">รางวัลที่ 1</div>
-      <div class="jnum" id="t-first">——————</div>
-      <div class="jlabel">รางวัลละ 6,000,000 บาท</div>
+      <div class="jticket">
+        <div class="jnotch-l"></div><div class="jnotch-r"></div>
+        <div class="jeyebrow">รางวัลที่ 1</div>
+        <div class="jnum" id="t-first">——————</div>
+        <div class="jlabel">รางวัลละ 6,000,000 บาท</div>
+      </div>
     </div>
     <!-- CHECK -->
     <div class="cwrap" style="padding-top:14px">
@@ -243,9 +265,12 @@
       <button class="rfbtn" onclick="loadLao()">🔄 รีเฟรช</button>
     </div>
     <div class="jbox">
-      <div class="jeyebrow">เลขพิเศษ 6 ตัว</div>
-      <div class="jnum md" id="l-6d">— — — — — —</div>
-      <div class="jlabel">ถูก 6 ตัว รับ × 800 เท่า</div>
+      <div class="jticket">
+        <div class="jnotch-l"></div><div class="jnotch-r"></div>
+        <div class="jeyebrow">เลขพิเศษ 6 ตัว</div>
+        <div class="jnum md" id="l-6d">— — — — — —</div>
+        <div class="jlabel">ถูก 6 ตัว รับ × 800 เท่า</div>
+      </div>
     </div>
     <div class="cwrap" style="padding-top:14px">
       <div class="ccard">
@@ -305,13 +330,16 @@
       <button class="dtbtn" onclick="setHD('normal',this)">ฮานอยปกติ <span class="dtime">18:30</span></button>
       <button class="dtbtn" onclick="setHD('vip',this)">ฮานอย VIP <span class="dtime">19:30</span></button>
     </div>
-    <div class="jbox" style="padding-top:18px">
-      <div class="jeyebrow" id="h-dname">ฮานอยพิเศษ</div>
-      <div style="display:flex;justify-content:center;gap:24px;align-items:flex-end">
-        <div style="text-align:center"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">3 ตัวบน</div><div class="jnum md" id="h-3t">—</div></div>
-        <div style="text-align:center"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">2 ตัวล่าง</div><div class="jnum md" id="h-2b">—</div></div>
+    <div class="jbox">
+      <div class="jticket">
+        <div class="jnotch-l"></div><div class="jnotch-r"></div>
+        <div class="jeyebrow" id="h-dname">ฮานอยพิเศษ</div>
+        <div style="display:flex;justify-content:center;gap:24px;align-items:flex-end">
+          <div style="text-align:center"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">3 ตัวบน</div><div class="jnum md" id="h-3t">—</div></div>
+          <div style="text-align:center"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">2 ตัวล่าง</div><div class="jnum md" id="h-2b">—</div></div>
+        </div>
+        <div class="jsub" style="margin-top:8px">เล่นทุกวัน ไม่มีวันหยุด (ยกเว้นวันหยุดเวียดนาม)</div>
       </div>
-      <div class="jsub" style="margin-top:8px">เล่นทุกวัน ไม่มีวันหยุด (ยกเว้นวันหยุดเวียดนาม)</div>
     </div>
     <div class="cwrap" style="padding-top:14px">
       <div class="ccard">
@@ -362,7 +390,7 @@
 
 <nav class="bnav">
   <a class="nitem active" href="index.html"><span class="nico">🏆</span>ตรวจหวย</a>
-  <a class="nitem" href="stats.html"><span class="nico">📊</span>สถิติ</a>
+  <a class="nitem" href="stock-lottery.html"><span class="nico">📈</span>หวยหุ้น</a>
   <a class="nitem" href="dream.html"><span class="nico">💭</span>ทำนายฝัน</a>
   <a class="nitem" href="horoscope.html"><span class="nico">🔮</span>ดูดวง</a>
   <button class="nitem" onclick="openMore()"><span class="nico">☰</span>เพิ่มเติม</button>
@@ -673,19 +701,18 @@ loadThai();
   <div class="more-drawer-title">เมนูทั้งหมด</div>
   <div class="more-grid">
     <a class="mgitem" href="index.html" id="mg-index"><span class="mico">🏆</span>ตรวจหวย</a>
-    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติ</a>
+    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
     <a class="mgitem" href="dream.html" id="mg-dream"><span class="mico">💭</span>ทำนายฝัน</a>
     <a class="mgitem" href="horoscope.html" id="mg-horoscope"><span class="mico">🔮</span>ดูดวง</a>
+    <a class="mgitem" href="stats.html" id="mg-stats"><span class="mico">📊</span>สถิติหวย</a>
     <a class="mgitem" href="lucky-numbers.html" id="mg-lucky"><span class="mico">🔢</span>วิเคราะห์เลข</a>
     <a class="mgitem" href="numerology.html" id="mg-numerology"><span class="mico">🔡</span>เลขศาสตร์</a>
     <a class="mgitem" href="news-numbers.html" id="mg-news"><span class="mico">📰</span>เลขจากข่าว</a>
-    <a class="mgitem" href="stock-lottery.html" id="mg-stock"><span class="mico">📈</span>หวยหุ้น/ยี่กี</a>
   </div>
 </div>
 <script>
 function openMore(){document.getElementById('more-ov').classList.add('open');document.getElementById('more-dr').classList.add('open');}
 function closeMore(){document.getElementById('more-ov').classList.remove('open');document.getElementById('more-dr').classList.remove('open');}
-// mark active item in drawer
 (function(){
   const map={'index.html':'mg-index','stats.html':'mg-stats','dream.html':'mg-dream','dream-result.html':'mg-dream','horoscope.html':'mg-horoscope','horoscope-result.html':'mg-horoscope','lucky-numbers.html':'mg-lucky','numerology.html':'mg-numerology','news-numbers.html':'mg-news','stock-lottery.html':'mg-stock'};
   const page=location.pathname.split('/').pop()||'index.html';
